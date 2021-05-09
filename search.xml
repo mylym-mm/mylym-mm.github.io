@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>app = Flask(__name__)</title>
+    <url>/2021/04/29/11-37-38/</url>
+    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第一部分，初始化：所有的Flask都必须创建程序实例</span><br><span class="line">程序实例是Flask的对象，一般情况下用如下方法实例化</span><br><span class="line">Flask类只有一个必须指定的参数，即程序主模块或者包的名字，__name__是系统变量，该变量指的是本py文件的文件名</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>学习资料</tag>
+      </tags>
+  </entry>
 </search>
