@@ -267,10 +267,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-05-10 01:30:15 / Modified: 17:44:16" itemprop="dateCreated datePublished" datetime="2021-05-10T01:30:15+08:00">2021-05-10</time>
+      <time title="Created: 2021-05-10 01:30:15" itemprop="dateCreated datePublished" datetime="2021-05-10T01:30:15+08:00">2021-05-10</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-05-11 02:42:12" itemprop="dateModified" datetime="2021-05-11T02:42:12+08:00">2021-05-11</time>
+      </span>
 
   
 </div>
@@ -365,6 +371,47 @@
 <li>学习<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/substring">substring</a>方法，返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。语法：<code>str.substring(indexStart[, indexEnd])</code></li>
 <li>由于空字符串不处理，所以<code>str+=&#39;0000000&#39;</code>这里是加7个0；加8个的话可能会导致在原字符串长度就可以整除8的情况下加一个空字符串；</li>
 <li>由于是按行输入和按长度分解的，所以不应该直接使用str.split()函数分解成数组。与题意不符</li>
+</ul>
+<h4 id="T4-进制转换"><a href="#T4-进制转换" class="headerlink" title="T4.进制转换"></a>T4.进制转换</h4><p>题目描述：写出一个程序，接受一个十六进制的数，输出该数值的十进制表示。<br>输入：输入一个十六进制的数值字符串。注意：一个用例会同时有多组输入数据，请参考帖子<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/276%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82">https://www.nowcoder.com/discuss/276处理多组输入的问题。</a><br>输出：输出该数值的十进制字符串。不同组的测试用例用\n隔开。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    print(<span class="string">&#x27;&#x27;</span>+<span class="built_in">parseInt</span>(line,<span class="number">16</span>))</span><br><span class="line">    <span class="comment">//等于console.log(&#x27;&#x27;+parseInt(line,16))</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><code>parseInt(string,radix)</code>函数  : 解析radix进制的string为十进制数；如果string的第一个非空格字符不是数字或者radix不在[2,36]这个范围的话返回NaN;如果string不是一个字符串，则将其转换为字符串(使用  <code>ToString </code>抽象操作)。字符串开头的空白符将会被忽略。radix，从2到36，可以不写，但可能出错。</li>
+<li>NaN属性是代表非数字值的特殊值。该属性用于指示某个值不是数字。可以把 Number 对象设置为该值，来指示其不是数字值。</li>
+<li>这个print()是封装过的console.log()</li>
+<li>console.log()默认是换行的，不用单独处理，如果想输出换行，可以用console.log( ‘\n’ );</li>
+<li>用’’+把结果转换成字符串</li>
+</ul>
+<h4 id="T5-字符个数统计"><a href="#T5-字符个数统计" class="headerlink" title="T5.字符个数统计"></a>T5.字符个数统计</h4><p>题目描述：  编写一个函数，计算字符串中含有的不同字符的个数。字符在ACSII码范围内(0<del>127)，换行表示结束符，不算在字符里。不在范围内的不作统计。多个相同的字符只计算一次<br>例如，对于字符串abaca而言，有a、b、c三种不同的字符，因此输出3。<br>输入：输入一行没有空格的字符串。<br>输出：输出范围在(0</del>127)字符的个数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> line = readline()</span><br><span class="line"><span class="keyword">let</span> arr=[]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;line.length;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.indexOf(line[i])==-<span class="number">1</span>&amp;&amp;line.charCodeAt(i)&lt;=<span class="number">127</span>&amp;&amp;line.charCodeAt(i)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">        arr.push(line[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr.length)</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><code>**str.charCodeAt(index)**</code> 方法返回 <code>0</code> 到 <code>65535</code> 之间的整数，表示给定索引处的 UTF-16 代码单元。参数index：一个大于等于 <code>0</code>，小于字符串长度的整数。如果不是一个数值，则默认为 <code>0</code>。返回值：指定 <code>index</code> 处字符的 UTF-16 代码单元值的一个数字；如果 <code>index</code> 超出范围，<code>charCodeAt()</code> 返回 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN"><code>NaN</code></a>。</li>
+</ul>
+<h4 id="T6-数字颠倒"><a href="#T6-数字颠倒" class="headerlink" title="T6.数字颠倒"></a>T6.数字颠倒</h4><p>题目描述：  输入一个整数，将这个整数以字符串的形式逆序输出。 程序不考虑负数的情况，若数字含                有0，则逆序形式也含有0，如输入为100，则输出为001<br>输入：输入一个int整数<br>输出：将这个整数以字符串的形式逆序输出</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">let</span> line = <span class="built_in">String</span>(readline())</span><br><span class="line"><span class="built_in">console</span>.log(line.toString().split(<span class="string">&#x27;&#x27;</span>).reverse().join(<span class="string">&#x27;&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"><span class="keyword">let</span> line = <span class="built_in">String</span>(readline())</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=line.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">    str+=line[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(str)</span><br></pre></td></tr></table></figure>
+
+<h4 id="T7-字符串反转"><a href="#T7-字符串反转" class="headerlink" title="T7.字符串反转"></a>T7.字符串反转</h4><p>题目描述：  接受一个只包含小写字母的字符串，然后输出该字符串反转后的字符串。（字符串长度不                    超过1000）<br>输入：输入一行，为一个只包含小写字母的字符串。<br>输出：输出该字符串反转后的字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> input = readline();</span><br><span class="line"><span class="keyword">var</span> length = input.length;</span><br><span class="line"><span class="keyword">if</span>(length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(length &gt; <span class="number">1000</span>)&#123;                <span class="comment">//字符串长度不超过1000</span></span><br><span class="line">        length = <span class="number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">if</span>(<span class="regexp">/^[a-z]+$/</span>.test(input))&#123;       <span class="comment">//只包含小写字母</span></span><br><span class="line">          <span class="built_in">console</span>.log(input.split(<span class="string">&quot;&quot;</span>).reverse().join(<span class="string">&quot;&quot;</span>))</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="T8-句子逆序"><a href="#T8-句子逆序" class="headerlink" title="T8.句子逆序"></a>T8.句子逆序</h4><p>题目描述：  将一个英文语句以单词为单位逆序排放。例如“I am a boy”，逆序排放后为“boy a am I”<br> 所有单词之间用一个空格隔开，语句中除了英文字母外，不再包含其他字符<br>输入：输入一个英文语句，每个单词用空格隔开。保证输入只包含空格和字母。<br>输出：得到逆序的句子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(line.split(<span class="string">&quot; &quot;</span>).reverse().join(<span class="string">&quot; &quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="T9-字符串排序"><a href="#T9-字符串排序" class="headerlink" title="T9.字符串排序"></a>T9.字符串排序</h4><p>题目描述：  给定n个字符串，请对n个字符串按照字典序排列。<br>输入：输入第一行为一个正整数n(1≤n≤1000),下面n行为n个字符串(字符串长度≤100),字符串中只含有大小写字母。<br>输出：数据输出n行，输出结果为按照字典序排列的字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num=<span class="built_in">Number</span>(readline())</span><br><span class="line"><span class="keyword">let</span> arr=[]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">    arr.push(readline())</span><br><span class="line">&#125;</span><br><span class="line">arr.sort()</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arr[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li>Number()  把readline接收到的字符串转换成数字</li>
+<li>arr.sort()用<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/In-place_algorithm">原地算法</a>对数组的元素进行排序，并返回数组。默认排序顺序是在将元素<strong>转换为字符串</strong>，然后比较它们的UTF-16代码单元值序列时构建的。<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">arr.sort([compareFunction])</a></li>
+<li>参数compareFunction，可省，用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。 例如 “Banana” 会被排列到 “cherry” 之前。当数字按由小到大排序时，9 出现在 80 之前，但因为（没有指明 <code>compareFunction</code>），比较的数字会先被转换为字符串，所以在Unicode顺序上 “80” 要比 “9” 要靠前。</li>
+</ul>
+</li>
 </ul>
 
       
