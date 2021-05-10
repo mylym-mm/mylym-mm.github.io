@@ -269,7 +269,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-05-10 01:30:15 / Modified: 17:28:00" itemprop="dateCreated datePublished" datetime="2021-05-10T01:30:15+08:00">2021-05-10</time>
+      <time title="Created: 2021-05-10 01:30:15 / Modified: 17:44:16" itemprop="dateCreated datePublished" datetime="2021-05-10T01:30:15+08:00">2021-05-10</time>
     </span>
 
   
@@ -282,14 +282,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
+          <h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解1：简单解法，但不满足具体题意</span></span><br><span class="line"><span class="keyword">let</span> s = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s[s.length-<span class="number">1</span>].length) </span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解2：满足题目描述具体解法</span></span><br><span class="line"><span class="keyword">let</span> strArr = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span>(strArr.length &amp;&amp; strArr.length &lt; <span class="number">5000</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(strArr[strArr.length-<span class="number">1</span>].length)</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;输入应非空&amp;&amp;字符串长度小于5000&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>收获：</p>
 <ul>
-<li><p>之前好像没有用过readline()函数完全没有映像；split()函数复习（用split(‘ ‘)把字符串按照空格分成数组）；输出函数console.log()好几天没写差点忘了差点写print哈哈哈；</p>
+<li><p>之前好像没有用过readline()函数完全没有映像；split()函数复习（用split(‘ ‘)把字符串按照空格分成数组）；输出函数console.log()好几天没写差点忘了差点写print哈哈哈（这个其实可以）；</p>
 </li>
 <li><p>JavaScript输出：JavaScript，没有任何打印或者输出的函数</p>
 </li>
@@ -349,7 +349,19 @@
 <p>收获：</p>
 <ul>
 <li>题目‘连续输入字符串’，解题时用<code>while(line = readline())&#123; &#125;</code></li>
-<li><code>**Math.floor()**</code>为向下取整。学习<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a></li>
+<li><code>**Math.floor()**</code>为向下取整。学习<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>，以下为个人觉得需要记住的：<ul>
+<li>Math.abs(x)  绝对值</li>
+<li>Math.random()  0 到 1 之间的伪随机数</li>
+<li>Math.round(x)  返回四舍五入后的整数</li>
+<li>Math.ceil(x)  一个数向上取整后的值</li>
+<li>Math.floor(x)  一个数向下取整后的值</li>
+<li>Math.log(x)  自然对数</li>
+<li>Math.lnx  自然对数</li>
+<li>Math.PI  圆周率，一个圆的周长和直径之比，约等于 <code>3.14159</code></li>
+<li>Math.min([x,[y[,…]]])  返回零到多个数值中最小值</li>
+<li>Math.max([x,[y[,…]]])  返回零到多个数值中最大值</li>
+</ul>
+</li>
 <li>学习<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/substring">substring</a>方法，返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。语法：<code>str.substring(indexStart[, indexEnd])</code></li>
 <li>由于空字符串不处理，所以<code>str+=&#39;0000000&#39;</code>这里是加7个0；加8个的话可能会导致在原字符串长度就可以整除8的情况下加一个空字符串；</li>
 <li>由于是按行输入和按长度分解的，所以不应该直接使用str.split()函数分解成数组。与题意不符</li>
