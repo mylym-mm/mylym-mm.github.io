@@ -10,4 +10,84 @@
         <tag>学习资料</tag>
       </tags>
   </entry>
+  <entry>
+    <title>forwardDay1</title>
+    <url>/2021/05/10/01-30-15/</url>
+    <content><![CDATA[<h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1：简单解法，但不满足具体题意</span></span><br><span class="line"><span class="keyword">let</span> s = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s[s.length-<span class="number">1</span>].length) </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2：满足题目描述具体解法</span></span><br><span class="line"><span class="keyword">let</span> strArr = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span>(strArr.length &amp;&amp; strArr.length &lt; <span class="number">5000</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(strArr[strArr.length-<span class="number">1</span>].length)</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;输入应非空&amp;&amp;字符串长度小于5000&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><p>之前好像没有用过readline()函数完全没有映像；split()函数复习（用split(‘ ‘)把字符串按照空格分成数组）；输出函数console.log()好几天没写差点忘了差点写print哈哈哈；</p>
+</li>
+<li><p>JavaScript输出：JavaScript，没有任何打印或者输出的函数</p>
+</li>
+<li><p>JavaScript显示数据：JavaScript可以通过不同的方式来输出数据：</p>
+<ul>
+<li>使用window.alert()弹出警告框。</li>
+<li>使用document.write()方法将内容写到HTML文档中</li>
+<li>使用innerHTML写入到HTML元素</li>
+<li>使用console.log()写入到浏览器的控制台</li>
+</ul>
+</li>
+<li><p>（Object一共有两类原生方法，一是本身的方法，二是实例方法）</p>
+<ul>
+<li><p>所谓本身的方法就是直接定义在Object对象的方法。<code>Object.print = function(o)&#123;console.log(o) &#125;;</code>print方法是直接定义在Object对象上的</p>
+</li>
+<li><p>所谓实例方法就是定义在Object原型对象 Object.prototype 上的方法。它可以被Object实例直接使用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Object.prototype.print &#x3D; function () &#123;</span><br><span class="line">	console.log(this) ;</span><br><span class="line">&#125;;</span><br><span class="line">let obj &#x3D; new Object();</span><br><span class="line">obj.print()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="T2-计算某字母出现次数"><a href="#T2-计算某字母出现次数" class="headerlink" title="T2.计算某字母出现次数"></a>T2.计算某字母出现次数</h4><p>题目描述：写出一个程序，接受一个由字母、数字和空格组成的字符串，和一个字母，然后输出输入字符串                    中该字母的出现次数。不区分大小写，字符串长度小于500。<br>输入：第一行输入一个由字母和数字以及空格组成的字符串，第二行输入一个字母。<br>输出：输出输入字符串中含有该字符的个数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">let</span> line = readline().toLowerCase()</span><br><span class="line"><span class="keyword">let</span> strget = readline().toLowerCase()</span><br><span class="line"><span class="built_in">console</span>.log(line.split(<span class="string">&#x27;&#x27;</span>).filter(<span class="function"><span class="params">e</span>=&gt;</span>e===strget).length)</span><br><span class="line"><span class="comment">//这里的console.log可以换成print</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> a = readline().toLowerCase()</span><br><span class="line">    <span class="keyword">let</span> strA = line.toLowerCase()</span><br><span class="line">    <span class="keyword">for</span> (chart <span class="keyword">of</span> strA)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a === chart)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(count)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><p>不区分大小写：将用来比较的字符串都换成小写/大写；</p>
+</li>
+<li><p>直接对一个字符串进行分割、过滤、求长度；</p>
+</li>
+<li><p>filter函数：<code>**filter()**</code>方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 </p>
+</li>
+<li><p>Node.js的readline()：模块提供了一个接口，用于一次一行地读取可读流例如（ process.stdin）中的数据。</p>
+</li>
+<li><p>可读流：是对数据来源的一种抽象。可读流的例子包括：<br>客户端的HTTP响应、服务器的HTTP请求、fs的读取流、zlib流、crypto流、TCP socket、子进程 stdout 与 stderr、process.stdin</p>
+</li>
+<li><p>由for(…… of…… ) 引出的关于字符串遍历的几种方法的收集：</p>
+<ul>
+<li> for循环：要遍历字符串的所有字符，我们可以使用一个普通的for循环，并使用一个循环计数器（i）来对字符串索引遍历</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;Buzz&#x27;</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i++)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(str[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>for…in…：存在一种特殊的循环形式，变量 i 自动接收索引，以便可以使用来访问每个字符<code>str[i]</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> str)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(str[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>for…of…：使用<code>for item of str</code>。变量<code>item</code>直接接收字符，因此不必使用索引。如果代码不需要每个字符的索引值，则此循环格式甚至更简单。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> char <span class="keyword">of</span> str) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(char);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="T3-字符串分隔"><a href="#T3-字符串分隔" class="headerlink" title="T3.字符串分隔"></a>T3.字符串分隔</h4><p>题目描述：连续输入字符串，请按长度为8拆分每个字符串后输出到新的字符串数                组；长度不是8整数倍的字符串请在后面补数字0，空字符串不处理。<br>输入：连续输入字符串(输入多次,每个字符串长度小于100)<br>输出：输出到长度为8的新字符串数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1，先加7个0，然后只保留能整除8的部分的字符串，然后每8个print一次</span></span><br><span class="line"><span class="keyword">while</span>(str = readline())&#123;</span><br><span class="line">    str+=<span class="string">&#x27;0000000&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> len = <span class="built_in">Math</span>.floor(str.length/<span class="number">8</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        print(str.substring(i*<span class="number">8</span>,(i+<span class="number">1</span>)*<span class="number">8</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2,直接把传进来的一行处理了，从头到尾遍历字符串line，把它加进str,大于7（8）时就输出，然后str清零，遍历完了之后用if语句看str是不是空，不是的话加0到8个输出。</span></span><br><span class="line"><span class="keyword">while</span>((line=readline()))&#123;</span><br><span class="line">    <span class="keyword">let</span> str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;line.length;i++)&#123;</span><br><span class="line">        str=str+line[i];</span><br><span class="line">        <span class="keyword">if</span>(str.length&gt;<span class="number">7</span>)&#123;</span><br><span class="line">            print(str);</span><br><span class="line">            str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(str.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(str.length&lt;<span class="number">8</span>) str+=<span class="string">&quot;0&quot;</span>;</span><br><span class="line">        print(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li>题目‘连续输入字符串’，解题时用<code>while(line = readline())&#123; &#125;</code></li>
+<li><code>**Math.floor()**</code>为向下取整。学习<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a></li>
+<li>学习<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/substring">substring</a>方法，返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。语法：<code>str.substring(indexStart[, indexEnd])</code></li>
+<li>由于空字符串不处理，所以<code>str+=&#39;0000000&#39;</code>这里是加7个0；加8个的话可能会导致在原字符串长度就可以整除8的情况下加一个空字符串；</li>
+<li>由于是按行输入和按长度分解的，所以不应该直接使用str.split()函数分解成数组。与题意不符</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>刷题笔记</tag>
+      </tags>
+  </entry>
 </search>
