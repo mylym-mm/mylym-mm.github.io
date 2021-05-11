@@ -198,12 +198,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -235,6 +235,107 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/11/14-51-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/hylike.jpg">
+      <meta itemprop="name" content="lym">
+      <meta itemprop="description" content="my的修炼之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="my鱼">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/11/14-51-21/" class="post-title-link" itemprop="url">forwardDay2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-05-11 14:51:21 / Modified: 15:44:55" itemprop="dateCreated datePublished" datetime="2021-05-11T14:51:21+08:00">2021-05-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>​    今天花了1小时在课程大作业上，算是浅显的了解了一点车联网的技术和当前面临的困难。然后又回归到我的前端学习状态。</p>
+<h3 id="前后端项目之王者荣耀爬虫"><a href="#前后端项目之王者荣耀爬虫" class="headerlink" title="前后端项目之王者荣耀爬虫"></a>前后端项目之王者荣耀爬虫</h3><h5 id="1-flask框架："><a href="#1-flask框架：" class="headerlink" title="1.flask框架："></a>1.flask框架：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">9000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​            第1行，引入Flask类，Flask类实现了一个WSGI应用<br>​            第2行，app是Flask的实例，它接收包或者模块的名字作为参数，但一般都是传递__name__。让flask.helpers.get_root_path函数通过传入这个名字确定程序的根目录，以便获得静态文件和模板文件的目录。<br>​            第4~6行，使用app.route装饰器会将URL和执行的视图函数的关系保存到app.url_map属性上。处理URL和视图函数的关系的程序就是路由，这里的视图函数就是hello_world。<br>​            第8行，使用这个判断可以保证当其他文件引用这个文件的时候（例如“from hello import app”）不会执行这个判断内的代码，也就是不会执行app.run函数。<br>​            第9行，执行app.run就可以启动服务了。默认Flask只监听虚拟机的本地127.0.0.1这个地址，端口为5000。而我们对虚拟机做的端口转发端口是9000，所以需要制定host和port参数，0.0.0.0表示监听所有地址，这样就可以在本机访问了。<br>​            服务器启动后，会调用werkzeug.serving.run_simple进入轮询，默认使用单进程单线程的werkzeug.serving.BaseWSGIServer处理请求，<br>​            实际上还是使用标准库BaseHTTPServer.HTTPServer，通过select.select做0.5秒的“while TRUE”的事件轮询。<br>​            当我们访问“<a target="_blank" rel="noopener" href="http://127.0.0.1:9000/%E2%80%9D,%E9%80%9A%E8%BF%87app.url_map%E6%89%BE%E5%88%B0%E6%B3%A8%E5%86%8C%E7%9A%84%E2%80%9C/%E2%80%9D%E8%BF%99%E4%B8%AAURL%E6%A8%A1%E5%BC%8F,%E5%B0%B1%E6%89%BE%E5%88%B0%E4%BA%86%E5%AF%B9%E5%BA%94%E7%9A%84hello_world%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%EF%BC%8C%E8%BF%94%E5%9B%9E%E2%80%9Chello">http://127.0.0.1:9000/”,通过app.url_map找到注册的“/”这个URL模式,就找到了对应的hello_world函数执行，返回“hello</a> world!”,状态码为200。<br>​            如果访问一个不存在的路径，如访问“<a target="_blank" rel="noopener" href="http://127.0.0.1:9000/a%E2%80%9D,Flask%E6%89%BE%E4%B8%8D%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%B0%B1%E4%BC%9A%E5%90%91%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%94%E5%9B%9E%E2%80%9CNot">http://127.0.0.1:9000/a”,Flask找不到对应的模式，就会向浏览器返回“Not</a> Found”，状态码为404</p>
+<p>​        原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/christopherchen/article/details/54636846">https://blog.csdn.net/christopherchen/article/details/54636846</a></p>
+<h5 id="2-WSGI"><a href="#2-WSGI" class="headerlink" title="2.WSGI"></a>2.WSGI</h5><p>了解了HTTP协议和HTML文档，我们其实就明白了一个Web应用的本质就是：</p>
+<ol>
+<li>浏览器发送一个HTTP请求；</li>
+<li>服务器收到请求，生成一个HTML文档；</li>
+<li>服务器把HTML文档作为HTTP响应的Body发送给浏览器；</li>
+<li>浏览器收到HTTP响应，从HTTP Body取出HTML文档并显示。</li>
+</ol>
+<p>所以，最简单的Web应用就是先把HTML用文件保存好，用一个现成的HTTP服务器软件，接收用户请求，从文件中读取HTML，返回。Apache、Nginx、Lighttpd等这些常见的静态服务器就是干这件事情的。</p>
+<p>如果要动态生成HTML，就需要把上述步骤自己来实现。不过，接受HTTP请求、解析HTTP请求、发送HTTP响应都是苦力活，如果我们自己来写这些底层代码，还没开始写动态HTML呢，就得花个把月去读HTTP规范。</p>
+<p>正确的做法是底层代码由专门的服务器软件实现，我们用Python专注于生成HTML文档。因为我们不希望接触到TCP连接、HTTP原始请求和响应格式，所以，需要一个统一的接口，让我们专心用Python编写Web业务。</p>
+<p>这个接口就是WSGI：Web Server Gateway Interface。</p>
+<p>WSGI接口定义非常简单，它只要求Web开发者实现一个函数，就可以响应HTTP请求。我们来看一个最简单的Web版本的“Hello, web!”：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span>(<span class="params">environ, start_response</span>):</span></span><br><span class="line">    start_response(<span class="string">&#x27;200 OK&#x27;</span>, [(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/html&#x27;</span>)])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的<code>application()</code>函数就是符合WSGI标准的一个HTTP处理函数，它接收两个参数：</p>
+<ul>
+<li>environ：一个包含所有HTTP请求信息的<code>dict</code>对象；</li>
+<li>start_response：一个发送HTTP响应的函数。</li>
+</ul>
+<p>在<code>application()</code>函数中，调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start_response(&#39;200 OK&#39;, [(&#39;Content-Type&#39;, &#39;text&#x2F;html&#39;)])</span><br></pre></td></tr></table></figure>
+
+<p>就发送了HTTP响应的Header，注意Header只能发送一次，也就是只能调用一次<code>start_response()</code>函数。<code>start_response()</code>函数接收两个参数，一个是HTTP响应码，一个是一组<code>list</code>表示的HTTP Header，每个Header用一个包含两个<code>str</code>的<code>tuple</code>表示。</p>
+<p>通常情况下，都应该把<code>Content-Type</code>头发送给浏览器。其他很多常用的HTTP Header也应该发送。</p>
+<p>然后，函数的返回值<code>&#39;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#39;</code>将作为HTTP响应的Body发送给浏览器。</p>
+<p>有了WSGI，我们关心的就是如何从<code>environ</code>这个<code>dict</code>对象拿到HTTP请求信息，然后构造HTML，通过<code>start_response()</code>发送Header，最后返回Body。</p>
+<p>整个<code>application()</code>函数本身没有涉及到任何解析HTTP的部分，也就是说，底层代码不需要我们自己编写，我们只负责在更高层次上考虑如何响应请求就可以了。</p>
+<p>不过，等等，这个<code>application()</code>函数怎么调用？如果我们自己调用，两个参数<code>environ</code>和<code>start_response</code>我们没法提供，返回的<code>str</code>也没法发给浏览器。</p>
+<p>所以<code>application()</code>函数必须由WSGI服务器来调用。有很多符合WSGI规范的服务器，我们可以挑选一个来用。但是现在，我们只想尽快测试一下我们编写的<code>application()</code>函数真的可以把HTML输出到浏览器，所以，要赶紧找一个最简单的WSGI服务器，把我们的Web应用程序跑起来。</p>
+<p>好消息是Python内置了一个WSGI服务器，这个模块叫wsgiref，它是用纯Python编写的WSGI服务器的参考实现。所谓“参考实现”是指该实现完全符合WSGI标准，但是不考虑任何运行效率，仅供开发和测试使用</p>
+<p>……</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/897692888725344/923057027806560">https://www.liaoxuefeng.com/wiki/897692888725344/923057027806560</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
