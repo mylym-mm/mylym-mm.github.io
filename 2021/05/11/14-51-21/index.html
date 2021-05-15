@@ -22,17 +22,17 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mylym-mm.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="​    今天花了1小时在课程大作业上，算是浅显的了解了一点车联网的技术和当前面临的困难。然后又回归到我的前端学习状态。 前后端项目之王者荣耀爬虫1.flask框架：123456789from flask import Flaskapp &#x3D; Flask(__name__)@app.route(&amp;#x27;&#x2F;&amp;#x27;)def hello_world():    return &amp;#x27;Hell">
+<meta name="description" content="​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程     今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。 随后回归前端学习。 前后端项目之王者荣耀爬虫1.flask框架：123456789from flask imp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="forwardDay2">
+<meta property="og:title" content="前后端项目之王者荣耀爬虫">
 <meta property="og:url" content="https://mylym-mm.github.io/2021/05/11/14-51-21/index.html">
 <meta property="og:site_name" content="my鱼">
-<meta property="og:description" content="​    今天花了1小时在课程大作业上，算是浅显的了解了一点车联网的技术和当前面临的困难。然后又回归到我的前端学习状态。 前后端项目之王者荣耀爬虫1.flask框架：123456789from flask import Flaskapp &#x3D; Flask(__name__)@app.route(&amp;#x27;&#x2F;&amp;#x27;)def hello_world():    return &amp;#x27;Hell">
+<meta property="og:description" content="​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程     今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。 随后回归前端学习。 前后端项目之王者荣耀爬虫1.flask框架：123456789from flask imp">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-11T06:51:21.000Z">
-<meta property="article:modified_time" content="2021-05-14T14:17:25.354Z">
+<meta property="article:modified_time" content="2021-05-15T10:21:55.668Z">
 <meta property="article:author" content="lym">
-<meta property="article:tag" content="学习和刷题笔记">
+<meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
 
 
@@ -48,7 +48,7 @@
     lang   : 'en'
   };
 </script>
-<title>forwardDay2 | my鱼</title>
+<title>前后端项目之王者荣耀爬虫 | my鱼</title>
   
 
 
@@ -186,7 +186,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E4%B9%8B%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E7%88%AC%E8%99%AB"><span class="nav-number">1.</span> <span class="nav-text">前后端项目之王者荣耀爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-flask%E6%A1%86%E6%9E%B6%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">1.flask框架：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-WSGI"><span class="nav-number">1.2.</span> <span class="nav-text">2.WSGI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%8F%8D%E7%88%AC%E8%99%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB"><span class="nav-number">1.3.</span> <span class="nav-text">3.反爬虫机制和破解方法汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%88%AC%E8%99%AB%E5%92%8C%E5%8F%8D%E7%88%AC%E8%99%AB%EF%BC%9F"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">什么是爬虫和反爬虫？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8F%8D%E7%88%AC%E8%99%AB%E6%9C%BA%E5%88%B6"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">常见的反爬虫机制</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3%E5%8F%8D%E7%88%AC%E8%99%AB%E6%9C%BA%E5%88%B6%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">破解反爬虫机制的几种方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-1%E5%B9%B6%E5%8F%91%E7%94%A8%E6%88%B7%E6%95%B0%EF%BC%9A%E5%90%8C%E6%97%B6%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%BA%A4%E4%BA%92%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E9%87%8F"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">3.1并发用户数：同时与服务器进行交互在线用户量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-raise-for-status"><span class="nav-number">1.4.</span> <span class="nav-text">4.raise_for_status()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-bind"><span class="nav-number">1.5.</span> <span class="nav-text">5.bind()</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E4%B9%8B%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E7%88%AC%E8%99%AB"><span class="nav-number">1.</span> <span class="nav-text">前后端项目之王者荣耀爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-flask%E6%A1%86%E6%9E%B6%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">1.flask框架：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-WSGI"><span class="nav-number">1.2.</span> <span class="nav-text">2.WSGI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%8F%8D%E7%88%AC%E8%99%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95%E6%B1%87%E6%80%BB"><span class="nav-number">1.3.</span> <span class="nav-text">3.反爬虫机制和破解方法汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%88%AC%E8%99%AB%E5%92%8C%E5%8F%8D%E7%88%AC%E8%99%AB%EF%BC%9F"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">什么是爬虫和反爬虫？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8F%8D%E7%88%AC%E8%99%AB%E6%9C%BA%E5%88%B6"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">常见的反爬虫机制</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3%E5%8F%8D%E7%88%AC%E8%99%AB%E6%9C%BA%E5%88%B6%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">破解反爬虫机制的几种方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-1%E5%B9%B6%E5%8F%91%E7%94%A8%E6%88%B7%E6%95%B0%EF%BC%9A%E5%90%8C%E6%97%B6%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E8%A1%8C%E4%BA%A4%E4%BA%92%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E9%87%8F"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">3.1并发用户数：同时与服务器进行交互在线用户量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-raise-for-status"><span class="nav-number">1.4.</span> <span class="nav-text">4.raise_for_status()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-bind"><span class="nav-number">1.5.</span> <span class="nav-text">5.bind()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Python-f-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%99%E7%A8%8B"><span class="nav-number">1.6.</span> <span class="nav-text">6.Python f 字符串教程</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -207,7 +207,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -262,7 +262,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          forwardDay2
+          前后端项目之王者荣耀爬虫
         </h1>
 
         <div class="post-meta-container">
@@ -280,7 +280,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-14 22:17:25" itemprop="dateModified" datetime="2021-05-14T22:17:25+08:00">2021-05-14</time>
+        <time title="Modified: 2021-05-15 18:21:55" itemprop="dateModified" datetime="2021-05-15T18:21:55+08:00">2021-05-15</time>
       </span>
 
   
@@ -293,7 +293,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>​    今天花了1小时在课程大作业上，算是浅显的了解了一点车联网的技术和当前面临的困难。然后又回归到我的前端学习状态。</p>
+        <p>​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程    </p>
+<p>今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。</p>
+<p>随后回归前端学习。</p>
 <h3 id="前后端项目之王者荣耀爬虫"><a href="#前后端项目之王者荣耀爬虫" class="headerlink" title="前后端项目之王者荣耀爬虫"></a>前后端项目之王者荣耀爬虫</h3><h4 id="1-flask框架："><a href="#1-flask框架：" class="headerlink" title="1.flask框架："></a>1.flask框架：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">9000</span>)</span><br></pre></td></tr></table></figure>
 
 <p>​            第1行，引入Flask类，Flask类实现了一个WSGI应用<br>​            第2行，app是Flask的实例，它接收包或者模块的名字作为参数，但一般都是传递__name__。让flask.helpers.get_root_path函数通过传入这个名字确定程序的根目录，以便获得静态文件和模板文件的目录。<br>​            第4~6行，使用app.route装饰器会将URL和执行的视图函数的关系保存到app.url_map属性上。处理URL和视图函数的关系的程序就是路由，这里的视图函数就是hello_world。<br>​            第8行，使用这个判断可以保证当其他文件引用这个文件的时候（例如“from hello import app”）不会执行这个判断内的代码，也就是不会执行app.run函数。<br>​            第9行，执行app.run就可以启动服务了。默认Flask只监听虚拟机的本地127.0.0.1这个地址，端口为5000。而我们对虚拟机做的端口转发端口是9000，所以需要制定host和port参数，0.0.0.0表示监听所有地址，这样就可以在本机访问了。<br>​            服务器启动后，会调用werkzeug.serving.run_simple进入轮询，默认使用单进程单线程的werkzeug.serving.BaseWSGIServer处理请求，<br>​            实际上还是使用标准库BaseHTTPServer.HTTPServer，通过select.select做0.5秒的“while TRUE”的事件轮询。<br>​            当我们访问“<a target="_blank" rel="noopener" href="http://127.0.0.1:9000/%E2%80%9D,%E9%80%9A%E8%BF%87app.url_map%E6%89%BE%E5%88%B0%E6%B3%A8%E5%86%8C%E7%9A%84%E2%80%9C/%E2%80%9D%E8%BF%99%E4%B8%AAURL%E6%A8%A1%E5%BC%8F,%E5%B0%B1%E6%89%BE%E5%88%B0%E4%BA%86%E5%AF%B9%E5%BA%94%E7%9A%84hello_world%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%EF%BC%8C%E8%BF%94%E5%9B%9E%E2%80%9Chello">http://127.0.0.1:9000/”,通过app.url_map找到注册的“/”这个URL模式,就找到了对应的hello_world函数执行，返回“hello</a> world!”,状态码为200。<br>​            如果访问一个不存在的路径，如访问“<a target="_blank" rel="noopener" href="http://127.0.0.1:9000/a%E2%80%9D,Flask%E6%89%BE%E4%B8%8D%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%B0%B1%E4%BC%9A%E5%90%91%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%94%E5%9B%9E%E2%80%9CNot">http://127.0.0.1:9000/a”,Flask找不到对应的模式，就会向浏览器返回“Not</a> Found”，状态码为404</p>
@@ -376,8 +378,7 @@
 </ul>
 <p>当调用绑定函数时，它调用 <strong>[[BoundTargetFunction]]</strong> 上的内部方法 **[[Call]]**，就像这样 <strong>Call(*boundThis*, *args*)<strong>。其中，</strong>boundThis</strong> 是 <strong>[[BoundThis]]<strong>，</strong>args</strong> 是 <strong>[[BoundArguments]]</strong> 加上通过函数调用传入的参数列表。</p>
 <p>绑定函数也可以使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a> 运算符构造，它会表现为目标函数已经被构建完毕了似的。提供的 <code>this</code> 值会被忽略，但前置参数仍会提供给模拟函数。</p>
-<p>6.<a target="_blank" rel="noopener" href="https://geek-docs.com/python/python-tutorial/python-fstring.html">Python f 字符串教程</a></p>
-<p>f 字符串的前缀为<code>f</code>，并使用<code>&#123;&#125;</code>括号评估值。</p>
+<h4 id="6-Python-f-字符串教程"><a href="#6-Python-f-字符串教程" class="headerlink" title="6.Python f 字符串教程"></a>6.<a target="_blank" rel="noopener" href="https://geek-docs.com/python/python-tutorial/python-fstring.html">Python f 字符串教程</a></h4><p>f 字符串的前缀为<code>f</code>，并使用<code>&#123;&#125;</code>括号评估值。</p>
 <p>在冒号后指定用于类型，填充或对齐的格式说明符； 例如：<code>f&#39;&#123;price:.3&#125;&#39;</code>，其中<code>price</code>是变量名。</p>
 <p>举例：Python 中的字符串格式设置选项</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;Peter&#x27;</span></span><br><span class="line">age = <span class="number">23</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%s is %d years old&#x27;</span> % (name, age))//这是最旧的选项。 它使用%运算符和经典字符串格式指定，例如%s和%d。</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125; is &#123;&#125; years old&#x27;</span>.<span class="built_in">format</span>(name, age))//从 Python <span class="number">3.0</span> 开始，<span class="built_in">format</span>()函数被引入以提供高级格式化选项。</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;name&#125;</span> is <span class="subst">&#123;age&#125;</span> years old&#x27;</span>)//从 Python <span class="number">3.6</span> 开始，Python f 字符串可用。 该字符串具有f前缀，并使用&#123;&#125;评估变量</span><br><span class="line">//输出是一样的 Peter <span class="keyword">is</span> <span class="number">23</span> years old</span><br></pre></td></tr></table></figure>
@@ -437,7 +438,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://mylym-mm.github.io/2021/05/11/14-51-21/" title="forwardDay2">https://mylym-mm.github.io/2021/05/11/14-51-21/</a>
+      <a href="https://mylym-mm.github.io/2021/05/11/14-51-21/" title="前后端项目之王者荣耀爬虫">https://mylym-mm.github.io/2021/05/11/14-51-21/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -446,7 +447,7 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag"># 学习和刷题笔记</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
           </div>
 
         
@@ -458,8 +459,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/05/14/20-36-11/" rel="next" title="forwardDay3-MVC && API">
-                  forwardDay3-MVC && API <i class="fa fa-chevron-right"></i>
+                <a href="/2021/05/14/20-36-11/" rel="next" title="MVC && API">
+                  MVC && API <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

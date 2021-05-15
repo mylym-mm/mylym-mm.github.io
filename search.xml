@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>forwardDay4</title>
+    <url>/2021/05/15/18-00-24/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>app = Flask(__name__)</title>
     <url>/2021/04/29/11-37-38/</url>
     <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第一部分，初始化：所有的Flask都必须创建程序实例</span><br><span class="line">程序实例是Flask的对象，一般情况下用如下方法实例化</span><br><span class="line">Flask类只有一个必须指定的参数，即程序主模块或者包的名字，__name__是系统变量，该变量指的是本py文件的文件名</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -8,6 +13,117 @@
 ]]></content>
       <tags>
         <tag>学习资料</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MVC &amp;&amp; API</title>
+    <url>/2021/05/14/20-36-11/</url>
+    <content><![CDATA[<h2 id="API接口TOKEN设计"><a href="#API接口TOKEN设计" class="headerlink" title="API接口TOKEN设计"></a><a href="https://www.cnblogs.com/xingxia/p/api_token.html">API接口TOKEN设计</a></h2><p>首先需要知道API是什么？<br>API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。</p>
+<p><strong>API的特点</strong>：</p>
+<p>　　1、因为是非开放性的，所以所有的接口都是封闭的，只对公司内部的产品有效；<br>        2、因为是非开放性的，所以OAuth那套协议是行不通的，因为没有中间用户的授权过程；<br>        3、接口分为需要用户登录才能访问的和不需要用户登录就可访问的；</p>
+<p>​            针对以上特点，移动端与服务端的通信就需要两种不同的TOKEN，一种针对接口的api_token,一种针对用户的user_token;</p>
+<p><strong>一.api_token</strong></p>
+<p>　　它的职责是保持接口访问的隐蔽性和有效性，保证接口只有可信任的来源才可以访问，参考思路如下：</p>
+<p>　　按服务器端和客户端都拥有的共同属性生成一个随机串，客户端生成这个串，服务器也按同样算法生成一个串，用来校验客户端的串。</p>
+<p>　　现在的接口基本是mvc模式，URL基本是restful风格，URL大体格式如下：</p>
+<p>　　<a href="http://www.api.com/%E6%A8%A1%E5%9D%97%E5%90%8D/%E6%8E%A7%E5%88%B6%E5%99%A8%E5%90%8D/%E6%96%B9%E6%B3%95%E5%90%8D?%E5%8F%82%E6%95%B0%E5%90%8D1=%E5%8F%82%E6%95%B0%E5%80%BC1&amp;%E5%8F%82%E6%95%B0%E5%90%8D2=%E5%8F%82%E6%95%B0%E5%80%BC2">http://www.api.com/模块名/控制器名/方法名?参数名1=参数值1&amp;参数名2=参数值2</a></p>
+<p>　　接口token生成规则参考如下：</p>
+<p>　　　　$api_token = md5 (‘模块名’ + ‘控制器名’ + ‘方法名’ + ‘2018-1-18’ + ‘加密密钥’) = 789fed3842aabd834e9a5dd7735532de2</p>
+<p>　　　　1.’2018-1-18’ 为当天时间</p>
+<p>　　　　2.’加密密钥’为私有的加密密钥，手机端需要在服务端注册一个“接口使用者”账号后，系统会分配一个账号及密码，数据表设计参考如下：</p>
+<p>　　　　　　字段名及字段类型　　　　　</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">client_id varchar(20) 客户端ID</span><br><span class="line">client_secret varchar(20) 客户端(加密)密钥 </span><br></pre></td></tr></table></figure>
+
+<p>　　　　　　服务端接口校验，PHP实现流程如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;获取GET参数值</span><br><span class="line"> </span><br><span class="line">    $module &#x3D; $_GET[&#39;module&#39;];</span><br><span class="line"> </span><br><span class="line">    $controller &#x3D; $_GET[&#39;controller&#39;]</span><br><span class="line"> </span><br><span class="line">    $action &#x3D; $_GET[&#39;action&#39;];</span><br><span class="line"> </span><br><span class="line">    $client_id &#x3D; $_GET[&#39;client_id&#39;];</span><br><span class="line"> </span><br><span class="line">    $api_token &#x3D; $_GET[&#39;&#39;api_token];</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;根据客户端传过来的client_id，查询数据库，获取对应的client_secret</span><br><span class="line"> </span><br><span class="line">    $client_secret &#x3D; getClientSecret($client_id);</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;服务端重新生成一个api_token</span><br><span class="line"> </span><br><span class="line">    $api_token_server &#x3D; md5($module . $controller . $action . date(&#39;Y-m-d&#39;, time()) . $client_secret);</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;客户端传过来的api_token与服务端生成的api_token进行校对，如果不相等，则表示验证失败</span><br><span class="line"> </span><br><span class="line">    if ($api_token !&#x3D; $api_token_server) &#123;</span><br><span class="line"> </span><br><span class="line">        exit(&#39;access deny&#39;); &#x2F;&#x2F;拒绝访问</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;验证通过，返回数据给客户端</span><br><span class="line"> </span><br><span class="line">?&gt;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>二.user_token</strong></p>
+<p>　　它的职责是保护用户的用户名及密码多次提交，以防密码泄露。</p>
+<p>　　如果接口需要用户登录，其访问流程如下：</p>
+<p>　　　　1、用户提交“用户名”和“密码”，实现登录（条件允许，这一步最好走https）；</p>
+<p>　　　　2、登录成功后，服务端返回一个user_token，生成规则参考如下：</p>
+<p>　　　　　　user_token = md5(‘用户的uid’ + ‘Unix时间戳’) = etye0fgkgk4ca2ttdsl0ae9a5dd77471fgf</p>
+<p>　　　　　　服务端用数据表维护user_token的状态，表设计如下：</p>
+<p>　　　　　　字段名及字段类型如下：　　　　　　　　</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">user_id int(11) 用户ID</span><br><span class="line">user_token varchar(36) 用户token</span><br><span class="line">expire_time int 过期时间（Unix时间戳）  </span><br></pre></td></tr></table></figure>
+
+<p>　　服务端生成user_token后，返回给客户端（自己存储），客户端每次接口请求时，如果接口需要用户登录才能访问，则需要把 user_id与user_token传回给服务端，服务端接受到这2个参数后，需要做以下几步：</p>
+<p>　　　　  1、检测user_token的有效性；</p>
+<p>　　　　2、删除过期的user_token表记录；</p>
+<p>　　　　3、根据user_id，user_token 获取表记录，如果表记录不存在，直接返回错误，如果记录存在，则进行下一步；</p>
+<p>　　　　4、更新user_token 的过期时间（延期，保证其有效期内连续操作不掉线）；</p>
+<p>　　　　5、返回接口数据；</p>
+<p>接口用例如下：添加测试接口</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">URL： http:&#x2F;&#x2F;www.api.com&#x2F;demo&#x2F;index&#x2F;add-demo?client_id&#x3D;wt373uesksklwkskx36sr5858t6&amp;api_token&#x3D;880fed4ca2aabd20ae9eessa74711de2&amp;user_token&#x3D;etye0fgkgk4ca2asehxlejeje5dd77471fgf&amp;user_id&#x3D;12</span><br><span class="line">请求方式： POST</span><br><span class="line">POST参数：title&#x3D;哈喽&amp;content&#x3D;我的世界</span><br><span class="line">返回数据：</span><br><span class="line">&#123;&#39;code&#39;&#x3D;&gt; 1,&#x2F;&#x2F; 1:成功 0:失败</span><br><span class="line">&#39;msg&#39;&#x3D;&gt; &#39;成功&#x2F;失败，无权访问&#39;</span><br><span class="line">&#39;data&#39;&#x3D;&gt; []&#125;</span><br></pre></td></tr></table></figure>
+
+<p>　　</p>
+<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这种模式用于应用程序的分层开发。</p>
+<ul>
+<li><strong>Model（模型）</strong> 模型代表一个存取数据的对象或 JAVA POJO。它也可以带有逻辑，在数据变化时更新控制器。</li>
+<li><strong>View（视图）</strong>  视图代表模型包含的数据的可视化。</li>
+<li><strong>Controller（控制器）</strong> -控制器作用于模型和视图上。它控制数据流向模型对象，并在数据变化时更新视图。它使视图与模型分离开。</li>
+<li><img src="https://www.runoob.com/wp-content/uploads/2014/08/1200px-ModelViewControllerDiagram2.svg_.png" alt="三者关系"></li>
+</ul>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>我们将创建一个作为模型的 <em>Student</em> 对象。<em>StudentView</em> 是一个把学生详细信息输出到控制台的视图类，<em>StudentController</em> 是负责存储数据到 <em>Student</em> 对象中的控制器类，并相应地更新视图 <em>StudentView</em>。</p>
+<p><em>MVCPatternDemo</em>，我们的演示类使用 <em>StudentController</em> 来演示 MVC 模式的用法。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/08/mvc-2.svg" alt="类图"></p>
+<h5 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤 1"></a>步骤 1</h5><p>创建模型。</p>
+<h6 id="Student-java"><a href="#Student-java" class="headerlink" title="Student.java"></a>Student.java</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Student &#123;</span><br><span class="line">	private String rollNo;   </span><br><span class="line">	private String name;   </span><br><span class="line">	public String getRollNo() &#123;</span><br><span class="line">    	return rollNo;   </span><br><span class="line">    &#125;   </span><br><span class="line">    public void setRollNo(String rollNo) &#123;      </span><br><span class="line">    	this.rollNo &#x3D; rollNo;   </span><br><span class="line">    &#125;   </span><br><span class="line">    public String getName() &#123;      </span><br><span class="line">    	return name;   </span><br><span class="line">    &#125;   </span><br><span class="line">    public void setName(String name) &#123;      </span><br><span class="line">    	this.name &#x3D; name;   </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤 2"></a>步骤 2</h5><p>创建视图。</p>
+<h6 id="StudentView-java"><a href="#StudentView-java" class="headerlink" title="StudentView.java"></a>StudentView.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentView</span> </span>&#123;   </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStudentDetails</span><span class="params">(String studentName, String studentRollNo)</span></span>&#123;      			System.out.println(<span class="string">&quot;Student: &quot;</span>);      </span><br><span class="line">		System.out.println(<span class="string">&quot;Name: &quot;</span> + studentName);      </span><br><span class="line">		System.out.println(<span class="string">&quot;Roll No: &quot;</span> + studentRollNo);   </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤 3"></a>步骤 3</h5><p>创建控制器。</p>
+<h6 id="StudentController-java"><a href="#StudentController-java" class="headerlink" title="StudentController.java"></a>StudentController.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> </span>&#123;   </span><br><span class="line">	<span class="keyword">private</span> Student model;   </span><br><span class="line">	<span class="keyword">private</span> StudentView view;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">StudentController</span><span class="params">(Student model, StudentView view)</span></span>&#123;      </span><br><span class="line">		<span class="keyword">this</span>.model = model;      </span><br><span class="line">		<span class="keyword">this</span>.view = view;   </span><br><span class="line">	&#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStudentName</span><span class="params">(String name)</span></span>&#123;     </span><br><span class="line">        model.setName(name);      </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getStudentName</span><span class="params">()</span></span>&#123;    </span><br><span class="line">        <span class="keyword">return</span> model.getName();     </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStudentRollNo</span><span class="params">(String rollNo)</span></span>&#123;      </span><br><span class="line">        model.setRollNo(rollNo);       </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getStudentRollNo</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        <span class="keyword">return</span> model.getRollNo();      </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateView</span><span class="params">()</span></span>&#123;             </span><br><span class="line">        view.printStudentDetails(model.getName(), model.getRollNo());  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤 4"></a>步骤 4</h5><p>使用 <em>StudentController</em> 方法来演示 MVC 设计模式的用法。</p>
+<h6 id="MVCPatternDemo-java"><a href="#MVCPatternDemo-java" class="headerlink" title="MVCPatternDemo.java"></a>MVCPatternDemo.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MVCPatternDemo</span> </span>&#123;   </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;       </span><br><span class="line">    <span class="comment">//从数据库获取学生记录      </span></span><br><span class="line">    Student model  = retrieveStudentFromDatabase();       </span><br><span class="line">    <span class="comment">//创建一个视图：把学生详细信息输出到控制台      </span></span><br><span class="line">    StudentView view = <span class="keyword">new</span> StudentView();       </span><br><span class="line">    StudentController controller = <span class="keyword">new</span> StudentController(model, view);       </span><br><span class="line">    controller.updateView();       </span><br><span class="line">    <span class="comment">//更新模型数据     </span></span><br><span class="line">    controller.setStudentName(<span class="string">&quot;John&quot;</span>);      </span><br><span class="line">    controller.updateView();   </span><br><span class="line">&#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Student <span class="title">retrieveStudentFromDatabase</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        Student student = <span class="keyword">new</span> Student();      </span><br><span class="line">        student.setName(<span class="string">&quot;Robert&quot;</span>);      </span><br><span class="line">        student.setRollNo(<span class="string">&quot;10&quot;</span>);      </span><br><span class="line">        <span class="keyword">return</span> student;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="步骤-5"><a href="#步骤-5" class="headerlink" title="步骤 5"></a>步骤 5</h5><p>执行程序，输出结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Student: </span><br><span class="line">Name: Robert</span><br><span class="line">Roll No: <span class="number">10</span></span><br><span class="line">Student: </span><br><span class="line">Name: John</span><br><span class="line">Roll No: <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="前端控制器模式MVC"><a href="#前端控制器模式MVC" class="headerlink" title="前端控制器模式MVC"></a>前端控制器模式MVC</h2><p>前端控制器模式（Front Controller Pattern）是用来提供一个集中的请求处理机制，所有的请求都将由一个单一的处理程序处理。该处理程序可以做认证/授权/记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体。</p>
+<ul>
+<li><strong>前端控制器（Front Controller）</strong> - 处理应用程序所有类型请求的单个处理程序，应用程序可以是基于 web 的应用程序，也可以是基于桌面的应用程序。</li>
+<li><strong>调度器（Dispatcher）</strong> - 前端控制器可能使用一个调度器对象来调度请求到相应的具体处理程序。</li>
+<li><strong>视图（View）</strong> - 视图是为请求而创建的对象。</li>
+</ul>
+<h5 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h5><p>我们将创建 <em>FrontController</em>、<em>Dispatcher</em> 分别当作前端控制器和调度器。<em>HomeView</em> 和 <em>StudentView</em> 表示各种为前端控制器接收到的请求而创建的视图。</p>
+<p><em>FrontControllerPatternDemo</em>，我们的演示类使用 <em>FrontController</em> 来演示前端控制器设计模式。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/08/frontcontroller_pattern_uml_diagram.jpg" alt="前端控制器模式的 UML 图"></p>
+<h5 id="步骤-1-1"><a href="#步骤-1-1" class="headerlink" title="步骤 1"></a>步骤 1</h5><p>创建视图。</p>
+<h6 id="HomeView-java"><a href="#HomeView-java" class="headerlink" title="HomeView.java"></a>HomeView.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeView</span> </span>&#123;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        System.out.println(<span class="string">&quot;Displaying Home Page&quot;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="StudentView-java-1"><a href="#StudentView-java-1" class="headerlink" title="StudentView.java"></a>StudentView.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentView</span> </span>&#123;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        System.out.println(<span class="string">&quot;Displaying Student Page&quot;</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="步骤-2-1"><a href="#步骤-2-1" class="headerlink" title="步骤 2"></a>步骤 2</h5><p>创建调度器 Dispatcher。</p>
+<h6 id="Dispatcher-java"><a href="#Dispatcher-java" class="headerlink" title="Dispatcher.java"></a>Dispatcher.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dispatcher</span> </span>&#123;   </span><br><span class="line">    <span class="keyword">private</span> StudentView studentView;   </span><br><span class="line">    <span class="keyword">private</span> HomeView homeView; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dispatcher</span><span class="params">()</span></span>&#123;    </span><br><span class="line">        studentView = <span class="keyword">new</span> StudentView();      </span><br><span class="line">        homeView = <span class="keyword">new</span> HomeView(); </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatch</span><span class="params">(String request)</span></span>&#123;   </span><br><span class="line">        <span class="keyword">if</span>(request.equalsIgnoreCase(<span class="string">&quot;STUDENT&quot;</span>))&#123;  </span><br><span class="line">            studentView.show();     </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;       </span><br><span class="line">            homeView.show();     </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="步骤-3-1"><a href="#步骤-3-1" class="headerlink" title="步骤 3"></a>步骤 3</h5><p>创建前端控制器 FrontController。</p>
+<h6 id="FrontController-java"><a href="#FrontController-java" class="headerlink" title="FrontController.java"></a>FrontController.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FrontController</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> Dispatcher dispatcher;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FrontController</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        dispatcher = <span class="keyword">new</span> Dispatcher();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isAuthenticUser</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;User is authenticated successfully.&quot;</span>);      </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">trackRequest</span><span class="params">(String request)</span></span>&#123;   </span><br><span class="line">        System.out.println(<span class="string">&quot;Page requested: &quot;</span> + request);   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatchRequest</span><span class="params">(String request)</span></span>&#123;  </span><br><span class="line">        <span class="comment">//记录每一个请求    </span></span><br><span class="line">        trackRequest(request);  </span><br><span class="line">        <span class="comment">//对用户进行身份验证      </span></span><br><span class="line">        <span class="keyword">if</span>(isAuthenticUser())&#123;   </span><br><span class="line">            dispatcher.dispatch(request); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="步骤-4-1"><a href="#步骤-4-1" class="headerlink" title="步骤 4"></a>步骤 4</h5><p>使用 <em>FrontController</em> 来演示前端控制器设计模式。</p>
+<h6 id="FrontControllerPatternDemo-java"><a href="#FrontControllerPatternDemo-java" class="headerlink" title="FrontControllerPatternDemo.java"></a>FrontControllerPatternDemo.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FrontControllerPatternDemo</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;      </span><br><span class="line">        FrontController frontController = <span class="keyword">new</span> FrontController();      		</span><br><span class="line">        frontController.dispatchRequest(<span class="string">&quot;HOME&quot;</span>);  </span><br><span class="line">        frontController.dispatchRequest(<span class="string">&quot;STUDENT&quot;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="步骤-5-1"><a href="#步骤-5-1" class="headerlink" title="步骤 5"></a>步骤 5</h5><p>执行程序，输出结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Page requested: HOME</span><br><span class="line">User is authenticated successfully.</span><br><span class="line">Displaying Home Page</span><br><span class="line">Page requested: STUDENT</span><br><span class="line">User is authenticated successfully.</span><br><span class="line">Displaying Student Page</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>API</tag>
+        <tag>MVC</tag>
       </tags>
   </entry>
   <entry>
@@ -141,128 +257,16 @@
 </ul>
 ]]></content>
       <tags>
-        <tag>刷题笔记</tag>
+        <tag>字符串</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
-    <title>forwardDay4</title>
-    <url>/2021/05/15/18-00-24/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>forwardDay3-MVC &amp;&amp; API</title>
-    <url>/2021/05/14/20-36-11/</url>
-    <content><![CDATA[<h2 id="API接口TOKEN设计"><a href="#API接口TOKEN设计" class="headerlink" title="API接口TOKEN设计"></a><a href="https://www.cnblogs.com/xingxia/p/api_token.html">API接口TOKEN设计</a></h2><p>首先需要知道API是什么？<br>API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。</p>
-<p><strong>API的特点</strong>：</p>
-<p>　　1、因为是非开放性的，所以所有的接口都是封闭的，只对公司内部的产品有效；<br>        2、因为是非开放性的，所以OAuth那套协议是行不通的，因为没有中间用户的授权过程；<br>        3、接口分为需要用户登录才能访问的和不需要用户登录就可访问的；</p>
-<p>​            针对以上特点，移动端与服务端的通信就需要两种不同的TOKEN，一种针对接口的api_token,一种针对用户的user_token;</p>
-<p><strong>一.api_token</strong></p>
-<p>　　它的职责是保持接口访问的隐蔽性和有效性，保证接口只有可信任的来源才可以访问，参考思路如下：</p>
-<p>　　按服务器端和客户端都拥有的共同属性生成一个随机串，客户端生成这个串，服务器也按同样算法生成一个串，用来校验客户端的串。</p>
-<p>　　现在的接口基本是mvc模式，URL基本是restful风格，URL大体格式如下：</p>
-<p>　　<a href="http://www.api.com/%E6%A8%A1%E5%9D%97%E5%90%8D/%E6%8E%A7%E5%88%B6%E5%99%A8%E5%90%8D/%E6%96%B9%E6%B3%95%E5%90%8D?%E5%8F%82%E6%95%B0%E5%90%8D1=%E5%8F%82%E6%95%B0%E5%80%BC1&amp;%E5%8F%82%E6%95%B0%E5%90%8D2=%E5%8F%82%E6%95%B0%E5%80%BC2">http://www.api.com/模块名/控制器名/方法名?参数名1=参数值1&amp;参数名2=参数值2</a></p>
-<p>　　接口token生成规则参考如下：</p>
-<p>　　　　$api_token = md5 (‘模块名’ + ‘控制器名’ + ‘方法名’ + ‘2018-1-18’ + ‘加密密钥’) = 789fed3842aabd834e9a5dd7735532de2</p>
-<p>　　　　1.’2018-1-18’ 为当天时间</p>
-<p>　　　　2.’加密密钥’为私有的加密密钥，手机端需要在服务端注册一个“接口使用者”账号后，系统会分配一个账号及密码，数据表设计参考如下：</p>
-<p>　　　　　　字段名及字段类型　　　　　</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">client_id varchar(20) 客户端ID</span><br><span class="line">client_secret varchar(20) 客户端(加密)密钥 </span><br></pre></td></tr></table></figure>
-
-<p>　　　　　　服务端接口校验，PHP实现流程如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;获取GET参数值</span><br><span class="line"> </span><br><span class="line">    $module &#x3D; $_GET[&#39;module&#39;];</span><br><span class="line"> </span><br><span class="line">    $controller &#x3D; $_GET[&#39;controller&#39;]</span><br><span class="line"> </span><br><span class="line">    $action &#x3D; $_GET[&#39;action&#39;];</span><br><span class="line"> </span><br><span class="line">    $client_id &#x3D; $_GET[&#39;client_id&#39;];</span><br><span class="line"> </span><br><span class="line">    $api_token &#x3D; $_GET[&#39;&#39;api_token];</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;根据客户端传过来的client_id，查询数据库，获取对应的client_secret</span><br><span class="line"> </span><br><span class="line">    $client_secret &#x3D; getClientSecret($client_id);</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;服务端重新生成一个api_token</span><br><span class="line"> </span><br><span class="line">    $api_token_server &#x3D; md5($module . $controller . $action . date(&#39;Y-m-d&#39;, time()) . $client_secret);</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;客户端传过来的api_token与服务端生成的api_token进行校对，如果不相等，则表示验证失败</span><br><span class="line"> </span><br><span class="line">    if ($api_token !&#x3D; $api_token_server) &#123;</span><br><span class="line"> </span><br><span class="line">        exit(&#39;access deny&#39;); &#x2F;&#x2F;拒绝访问</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    &#x2F;&#x2F;验证通过，返回数据给客户端</span><br><span class="line"> </span><br><span class="line">?&gt;    </span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>二.user_token</strong></p>
-<p>　　它的职责是保护用户的用户名及密码多次提交，以防密码泄露。</p>
-<p>　　如果接口需要用户登录，其访问流程如下：</p>
-<p>　　　　1、用户提交“用户名”和“密码”，实现登录（条件允许，这一步最好走https）；</p>
-<p>　　　　2、登录成功后，服务端返回一个user_token，生成规则参考如下：</p>
-<p>　　　　　　user_token = md5(‘用户的uid’ + ‘Unix时间戳’) = etye0fgkgk4ca2ttdsl0ae9a5dd77471fgf</p>
-<p>　　　　　　服务端用数据表维护user_token的状态，表设计如下：</p>
-<p>　　　　　　字段名及字段类型如下：　　　　　　　　</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">user_id int(11) 用户ID</span><br><span class="line">user_token varchar(36) 用户token</span><br><span class="line">expire_time int 过期时间（Unix时间戳）  </span><br></pre></td></tr></table></figure>
-
-<p>　　服务端生成user_token后，返回给客户端（自己存储），客户端每次接口请求时，如果接口需要用户登录才能访问，则需要把 user_id与user_token传回给服务端，服务端接受到这2个参数后，需要做以下几步：</p>
-<p>　　　　  1、检测user_token的有效性；</p>
-<p>　　　　2、删除过期的user_token表记录；</p>
-<p>　　　　3、根据user_id，user_token 获取表记录，如果表记录不存在，直接返回错误，如果记录存在，则进行下一步；</p>
-<p>　　　　4、更新user_token 的过期时间（延期，保证其有效期内连续操作不掉线）；</p>
-<p>　　　　5、返回接口数据；</p>
-<p>接口用例如下：添加测试接口</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">URL： http:&#x2F;&#x2F;www.api.com&#x2F;demo&#x2F;index&#x2F;add-demo?client_id&#x3D;wt373uesksklwkskx36sr5858t6&amp;api_token&#x3D;880fed4ca2aabd20ae9eessa74711de2&amp;user_token&#x3D;etye0fgkgk4ca2asehxlejeje5dd77471fgf&amp;user_id&#x3D;12</span><br><span class="line">请求方式： POST</span><br><span class="line">POST参数：title&#x3D;哈喽&amp;content&#x3D;我的世界</span><br><span class="line">返回数据：</span><br><span class="line">&#123;&#39;code&#39;&#x3D;&gt; 1,&#x2F;&#x2F; 1:成功 0:失败</span><br><span class="line">&#39;msg&#39;&#x3D;&gt; &#39;成功&#x2F;失败，无权访问&#39;</span><br><span class="line">&#39;data&#39;&#x3D;&gt; []&#125;</span><br></pre></td></tr></table></figure>
-
-<p>　　</p>
-<h2 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h2><p>MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这种模式用于应用程序的分层开发。</p>
-<ul>
-<li><strong>Model（模型）</strong> 模型代表一个存取数据的对象或 JAVA POJO。它也可以带有逻辑，在数据变化时更新控制器。</li>
-<li><strong>View（视图）</strong>  视图代表模型包含的数据的可视化。</li>
-<li><strong>Controller（控制器）</strong> -控制器作用于模型和视图上。它控制数据流向模型对象，并在数据变化时更新视图。它使视图与模型分离开。</li>
-<li><img src="https://www.runoob.com/wp-content/uploads/2014/08/1200px-ModelViewControllerDiagram2.svg_.png" alt="三者关系"></li>
-</ul>
-<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>我们将创建一个作为模型的 <em>Student</em> 对象。<em>StudentView</em> 是一个把学生详细信息输出到控制台的视图类，<em>StudentController</em> 是负责存储数据到 <em>Student</em> 对象中的控制器类，并相应地更新视图 <em>StudentView</em>。</p>
-<p><em>MVCPatternDemo</em>，我们的演示类使用 <em>StudentController</em> 来演示 MVC 模式的用法。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2014/08/mvc-2.svg" alt="类图"></p>
-<h5 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤 1"></a>步骤 1</h5><p>创建模型。</p>
-<h6 id="Student-java"><a href="#Student-java" class="headerlink" title="Student.java"></a>Student.java</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Student &#123;</span><br><span class="line">	private String rollNo;   </span><br><span class="line">	private String name;   </span><br><span class="line">	public String getRollNo() &#123;</span><br><span class="line">    	return rollNo;   </span><br><span class="line">    &#125;   </span><br><span class="line">    public void setRollNo(String rollNo) &#123;      </span><br><span class="line">    	this.rollNo &#x3D; rollNo;   </span><br><span class="line">    &#125;   </span><br><span class="line">    public String getName() &#123;      </span><br><span class="line">    	return name;   </span><br><span class="line">    &#125;   </span><br><span class="line">    public void setName(String name) &#123;      </span><br><span class="line">    	this.name &#x3D; name;   </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤 2"></a>步骤 2</h5><p>创建视图。</p>
-<h6 id="StudentView-java"><a href="#StudentView-java" class="headerlink" title="StudentView.java"></a>StudentView.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentView</span> </span>&#123;   </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStudentDetails</span><span class="params">(String studentName, String studentRollNo)</span></span>&#123;      			System.out.println(<span class="string">&quot;Student: &quot;</span>);      </span><br><span class="line">		System.out.println(<span class="string">&quot;Name: &quot;</span> + studentName);      </span><br><span class="line">		System.out.println(<span class="string">&quot;Roll No: &quot;</span> + studentRollNo);   </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤 3"></a>步骤 3</h5><p>创建控制器。</p>
-<h6 id="StudentController-java"><a href="#StudentController-java" class="headerlink" title="StudentController.java"></a>StudentController.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> </span>&#123;   </span><br><span class="line">	<span class="keyword">private</span> Student model;   </span><br><span class="line">	<span class="keyword">private</span> StudentView view;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">StudentController</span><span class="params">(Student model, StudentView view)</span></span>&#123;      </span><br><span class="line">		<span class="keyword">this</span>.model = model;      </span><br><span class="line">		<span class="keyword">this</span>.view = view;   </span><br><span class="line">	&#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStudentName</span><span class="params">(String name)</span></span>&#123;     </span><br><span class="line">        model.setName(name);      </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getStudentName</span><span class="params">()</span></span>&#123;    </span><br><span class="line">        <span class="keyword">return</span> model.getName();     </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStudentRollNo</span><span class="params">(String rollNo)</span></span>&#123;      </span><br><span class="line">        model.setRollNo(rollNo);       </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getStudentRollNo</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        <span class="keyword">return</span> model.getRollNo();      </span><br><span class="line">    &#125;    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateView</span><span class="params">()</span></span>&#123;             </span><br><span class="line">        view.printStudentDetails(model.getName(), model.getRollNo());  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤 4"></a>步骤 4</h5><p>使用 <em>StudentController</em> 方法来演示 MVC 设计模式的用法。</p>
-<h6 id="MVCPatternDemo-java"><a href="#MVCPatternDemo-java" class="headerlink" title="MVCPatternDemo.java"></a>MVCPatternDemo.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MVCPatternDemo</span> </span>&#123;   </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;       </span><br><span class="line">    <span class="comment">//从数据库获取学生记录      </span></span><br><span class="line">    Student model  = retrieveStudentFromDatabase();       </span><br><span class="line">    <span class="comment">//创建一个视图：把学生详细信息输出到控制台      </span></span><br><span class="line">    StudentView view = <span class="keyword">new</span> StudentView();       </span><br><span class="line">    StudentController controller = <span class="keyword">new</span> StudentController(model, view);       </span><br><span class="line">    controller.updateView();       </span><br><span class="line">    <span class="comment">//更新模型数据     </span></span><br><span class="line">    controller.setStudentName(<span class="string">&quot;John&quot;</span>);      </span><br><span class="line">    controller.updateView();   </span><br><span class="line">&#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Student <span class="title">retrieveStudentFromDatabase</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        Student student = <span class="keyword">new</span> Student();      </span><br><span class="line">        student.setName(<span class="string">&quot;Robert&quot;</span>);      </span><br><span class="line">        student.setRollNo(<span class="string">&quot;10&quot;</span>);      </span><br><span class="line">        <span class="keyword">return</span> student;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="步骤-5"><a href="#步骤-5" class="headerlink" title="步骤 5"></a>步骤 5</h5><p>执行程序，输出结果：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Student: </span><br><span class="line">Name: Robert</span><br><span class="line">Roll No: <span class="number">10</span></span><br><span class="line">Student: </span><br><span class="line">Name: John</span><br><span class="line">Roll No: <span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="前端控制器模式"><a href="#前端控制器模式" class="headerlink" title="前端控制器模式"></a>前端控制器模式</h2><p>前端控制器模式（Front Controller Pattern）是用来提供一个集中的请求处理机制，所有的请求都将由一个单一的处理程序处理。该处理程序可以做认证/授权/记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体。</p>
-<ul>
-<li><strong>前端控制器（Front Controller）</strong> - 处理应用程序所有类型请求的单个处理程序，应用程序可以是基于 web 的应用程序，也可以是基于桌面的应用程序。</li>
-<li><strong>调度器（Dispatcher）</strong> - 前端控制器可能使用一个调度器对象来调度请求到相应的具体处理程序。</li>
-<li><strong>视图（View）</strong> - 视图是为请求而创建的对象。</li>
-</ul>
-<h5 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h5><p>我们将创建 <em>FrontController</em>、<em>Dispatcher</em> 分别当作前端控制器和调度器。<em>HomeView</em> 和 <em>StudentView</em> 表示各种为前端控制器接收到的请求而创建的视图。</p>
-<p><em>FrontControllerPatternDemo</em>，我们的演示类使用 <em>FrontController</em> 来演示前端控制器设计模式。</p>
-<p><img src="https://www.runoob.com/wp-content/uploads/2014/08/frontcontroller_pattern_uml_diagram.jpg" alt="前端控制器模式的 UML 图"></p>
-<h5 id="步骤-1-1"><a href="#步骤-1-1" class="headerlink" title="步骤 1"></a>步骤 1</h5><p>创建视图。</p>
-<h6 id="HomeView-java"><a href="#HomeView-java" class="headerlink" title="HomeView.java"></a>HomeView.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeView</span> </span>&#123;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        System.out.println(<span class="string">&quot;Displaying Home Page&quot;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="StudentView-java-1"><a href="#StudentView-java-1" class="headerlink" title="StudentView.java"></a>StudentView.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentView</span> </span>&#123;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        System.out.println(<span class="string">&quot;Displaying Student Page&quot;</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="步骤-2-1"><a href="#步骤-2-1" class="headerlink" title="步骤 2"></a>步骤 2</h5><p>创建调度器 Dispatcher。</p>
-<h6 id="Dispatcher-java"><a href="#Dispatcher-java" class="headerlink" title="Dispatcher.java"></a>Dispatcher.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dispatcher</span> </span>&#123;   </span><br><span class="line">    <span class="keyword">private</span> StudentView studentView;   </span><br><span class="line">    <span class="keyword">private</span> HomeView homeView; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dispatcher</span><span class="params">()</span></span>&#123;    </span><br><span class="line">        studentView = <span class="keyword">new</span> StudentView();      </span><br><span class="line">        homeView = <span class="keyword">new</span> HomeView(); </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatch</span><span class="params">(String request)</span></span>&#123;   </span><br><span class="line">        <span class="keyword">if</span>(request.equalsIgnoreCase(<span class="string">&quot;STUDENT&quot;</span>))&#123;  </span><br><span class="line">            studentView.show();     </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;       </span><br><span class="line">            homeView.show();     </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="步骤-3-1"><a href="#步骤-3-1" class="headerlink" title="步骤 3"></a>步骤 3</h5><p>创建前端控制器 FrontController。</p>
-<h6 id="FrontController-java"><a href="#FrontController-java" class="headerlink" title="FrontController.java"></a>FrontController.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FrontController</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> Dispatcher dispatcher;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FrontController</span><span class="params">()</span></span>&#123;     </span><br><span class="line">        dispatcher = <span class="keyword">new</span> Dispatcher();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isAuthenticUser</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">&quot;User is authenticated successfully.&quot;</span>);      </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">trackRequest</span><span class="params">(String request)</span></span>&#123;   </span><br><span class="line">        System.out.println(<span class="string">&quot;Page requested: &quot;</span> + request);   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatchRequest</span><span class="params">(String request)</span></span>&#123;  </span><br><span class="line">        <span class="comment">//记录每一个请求    </span></span><br><span class="line">        trackRequest(request);  </span><br><span class="line">        <span class="comment">//对用户进行身份验证      </span></span><br><span class="line">        <span class="keyword">if</span>(isAuthenticUser())&#123;   </span><br><span class="line">            dispatcher.dispatch(request); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="步骤-4-1"><a href="#步骤-4-1" class="headerlink" title="步骤 4"></a>步骤 4</h5><p>使用 <em>FrontController</em> 来演示前端控制器设计模式。</p>
-<h6 id="FrontControllerPatternDemo-java"><a href="#FrontControllerPatternDemo-java" class="headerlink" title="FrontControllerPatternDemo.java"></a>FrontControllerPatternDemo.java</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FrontControllerPatternDemo</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;      </span><br><span class="line">        FrontController frontController = <span class="keyword">new</span> FrontController();      		</span><br><span class="line">        frontController.dispatchRequest(<span class="string">&quot;HOME&quot;</span>);  </span><br><span class="line">        frontController.dispatchRequest(<span class="string">&quot;STUDENT&quot;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="步骤-5-1"><a href="#步骤-5-1" class="headerlink" title="步骤 5"></a>步骤 5</h5><p>执行程序，输出结果：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Page requested: HOME</span><br><span class="line">User is authenticated successfully.</span><br><span class="line">Displaying Home Page</span><br><span class="line">Page requested: STUDENT</span><br><span class="line">User is authenticated successfully.</span><br><span class="line">Displaying Student Page</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>forwardDay2</title>
+    <title>前后端项目之王者荣耀爬虫</title>
     <url>/2021/05/11/14-51-21/</url>
-    <content><![CDATA[<p>​    今天花了1小时在课程大作业上，算是浅显的了解了一点车联网的技术和当前面临的困难。然后又回归到我的前端学习状态。</p>
+    <content><![CDATA[<p>​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程    </p>
+<p>今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。</p>
+<p>随后回归前端学习。</p>
 <h3 id="前后端项目之王者荣耀爬虫"><a href="#前后端项目之王者荣耀爬虫" class="headerlink" title="前后端项目之王者荣耀爬虫"></a>前后端项目之王者荣耀爬虫</h3><h4 id="1-flask框架："><a href="#1-flask框架：" class="headerlink" title="1.flask框架："></a>1.flask框架：</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">9000</span>)</span><br></pre></td></tr></table></figure>
 
 <p>​            第1行，引入Flask类，Flask类实现了一个WSGI应用<br>​            第2行，app是Flask的实例，它接收包或者模块的名字作为参数，但一般都是传递__name__。让flask.helpers.get_root_path函数通过传入这个名字确定程序的根目录，以便获得静态文件和模板文件的目录。<br>​            第4~6行，使用app.route装饰器会将URL和执行的视图函数的关系保存到app.url_map属性上。处理URL和视图函数的关系的程序就是路由，这里的视图函数就是hello_world。<br>​            第8行，使用这个判断可以保证当其他文件引用这个文件的时候（例如“from hello import app”）不会执行这个判断内的代码，也就是不会执行app.run函数。<br>​            第9行，执行app.run就可以启动服务了。默认Flask只监听虚拟机的本地127.0.0.1这个地址，端口为5000。而我们对虚拟机做的端口转发端口是9000，所以需要制定host和port参数，0.0.0.0表示监听所有地址，这样就可以在本机访问了。<br>​            服务器启动后，会调用werkzeug.serving.run_simple进入轮询，默认使用单进程单线程的werkzeug.serving.BaseWSGIServer处理请求，<br>​            实际上还是使用标准库BaseHTTPServer.HTTPServer，通过select.select做0.5秒的“while TRUE”的事件轮询。<br>​            当我们访问“<a href="http://127.0.0.1:9000/%E2%80%9D,%E9%80%9A%E8%BF%87app.url_map%E6%89%BE%E5%88%B0%E6%B3%A8%E5%86%8C%E7%9A%84%E2%80%9C/%E2%80%9D%E8%BF%99%E4%B8%AAURL%E6%A8%A1%E5%BC%8F,%E5%B0%B1%E6%89%BE%E5%88%B0%E4%BA%86%E5%AF%B9%E5%BA%94%E7%9A%84hello_world%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%EF%BC%8C%E8%BF%94%E5%9B%9E%E2%80%9Chello">http://127.0.0.1:9000/”,通过app.url_map找到注册的“/”这个URL模式,就找到了对应的hello_world函数执行，返回“hello</a> world!”,状态码为200。<br>​            如果访问一个不存在的路径，如访问“<a href="http://127.0.0.1:9000/a%E2%80%9D,Flask%E6%89%BE%E4%B8%8D%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%B0%B1%E4%BC%9A%E5%90%91%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%94%E5%9B%9E%E2%80%9CNot">http://127.0.0.1:9000/a”,Flask找不到对应的模式，就会向浏览器返回“Not</a> Found”，状态码为404</p>
@@ -345,8 +349,7 @@
 </ul>
 <p>当调用绑定函数时，它调用 <strong>[[BoundTargetFunction]]</strong> 上的内部方法 **[[Call]]**，就像这样 <strong>Call(*boundThis*, *args*)<strong>。其中，</strong>boundThis</strong> 是 <strong>[[BoundThis]]<strong>，</strong>args</strong> 是 <strong>[[BoundArguments]]</strong> 加上通过函数调用传入的参数列表。</p>
 <p>绑定函数也可以使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a> 运算符构造，它会表现为目标函数已经被构建完毕了似的。提供的 <code>this</code> 值会被忽略，但前置参数仍会提供给模拟函数。</p>
-<p>6.<a href="https://geek-docs.com/python/python-tutorial/python-fstring.html">Python f 字符串教程</a></p>
-<p>f 字符串的前缀为<code>f</code>，并使用<code>&#123;&#125;</code>括号评估值。</p>
+<h4 id="6-Python-f-字符串教程"><a href="#6-Python-f-字符串教程" class="headerlink" title="6.Python f 字符串教程"></a>6.<a href="https://geek-docs.com/python/python-tutorial/python-fstring.html">Python f 字符串教程</a></h4><p>f 字符串的前缀为<code>f</code>，并使用<code>&#123;&#125;</code>括号评估值。</p>
 <p>在冒号后指定用于类型，填充或对齐的格式说明符； 例如：<code>f&#39;&#123;price:.3&#125;&#39;</code>，其中<code>price</code>是变量名。</p>
 <p>举例：Python 中的字符串格式设置选项</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">name = <span class="string">&#x27;Peter&#x27;</span></span><br><span class="line">age = <span class="number">23</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%s is %d years old&#x27;</span> % (name, age))//这是最旧的选项。 它使用%运算符和经典字符串格式指定，例如%s和%d。</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125; is &#123;&#125; years old&#x27;</span>.<span class="built_in">format</span>(name, age))//从 Python <span class="number">3.0</span> 开始，<span class="built_in">format</span>()函数被引入以提供高级格式化选项。</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;name&#125;</span> is <span class="subst">&#123;age&#125;</span> years old&#x27;</span>)//从 Python <span class="number">3.6</span> 开始，Python f 字符串可用。 该字符串具有f前缀，并使用&#123;&#125;评估变量</span><br><span class="line">//输出是一样的 Peter <span class="keyword">is</span> <span class="number">23</span> years old</span><br></pre></td></tr></table></figure>
@@ -373,7 +376,7 @@
 
 ]]></content>
       <tags>
-        <tag>学习和刷题笔记</tag>
+        <tag>爬虫</tag>
       </tags>
   </entry>
 </search>

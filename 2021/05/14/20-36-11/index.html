@@ -24,7 +24,7 @@
   </script>
 <meta name="description" content="API接口TOKEN设计首先需要知道API是什么？API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。 API的特点： 　　1、因">
 <meta property="og:type" content="article">
-<meta property="og:title" content="forwardDay3-MVC &amp;&amp; API">
+<meta property="og:title" content="MVC &amp;&amp; API">
 <meta property="og:url" content="https://mylym-mm.github.io/2021/05/14/20-36-11/index.html">
 <meta property="og:site_name" content="my鱼">
 <meta property="og:description" content="API接口TOKEN设计首先需要知道API是什么？API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。 API的特点： 　　1、因">
@@ -33,9 +33,10 @@
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/08/mvc-2.svg">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/08/frontcontroller_pattern_uml_diagram.jpg">
 <meta property="article:published_time" content="2021-05-14T12:36:11.000Z">
-<meta property="article:modified_time" content="2021-05-15T09:32:26.839Z">
+<meta property="article:modified_time" content="2021-05-15T10:27:45.784Z">
 <meta property="article:author" content="lym">
 <meta property="article:tag" content="API">
+<meta property="article:tag" content="MVC">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2014/08/1200px-ModelViewControllerDiagram2.svg_.png">
 
@@ -52,7 +53,7 @@
     lang   : 'en'
   };
 </script>
-<title>forwardDay3-MVC && API | my鱼</title>
+<title>MVC && API | my鱼</title>
   
 
 
@@ -190,7 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#API%E6%8E%A5%E5%8F%A3TOKEN%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">API接口TOKEN设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC"><span class="nav-number">2.</span> <span class="nav-text">MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">步骤 1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Student-java"><span class="nav-number">2.0.0.2.1.</span> <span class="nav-text">Student.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-2"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">步骤 2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#StudentView-java"><span class="nav-number">2.0.0.3.1.</span> <span class="nav-text">StudentView.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-3"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">步骤 3</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#StudentController-java"><span class="nav-number">2.0.0.4.1.</span> <span class="nav-text">StudentController.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-4"><span class="nav-number">2.0.0.5.</span> <span class="nav-text">步骤 4</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#MVCPatternDemo-java"><span class="nav-number">2.0.0.5.1.</span> <span class="nav-text">MVCPatternDemo.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-5"><span class="nav-number">2.0.0.6.</span> <span class="nav-text">步骤 5</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">前端控制器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-1-1"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">步骤 1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#HomeView-java"><span class="nav-number">3.0.0.2.1.</span> <span class="nav-text">HomeView.java</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#StudentView-java-1"><span class="nav-number">3.0.0.2.2.</span> <span class="nav-text">StudentView.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-2-1"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">步骤 2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Dispatcher-java"><span class="nav-number">3.0.0.3.1.</span> <span class="nav-text">Dispatcher.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-3-1"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">步骤 3</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FrontController-java"><span class="nav-number">3.0.0.4.1.</span> <span class="nav-text">FrontController.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-4-1"><span class="nav-number">3.0.0.5.</span> <span class="nav-text">步骤 4</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FrontControllerPatternDemo-java"><span class="nav-number">3.0.0.5.1.</span> <span class="nav-text">FrontControllerPatternDemo.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-5-1"><span class="nav-number">3.0.0.6.</span> <span class="nav-text">步骤 5</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#API%E6%8E%A5%E5%8F%A3TOKEN%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">API接口TOKEN设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC"><span class="nav-number">2.</span> <span class="nav-text">MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">步骤 1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Student-java"><span class="nav-number">2.0.0.2.1.</span> <span class="nav-text">Student.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-2"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">步骤 2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#StudentView-java"><span class="nav-number">2.0.0.3.1.</span> <span class="nav-text">StudentView.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-3"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">步骤 3</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#StudentController-java"><span class="nav-number">2.0.0.4.1.</span> <span class="nav-text">StudentController.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-4"><span class="nav-number">2.0.0.5.</span> <span class="nav-text">步骤 4</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#MVCPatternDemo-java"><span class="nav-number">2.0.0.5.1.</span> <span class="nav-text">MVCPatternDemo.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-5"><span class="nav-number">2.0.0.6.</span> <span class="nav-text">步骤 5</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%BC%8FMVC"><span class="nav-number">3.</span> <span class="nav-text">前端控制器模式MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-1-1"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">步骤 1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#HomeView-java"><span class="nav-number">3.0.0.2.1.</span> <span class="nav-text">HomeView.java</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#StudentView-java-1"><span class="nav-number">3.0.0.2.2.</span> <span class="nav-text">StudentView.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-2-1"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">步骤 2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Dispatcher-java"><span class="nav-number">3.0.0.3.1.</span> <span class="nav-text">Dispatcher.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-3-1"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">步骤 3</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FrontController-java"><span class="nav-number">3.0.0.4.1.</span> <span class="nav-text">FrontController.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-4-1"><span class="nav-number">3.0.0.5.</span> <span class="nav-text">步骤 4</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FrontControllerPatternDemo-java"><span class="nav-number">3.0.0.5.1.</span> <span class="nav-text">FrontControllerPatternDemo.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-5-1"><span class="nav-number">3.0.0.6.</span> <span class="nav-text">步骤 5</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -211,7 +212,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -266,7 +267,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          forwardDay3-MVC && API
+          MVC && API
         </h1>
 
         <div class="post-meta-container">
@@ -284,7 +285,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-15 17:32:26" itemprop="dateModified" datetime="2021-05-15T17:32:26+08:00">2021-05-15</time>
+        <time title="Modified: 2021-05-15 18:27:45" itemprop="dateModified" datetime="2021-05-15T18:27:45+08:00">2021-05-15</time>
       </span>
 
   
@@ -373,7 +374,7 @@
 
 
 
-<h2 id="前端控制器模式"><a href="#前端控制器模式" class="headerlink" title="前端控制器模式"></a>前端控制器模式</h2><p>前端控制器模式（Front Controller Pattern）是用来提供一个集中的请求处理机制，所有的请求都将由一个单一的处理程序处理。该处理程序可以做认证/授权/记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体。</p>
+<h2 id="前端控制器模式MVC"><a href="#前端控制器模式MVC" class="headerlink" title="前端控制器模式MVC"></a>前端控制器模式MVC</h2><p>前端控制器模式（Front Controller Pattern）是用来提供一个集中的请求处理机制，所有的请求都将由一个单一的处理程序处理。该处理程序可以做认证/授权/记录日志，或者跟踪请求，然后把请求传给相应的处理程序。以下是这种设计模式的实体。</p>
 <ul>
 <li><strong>前端控制器（Front Controller）</strong> - 处理应用程序所有类型请求的单个处理程序，应用程序可以是基于 web 的应用程序，也可以是基于桌面的应用程序。</li>
 <li><strong>调度器（Dispatcher）</strong> - 前端控制器可能使用一个调度器对象来调度请求到相应的具体处理程序。</li>
@@ -434,7 +435,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://mylym-mm.github.io/2021/05/14/20-36-11/" title="forwardDay3-MVC &amp;&amp; API">https://mylym-mm.github.io/2021/05/14/20-36-11/</a>
+      <a href="https://mylym-mm.github.io/2021/05/14/20-36-11/" title="MVC &amp;&amp; API">https://mylym-mm.github.io/2021/05/14/20-36-11/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -444,14 +445,15 @@
 
           <div class="post-tags">
               <a href="/tags/API/" rel="tag"># API</a>
+              <a href="/tags/MVC/" rel="tag"># MVC</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/05/11/14-51-21/" rel="prev" title="forwardDay2">
-                  <i class="fa fa-chevron-left"></i> forwardDay2
+                <a href="/2021/05/11/14-51-21/" rel="prev" title="前后端项目之王者荣耀爬虫">
+                  <i class="fa fa-chevron-left"></i> 前后端项目之王者荣耀爬虫
                 </a>
             </div>
             <div class="post-nav-item">
