@@ -671,7 +671,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/10/01-30-15/" class="post-title-link" itemprop="url">forwardDay1</a>
+          <a href="/2021/05/10/01-30-15/" class="post-title-link" itemprop="url">牛客华为-字符串类题-js</a>
         </h2>
 
         <div class="post-meta-container">
@@ -689,7 +689,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-11 02:42:12" itemprop="dateModified" datetime="2021-05-11T02:42:12+08:00">2021-05-11</time>
+        <time title="Modified: 2021-05-15 18:11:30" itemprop="dateModified" datetime="2021-05-15T18:11:30+08:00">2021-05-15</time>
       </span>
 
   
@@ -702,7 +702,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
+          <p>摘要：共9题：1.字符串最后一个单词的长度    2.计算某字母出现次数    3.字符串分隔    4.进制转换    5.字符个数统计    6.数字颠倒    7.字符串反转    8.句子逆序    9.字符串排序</p>
+<h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解1：简单解法，但不满足具体题意</span></span><br><span class="line"><span class="keyword">let</span> s = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s[s.length-<span class="number">1</span>].length) </span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解2：满足题目描述具体解法</span></span><br><span class="line"><span class="keyword">let</span> strArr = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span>(strArr.length &amp;&amp; strArr.length &lt; <span class="number">5000</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(strArr[strArr.length-<span class="number">1</span>].length)</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;输入应非空&amp;&amp;字符串长度小于5000&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
