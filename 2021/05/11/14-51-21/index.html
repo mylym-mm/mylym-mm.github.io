@@ -22,15 +22,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mylym-mm.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程     今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。 随后回归前端学习。 前后端项目之王者荣耀爬虫1.flask框架：123456789from flask imp">
+<meta name="description" content="概览： 1.flask框架模板        2.WSGI        3.反爬虫机制和破解方法汇总     4.raise_for_status()        5.bind()        6.Python f 字符串教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前后端项目之王者荣耀爬虫">
 <meta property="og:url" content="https://mylym-mm.github.io/2021/05/11/14-51-21/index.html">
 <meta property="og:site_name" content="my鱼">
-<meta property="og:description" content="​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程     今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。 随后回归前端学习。 前后端项目之王者荣耀爬虫1.flask框架：123456789from flask imp">
+<meta property="og:description" content="概览： 1.flask框架模板        2.WSGI        3.反爬虫机制和破解方法汇总     4.raise_for_status()        5.bind()        6.Python f 字符串教程">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-11T06:51:21.000Z">
-<meta property="article:modified_time" content="2021-05-15T10:21:55.668Z">
+<meta property="article:modified_time" content="2021-05-15T11:07:55.687Z">
 <meta property="article:author" content="lym">
 <meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
@@ -280,7 +280,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-15 18:21:55" itemprop="dateModified" datetime="2021-05-15T18:21:55+08:00">2021-05-15</time>
+        <time title="Modified: 2021-05-15 19:07:55" itemprop="dateModified" datetime="2021-05-15T19:07:55+08:00">2021-05-15</time>
       </span>
 
   
@@ -293,7 +293,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程    </p>
+        <p>概览：</p>
+<p>1.flask框架模板        2.WSGI        3.反爬虫机制和破解方法汇总    </p>
+<p>4.raise_for_status()        5.bind()        6.Python f 字符串教程    </p>
+<span id="more"></span>
+
+
+
+<p>题外话：</p>
 <p>今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。</p>
 <p>随后回归前端学习。</p>
 <h3 id="前后端项目之王者荣耀爬虫"><a href="#前后端项目之王者荣耀爬虫" class="headerlink" title="前后端项目之王者荣耀爬虫"></a>前后端项目之王者荣耀爬虫</h3><h4 id="1-flask框架："><a href="#1-flask框架：" class="headerlink" title="1.flask框架："></a>1.flask框架：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">9000</span>)</span><br></pre></td></tr></table></figure>

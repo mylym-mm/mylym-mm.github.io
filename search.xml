@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>forwardDay4</title>
-    <url>/2021/05/15/18-00-24/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>app = Flask(__name__)</title>
-    <url>/2021/04/29/11-37-38/</url>
-    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第一部分，初始化：所有的Flask都必须创建程序实例</span><br><span class="line">程序实例是Flask的对象，一般情况下用如下方法实例化</span><br><span class="line">Flask类只有一个必须指定的参数，即程序主模块或者包的名字，__name__是系统变量，该变量指的是本py文件的文件名</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>学习资料</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MVC &amp;&amp; API</title>
     <url>/2021/05/14/20-36-11/</url>
-    <content><![CDATA[<h2 id="API接口TOKEN设计"><a href="#API接口TOKEN设计" class="headerlink" title="API接口TOKEN设计"></a><a href="https://www.cnblogs.com/xingxia/p/api_token.html">API接口TOKEN设计</a></h2><p>首先需要知道API是什么？<br>API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。</p>
+    <content><![CDATA[<p>概览：<br>1.API接口TOKEN设计（API的特点、api_token、user_token）        2.MVC        3.前端控制器模式MVC</p>
+<span id="more"></span>
+
+<h2 id="API接口TOKEN设计"><a href="#API接口TOKEN设计" class="headerlink" title="API接口TOKEN设计"></a><a href="https://www.cnblogs.com/xingxia/p/api_token.html">API接口TOKEN设计</a></h2><p>首先需要知道API是什么？<br>API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。</p>
 <p><strong>API的特点</strong>：</p>
 <p>　　1、因为是非开放性的，所以所有的接口都是封闭的，只对公司内部的产品有效；<br>        2、因为是非开放性的，所以OAuth那套协议是行不通的，因为没有中间用户的授权过程；<br>        3、接口分为需要用户登录才能访问的和不需要用户登录就可访问的；</p>
 <p>​            针对以上特点，移动端与服务端的通信就需要两种不同的TOKEN，一种针对接口的api_token,一种针对用户的user_token;</p>
@@ -127,9 +115,26 @@
       </tags>
   </entry>
   <entry>
+    <title>app = Flask(__name__)</title>
+    <url>/2021/04/29/11-37-38/</url>
+    <content><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">第一部分，初始化：所有的Flask都必须创建程序实例</span><br><span class="line">程序实例是Flask的对象，一般情况下用如下方法实例化</span><br><span class="line">Flask类只有一个必须指定的参数，即程序主模块或者包的名字，__name__是系统变量，该变量指的是本py文件的文件名</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>学习资料</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>forwardDay4</title>
+    <url>/2021/05/15/18-00-24/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>牛客华为-字符串类题-js</title>
     <url>/2021/05/10/01-30-15/</url>
-    <content><![CDATA[<p>摘要：共9题：1.字符串最后一个单词的长度    2.计算某字母出现次数    3.字符串分隔    4.进制转换    5.字符个数统计    6.数字颠倒    7.字符串反转    8.句子逆序    9.字符串排序</p>
+    <content><![CDATA[<p>概览（共9题-题目）：<br>1.字符串最后一个单词的长度        2.计算某字母出现次数        3.字符串分隔        4.进制转换<br>5.字符个数统计        6.数字颠倒        7.字符串反转        8.句子逆序        9.字符串排序</p>
+<span id="more"></span>
+
 <h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1：简单解法，但不满足具体题意</span></span><br><span class="line"><span class="keyword">let</span> s = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s[s.length-<span class="number">1</span>].length) </span><br></pre></td></tr></table></figure>
 
@@ -264,7 +269,14 @@
   <entry>
     <title>前后端项目之王者荣耀爬虫</title>
     <url>/2021/05/11/14-51-21/</url>
-    <content><![CDATA[<p>​    摘要： 1.flask框架模板    2.WSGI    3.反爬虫机制和破解方法汇总    4.raise_for_status()    5.bind()    6.Python f 字符串教程    </p>
+    <content><![CDATA[<p>概览：</p>
+<p>1.flask框架模板        2.WSGI        3.反爬虫机制和破解方法汇总    </p>
+<p>4.raise_for_status()        5.bind()        6.Python f 字符串教程    </p>
+<span id="more"></span>
+
+
+
+<p>题外话：</p>
 <p>今天花了1小时在车联网课程大作业上，了解车联网的技术和当前面临的挑战。</p>
 <p>随后回归前端学习。</p>
 <h3 id="前后端项目之王者荣耀爬虫"><a href="#前后端项目之王者荣耀爬虫" class="headerlink" title="前后端项目之王者荣耀爬虫"></a>前后端项目之王者荣耀爬虫</h3><h4 id="1-flask框架："><a href="#1-flask框架：" class="headerlink" title="1.flask框架："></a>1.flask框架：</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">9000</span>)</span><br></pre></td></tr></table></figure>

@@ -22,18 +22,18 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mylym-mm.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="API接口TOKEN设计首先需要知道API是什么？API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。 API的特点： 　　1、因">
+<meta name="description" content="概览：1.API接口TOKEN设计（API的特点、api_token、user_token）        2.MVC        3.前端控制器模式MVC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MVC &amp;&amp; API">
 <meta property="og:url" content="https://mylym-mm.github.io/2021/05/14/20-36-11/index.html">
 <meta property="og:site_name" content="my鱼">
-<meta property="og:description" content="API接口TOKEN设计首先需要知道API是什么？API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。 API的特点： 　　1、因">
+<meta property="og:description" content="概览：1.API接口TOKEN设计（API的特点、api_token、user_token）        2.MVC        3.前端控制器模式MVC">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/08/1200px-ModelViewControllerDiagram2.svg_.png">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/08/mvc-2.svg">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2014/08/frontcontroller_pattern_uml_diagram.jpg">
 <meta property="article:published_time" content="2021-05-14T12:36:11.000Z">
-<meta property="article:modified_time" content="2021-05-15T10:27:45.784Z">
+<meta property="article:modified_time" content="2021-05-15T11:06:39.755Z">
 <meta property="article:author" content="lym">
 <meta property="article:tag" content="API">
 <meta property="article:tag" content="MVC">
@@ -285,7 +285,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-15 18:27:45" itemprop="dateModified" datetime="2021-05-15T18:27:45+08:00">2021-05-15</time>
+        <time title="Modified: 2021-05-15 19:06:39" itemprop="dateModified" datetime="2021-05-15T19:06:39+08:00">2021-05-15</time>
       </span>
 
   
@@ -298,7 +298,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="API接口TOKEN设计"><a href="#API接口TOKEN设计" class="headerlink" title="API接口TOKEN设计"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingxia/p/api_token.html">API接口TOKEN设计</a></h2><p>首先需要知道API是什么？<br>API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。</p>
+        <p>概览：<br>1.API接口TOKEN设计（API的特点、api_token、user_token）        2.MVC        3.前端控制器模式MVC</p>
+<span id="more"></span>
+
+<h2 id="API接口TOKEN设计"><a href="#API接口TOKEN设计" class="headerlink" title="API接口TOKEN设计"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingxia/p/api_token.html">API接口TOKEN设计</a></h2><p>首先需要知道API是什么？<br>API（Application Programming Interface）即应用程序接口。你可以认为 API 是一个软件组件或是一个 Web  服务与外界进行的交互的接口。而我们在这里要谈论的，是作为一家公司如何跟外界进行交互。从另一个角度来说，API  是一套协议，规定了我们与外界的沟通方式：如何发送请求和接收响应。</p>
 <p><strong>API的特点</strong>：</p>
 <p>　　1、因为是非开放性的，所以所有的接口都是封闭的，只对公司内部的产品有效；<br>        2、因为是非开放性的，所以OAuth那套协议是行不通的，因为没有中间用户的授权过程；<br>        3、接口分为需要用户登录才能访问的和不需要用户登录就可访问的；</p>
 <p>​            针对以上特点，移动端与服务端的通信就需要两种不同的TOKEN，一种针对接口的api_token,一种针对用户的user_token;</p>

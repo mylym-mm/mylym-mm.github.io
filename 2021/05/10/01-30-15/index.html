@@ -22,15 +22,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mylym-mm.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="摘要：共9题：1.字符串最后一个单词的长度    2.计算某字母出现次数    3.字符串分隔    4.进制转换    5.字符个数统计    6.数字颠倒    7.字符串反转    8.句子逆序    9.字符串排序 字符串类型题  jsT1.字符串最后一个单词的长度题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。输入：输入一行，代表要计算的字符串，非空，长度">
+<meta name="description" content="概览（共9题-题目）：1.字符串最后一个单词的长度        2.计算某字母出现次数        3.字符串分隔        4.进制转换5.字符个数统计        6.数字颠倒        7.字符串反转        8.句子逆序        9.字符串排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="牛客华为-字符串类题-js">
 <meta property="og:url" content="https://mylym-mm.github.io/2021/05/10/01-30-15/index.html">
 <meta property="og:site_name" content="my鱼">
-<meta property="og:description" content="摘要：共9题：1.字符串最后一个单词的长度    2.计算某字母出现次数    3.字符串分隔    4.进制转换    5.字符个数统计    6.数字颠倒    7.字符串反转    8.句子逆序    9.字符串排序 字符串类型题  jsT1.字符串最后一个单词的长度题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。输入：输入一行，代表要计算的字符串，非空，长度">
+<meta property="og:description" content="概览（共9题-题目）：1.字符串最后一个单词的长度        2.计算某字母出现次数        3.字符串分隔        4.进制转换5.字符个数统计        6.数字颠倒        7.字符串反转        8.句子逆序        9.字符串排序">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-09T17:30:15.000Z">
-<meta property="article:modified_time" content="2021-05-15T10:31:31.495Z">
+<meta property="article:modified_time" content="2021-05-15T10:42:25.163Z">
 <meta property="article:author" content="lym">
 <meta property="article:tag" content="字符串">
 <meta property="article:tag" content="js">
@@ -281,7 +281,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-15 18:31:31" itemprop="dateModified" datetime="2021-05-15T18:31:31+08:00">2021-05-15</time>
+        <time title="Modified: 2021-05-15 18:42:25" itemprop="dateModified" datetime="2021-05-15T18:42:25+08:00">2021-05-15</time>
       </span>
 
   
@@ -294,7 +294,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>摘要：共9题：1.字符串最后一个单词的长度    2.计算某字母出现次数    3.字符串分隔    4.进制转换    5.字符个数统计    6.数字颠倒    7.字符串反转    8.句子逆序    9.字符串排序</p>
+        <p>概览（共9题-题目）：<br>1.字符串最后一个单词的长度        2.计算某字母出现次数        3.字符串分隔        4.进制转换<br>5.字符个数统计        6.数字颠倒        7.字符串反转        8.句子逆序        9.字符串排序</p>
+<span id="more"></span>
+
 <h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解1：简单解法，但不满足具体题意</span></span><br><span class="line"><span class="keyword">let</span> s = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s[s.length-<span class="number">1</span>].length) </span><br></pre></td></tr></table></figure>
 
