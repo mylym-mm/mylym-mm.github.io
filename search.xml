@@ -115,36 +115,57 @@
       </tags>
   </entry>
   <entry>
+    <title>CSRF 攻击</title>
+    <url>/2021/05/15/20-34-57/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>SSL安全证书</title>
+    <url>/2021/05/15/21-13-24/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>Token 认证的来龙去脉</title>
     <url>/2021/05/15/18-00-24/</url>
-    <content><![CDATA[<p>概览：Token 认证的来龙去脉：</p>
+    <content><![CDATA[<p>概览：</p>
 <p>1.为什么要用 Token？</p>
 <p>2.需要设置有效期吗？</p>
 <p>3.时序图表示    （1）登录    （2）业务请求    （3）Token 过期，刷新 Token</p>
 <p>4.无状态 Token</p>
 <p>5.分离认证服务</p>
 <p>6.不受信的业务服务器</p>
+<p>补充：java生成token方法</p>
 <span id="more"></span>
 
-<p>原文链接：<a href="https://my.oschina.net/jamesfancy/blog/1613994">https://my.oschina.net/jamesfancy/blog/1613994</a></p>
+<p> Token 认证的来龙去脉-原文链接：<a href="https://my.oschina.net/jamesfancy/blog/1613994">https://my.oschina.net/jamesfancy/blog/1613994</a></p>
+<p>Token 无状态-原文链接：<a href="https://www.jianshu.com/p/7c34b78f1675">https://www.jianshu.com/p/7c34b78f1675</a></p>
 <p>通常情况下，我们在讨论某个技术的时候，都是从问题开始。那么第一个问题：</p>
 <h3 id="为什么要用-Token？"><a href="#为什么要用-Token？" class="headerlink" title="为什么要用 Token？"></a>为什么要用 Token？</h3><p>而要回答这个问题很简单——因为它能解决问题！</p>
 <p>可以解决哪些问题呢？</p>
 <ol>
-<li>Token 完全由应用管理，所以它可以避开同源策略？1？？</li>
-<li>Token 可以避免 <a href="https://www.oschina.net/action/GoToLink?url=http://www.cnblogs.com/shanyou/p/5038794.html">CSRF 攻击</a>？2？？</li>
-<li>Token 可以是无状态的？3？？，可以在多个服务间共享</li>
+<li>Token 完全由应用管理，所以它可以避开同源策略</li>
+<li>Token 可以避免 <a href="https://www.oschina.net/action/GoToLink?url=http://www.cnblogs.com/shanyou/p/5038794.html">CSRF 攻击</a></li>
+<li>Token 可以是无状态的，可以在多个服务间共享</li>
 </ol>
 <p>Token 是在服务端产生的。如果前端使用用户名/密码向服务端请求认证，服务端认证成功，那么在服务端会返回 Token  给前端。前端可以在每次请求的时候带上 Token 证明自己的合法地位。如果这个 Token  在服务端持久化（比如存入数据库），那它就是一个永久的身份令牌。</p>
 <p>于是，又一个问题产生了：需要为 Token 设置有效期吗？</p>
-<h3 id="需要设置有效期吗？"><a href="#需要设置有效期吗？" class="headerlink" title="需要设置有效期吗？"></a>需要设置有效期吗？</h3><p>对于这个问题，我们不妨先看两个例子。一个例子是登录密码，一般要求定期改变密码，以防止泄漏，所以密码是有有效期的；另一个例子是安全证书。SSL 安全证书？4？？都有有效期，目的是为了解决吊销的问题，对于这个问题的详细情况，<a href="https://www.oschina.net/action/GoToLink?url=https://www.zhihu.com/question/20803288">来看看知乎的回答</a>。所以无论是从安全的角度考虑，还是从吊销的角度考虑，Token 都需要设有效期。</p>
+<h3 id="需要设置有效期吗？"><a href="#需要设置有效期吗？" class="headerlink" title="需要设置有效期吗？"></a>需要设置有效期吗？</h3><p>对于这个问题，我们不妨先看两个例子。一个例子是登录密码，一般要求定期改变密码，以防止泄漏，所以密码是有有效期的；另一个例子是安全证书。<strong>SSL 安全证书</strong>都有有效期，目的是为了解决吊销的问题，对于这个问题的详细情况，<a href="https://www.oschina.net/action/GoToLink?url=https://www.zhihu.com/question/20803288">来看看知乎的回答</a>。所以无论是从安全的角度考虑，还是从吊销的角度考虑，Token 都需要设有效期。</p>
 <p>那么有效期多长合适呢？</p>
 <p>只能说，根据系统的安全需要，尽可能的短，但也不能短得离谱——想像一下手机的自动熄屏时间，如果设置为 10  秒钟无操作自动熄屏，再次点亮需要输入密码，会不会疯？如果你觉得不会，那就亲自试一试，设置成可以设置的最短时间，坚持一周就好（不排除有人适应这个时间，毕竟手机厂商也是有用户体验研究的）。</p>
 <p>然后新问题产生了，如果用户在正常操作的<strong>过程中</strong>，Token 过期失效了，要求用户重新登录……用户体验岂不是很糟糕？</p>
-<p>为了解决在操作过程不能让用户感到 Token 失效这个问题，<u>有一种方案</u>是在服务器端保存 Token 状态，用户每次操作都会<strong>自动刷新</strong>（推迟） Token 的过期时间——Session 就是采用这种策略来保持用户登录状态的。然而仍然存在这样一个问题，在<strong>前后端分离</strong>、<strong>单页 App</strong>  这些情况下，每秒种可能发起很多次请求，每次都去刷新过期时间会产生非常大的代价。如果 Token  的过期时间被持久化到数据库或文件，代价就更大了。所以通常为了提升效率，减少消耗，会把 Token 的过期时间保存在<strong>缓存或者内存</strong>中。</p>
+<p>为了解决在操作过程不能让用户感到 Token 失效这个问题，<u>有一种方案</u>是在服务器端保存 Token <strong>状态</strong>，用户每次操作都会<strong>自动刷新</strong>（推迟） Token 的过期时间——Session 就是采用这种策略来保持用户登录状态的。然而仍然存在这样一个问题，在<strong>前后端分离</strong>、<strong>单页 App</strong>  这些情况下，每秒种可能发起很多次请求，每次都去刷新过期时间会产生非常大的代价。如果 Token  的过期时间被持久化到数据库或文件，代价就更大了。所以通常为了提升效率，减少消耗，会把 Token 的过期时间保存在<strong>缓存或者内存</strong>中。</p>
 <p>还有<u>另一种方案</u>，使用 <strong>Refresh Token</strong>，它可以避免频繁的读写操作。这种方案中，服务端不需要刷新 Token 的过期时间，一旦  Token 过期，就反馈给前端，前端使用 Refresh Token 申请一个全新 Token  继续使用。这种方案中，服务端只需要在客户端请求更新 Token 的时候对 Refresh Token  的有效性进行一次检查，大大减少了更新有效期的操作，也就避免了频繁读写。当然 Refresh Token  也是有有效期的，但是这个有效期就可以长一点了，比如，以天为单位的时间。</p>
+<p>相比session而言，Refresh token有以下几点优势</p>
+<ol>
+<li>服务端不需要缓存用户信息，减少服务器压力</li>
+<li>token缓存在客户端，服务器重启，登录状态不会失效</li>
+<li>session是浏览器特有的，app要支持会比较繁琐，token就没有这样的限制</li>
+<li>易于扩展，存在多台服务器的情况下，使用负载均衡，第一次登录请求转发到A服务器，在A服务器的session中缓存了用户的登录信息，如果第二次请求转发到了B服务器，就丢失了登录状态。虽然可以使用redis等手段共享session，但token就简单很多，不同的服务器只需要使用相同的一段解密代码即可</li>
+</ol>
 <h3 id="时序图表示"><a href="#时序图表示" class="headerlink" title="时序图表示"></a>时序图表示</h3><p>使用 Token 和 Refresh Token 的时序图如下：</p>
-<h5 id="1）登录"><a href="#1）登录" class="headerlink" title="1）登录"></a>1）登录</h5><h5 id=""><a href="#" class="headerlink" title=""></a><img src="\uploads\upload.jpg" alt="clipboard.png" style="zoom:67%;" /></h5><h5 id="2）业务请求"><a href="#2）业务请求" class="headerlink" title="2）业务请求"></a>2）业务请求</h5><img src="\uploads\request.jpg" alt="clipboard.png" style="zoom:80%;" />
+<h5 id="1）登录"><a href="#1）登录" class="headerlink" title="1）登录"></a>1）登录</h5><h5 id=""><a href="#" class="headerlink" title=""></a><img src="\uploads\upload.jpg" alt="clipboard.png" style="zoom:67%;" /></h5><img src="\uploads\token-p1.jpg" alt="clipboard.png" style="zoom:67%;" />
+
+<h5 id="2）业务请求"><a href="#2）业务请求" class="headerlink" title="2）业务请求"></a>2）业务请求</h5><img src="\uploads\request.jpg" alt="clipboard.png" style="zoom:80%;" />
 
 <h5 id="3）Token-过期，刷新-Token"><a href="#3）Token-过期，刷新-Token" class="headerlink" title="3）Token 过期，刷新 Token"></a>3）Token 过期，刷新 Token</h5><img src="D:\uploads\newToken.jpg" alt="clipboard.png" style="zoom:80%;" />
 
@@ -177,10 +198,33 @@
 <p>但是，前端信任不代表用户信任。如果 Token 没有携带用户隐私（比如姓名），那么用户不会关心信任问题。但如果 Token  含有用户隐私的时候，用户得关心信任问题了。这时候认证服务就不得不再啰嗦一些，当用户请求 Token  的时候，问上一句，你真的要授权给某某某业务服务吗？而这个“某某某”，用户怎么知道它是不是真的“某某某”呢？用户当然不知道，甚至认证服务也不知道，因为公钥已经公开了，任何一个业务都可以声明自己是“某某某”。</p>
 <p>为了得到用户的信任，认证服务就不得不帮助用户来甄别业务服务。所以，认证服器决定不公开公钥，而是要求业务服务先申请注册并通过审核。只有通过审核的业务服务器才能得到认证服务为它创建的，仅供它使用的公钥。如果该业务服务泄漏公钥带来风险，由该业务服务自行承担。现在认证服务可以清楚的告诉用户，“某某某”服务是什么了。如果用户还是不够信任，认证服务甚至可以问，某某某业务服务需要请求 A、B、C 三项个人数据，其中 A 是必须的，不然它不工作，是否允许授权？如果你授权，我就把你授权的几项数据加密放在 Token 中……</p>
 <p>废话了这么多，有没有似曾相识……对了，这类似开放式 API 的认证过程。开发式 API 多采用 OAuth 认证，而关于 OAuth 的探讨资源非常丰富，这里就不深究了。</p>
+<h4 id="java生成token方法"><a href="#java生成token方法" class="headerlink" title="java生成token方法"></a>java生成token方法</h4><h5 id="JWT（JSON-Web-Token）"><a href="#JWT（JSON-Web-Token）" class="headerlink" title="JWT（JSON Web Token）"></a>JWT（JSON Web Token）</h5><p>网上找到的大部分资料都是使用JWT来生成token，JWT生成的token包含三部分</p>
+<ol>
+<li><p>header：包含token类型和加密算法</p>
+</li>
+<li><p>payload：存放自定义数据</p>
+</li>
+<li><p>signature：对前面两部分的签名，防止篡改数据\r\n\r\n用JWT生成的token是很长的一串字符串，用Base64进行编码，可以解码出原数据，注意不能放一些私密信息，比如用户密码</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\r\n<span class="selector-class">.eyJleHBpcmVUaW1lIjoxNTQ5NTU0NDUyLCJ1c2VyTmFtZSI6IuacveacqCIsInVzZXJJZCI6IjY2NiJ9</span>\r\n<span class="selector-class">.fiQKWuMTWbkfQ3dOozoJr13pJSmKnc5El4EBnKyU42o</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>上面这很长的一串就是用JWT生成的token，可以感受一下这个长度。客户端的每次请求都要带上这么一大串，服务端的每次响应都要返回这么一大串，我个人是难以接受的。所以我用了下面那种方法</p>
+<h5 id="AES（Advanced-Encryption-Standard）"><a href="#AES（Advanced-Encryption-Standard）" class="headerlink" title="AES（Advanced Encryption Standard）"></a>AES（Advanced Encryption Standard）</h5><p>token本质是一段加密的字符串，包含登录用户的一些信息，通过解密可以获取这些信息，所以理论上任何安全的加密解密手段都可以用来生成token<br> 高级加密标准AES，在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。AES采用对称加密，相比于非对称加密，对称加密效率更快</p>
+<ul>
+<li>对称加密：加密和解密使用相同的密钥。适用于单方面的加密解密，密钥不能泄露</li>
+<li>非对称加密：使用公钥加密，私钥解密。适用于一方加密，另一方解密，比如前后端的数据传输，可以在客户端使用公钥对数据进行加密，在服务端使用密钥进行解密，增强数据安全性<br> token的加密解密都在服务端进行，所以使用对称加密的AES算法即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EmaZUvyM9aabQ2Jmo6THJ&#x2F;r3&#x2F;e2xAjpRmoA5TzvuR4I&#x3D;</span><br></pre></td></tr></table></figure>
+
+<p>上面这一小串就是用AES生成的token了，是不是清爽了很多，而且没有密钥无法解密，相比JWT生成的token，AES生成的token携带的数据更安全</p>
 ]]></content>
       <tags>
         <tag>Token</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>什么是Http无状态？</title>
+    <url>/2021/05/15/21-13-48/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>牛客华为-字符串类题-js</title>
@@ -318,6 +362,11 @@
         <tag>字符串</tag>
         <tag>js</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>同源策略</title>
+    <url>/2021/05/15/20-34-29/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>前后端项目之王者荣耀爬虫</title>
