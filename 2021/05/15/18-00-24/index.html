@@ -22,24 +22,24 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mylym-mm.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="概览：Token 认证的来龙去脉： 1.为什么要用 Token？">
+<meta name="description" content="概览：Token 认证的来龙去脉： 1.为什么要用 Token？ 2.需要设置有效期吗？ 3.时序图表示    （1）登录    （2）业务请求    （3）Token 过期，刷新 Token 4.无状态 Token 5.分离认证服务 6.不受信的业务服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Token 认证的来龙去脉">
 <meta property="og:url" content="https://mylym-mm.github.io/2021/05/15/18-00-24/index.html">
 <meta property="og:site_name" content="my鱼">
-<meta property="og:description" content="概览：Token 认证的来龙去脉： 1.为什么要用 Token？">
+<meta property="og:description" content="概览：Token 认证的来龙去脉： 1.为什么要用 Token？ 2.需要设置有效期吗？ 3.时序图表示    （1）登录    （2）业务请求    （3）Token 过期，刷新 Token 4.无状态 Token 5.分离认证服务 6.不受信的业务服务器">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="d:/Hexo-Blog/themes/next/source/images/upload.jpg">
-<meta property="og:image" content="d:/Hexo-Blog/themes/next/source/images/request.jpg">
-<meta property="og:image" content="d:/Hexo-Blog/themes/next/source/images/newToken.jpg">
-<meta property="og:image" content="https://sfault-image.b0.upaiyun.com/244/254/2442545916-5a69d3ab205b4">
-<meta property="og:image" content="https://sfault-image.b0.upaiyun.com/236/406/2364067243-5a69d3df322ca">
+<meta property="og:image" content="https://mylym-mm.github.io/uploads/upload.jpg">
+<meta property="og:image" content="https://mylym-mm.github.io/uploads/request.jpg">
+<meta property="og:image" content="d:/uploads/newToken.jpg">
+<meta property="og:image" content="https://mylym-mm.github.io/uploads/token-p4.jpg">
+<meta property="og:image" content="https://mylym-mm.github.io/uploads/token-p5.jpg">
 <meta property="article:published_time" content="2021-05-15T10:00:24.000Z">
-<meta property="article:modified_time" content="2021-05-15T12:01:58.649Z">
+<meta property="article:modified_time" content="2021-05-15T12:28:43.738Z">
 <meta property="article:author" content="lym">
 <meta property="article:tag" content="Token">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/Hexo-Blog/themes/next/source/images/upload.jpg">
+<meta name="twitter:image" content="https://mylym-mm.github.io/uploads/upload.jpg">
 
 
 <link rel="canonical" href="https://mylym-mm.github.io/2021/05/15/18-00-24/">
@@ -192,7 +192,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-Token%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么要用 Token？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E6%9C%89%E6%95%88%E6%9C%9F%E5%90%97%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">需要设置有效期吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E5%9B%BE%E8%A1%A8%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">时序图表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%EF%BC%89%E7%99%BB%E5%BD%95"><span class="nav-number">3.0.1.</span> <span class="nav-text">1）登录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%EF%BC%89%E4%B8%9A%E5%8A%A1%E8%AF%B7%E6%B1%82"><span class="nav-number">3.0.2.</span> <span class="nav-text">2）业务请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%EF%BC%89Token-%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%88%B7%E6%96%B0-Token"><span class="nav-number">3.0.3.</span> <span class="nav-text">3）Token 过期，刷新 Token</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81-Token"><span class="nav-number">4.</span> <span class="nav-text">无状态 Token</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1"><span class="nav-number"></span> <span class="nav-text">分离认证服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%8F%97%E4%BF%A1%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number"></span> <span class="nav-text">不受信的业务服务器</span></a></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-Token%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么要用 Token？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E6%9C%89%E6%95%88%E6%9C%9F%E5%90%97%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">需要设置有效期吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E5%9B%BE%E8%A1%A8%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">时序图表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%EF%BC%89%E7%99%BB%E5%BD%95"><span class="nav-number">3.0.1.</span> <span class="nav-text">1）登录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">3.0.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%EF%BC%89%E4%B8%9A%E5%8A%A1%E8%AF%B7%E6%B1%82"><span class="nav-number">3.0.3.</span> <span class="nav-text">2）业务请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3%EF%BC%89Token-%E8%BF%87%E6%9C%9F%EF%BC%8C%E5%88%B7%E6%96%B0-Token"><span class="nav-number">3.0.4.</span> <span class="nav-text">3）Token 过期，刷新 Token</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81-Token"><span class="nav-number">4.</span> <span class="nav-text">无状态 Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">分离认证服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%97%E4%BF%A1%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">不受信的业务服务器</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -280,7 +280,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-05-15 18:00:24 / Modified: 20:01:58" itemprop="dateCreated datePublished" datetime="2021-05-15T18:00:24+08:00">2021-05-15</time>
+      <time title="Created: 2021-05-15 18:00:24 / Modified: 20:28:43" itemprop="dateCreated datePublished" datetime="2021-05-15T18:00:24+08:00">2021-05-15</time>
     </span>
 
   
@@ -295,6 +295,11 @@
     <div class="post-body" itemprop="articleBody">
         <p>概览：Token 认证的来龙去脉：</p>
 <p>1.为什么要用 Token？</p>
+<p>2.需要设置有效期吗？</p>
+<p>3.时序图表示    （1）登录    （2）业务请求    （3）Token 过期，刷新 Token</p>
+<p>4.无状态 Token</p>
+<p>5.分离认证服务</p>
+<p>6.不受信的业务服务器</p>
 <span id="more"></span>
 
 <p>原文链接：<a target="_blank" rel="noopener" href="https://my.oschina.net/jamesfancy/blog/1613994">https://my.oschina.net/jamesfancy/blog/1613994</a></p>
@@ -315,11 +320,9 @@
 <p>为了解决在操作过程不能让用户感到 Token 失效这个问题，<u>有一种方案</u>是在服务器端保存 Token 状态，用户每次操作都会<strong>自动刷新</strong>（推迟） Token 的过期时间——Session 就是采用这种策略来保持用户登录状态的。然而仍然存在这样一个问题，在<strong>前后端分离</strong>、<strong>单页 App</strong>  这些情况下，每秒种可能发起很多次请求，每次都去刷新过期时间会产生非常大的代价。如果 Token  的过期时间被持久化到数据库或文件，代价就更大了。所以通常为了提升效率，减少消耗，会把 Token 的过期时间保存在<strong>缓存或者内存</strong>中。</p>
 <p>还有<u>另一种方案</u>，使用 <strong>Refresh Token</strong>，它可以避免频繁的读写操作。这种方案中，服务端不需要刷新 Token 的过期时间，一旦  Token 过期，就反馈给前端，前端使用 Refresh Token 申请一个全新 Token  继续使用。这种方案中，服务端只需要在客户端请求更新 Token 的时候对 Refresh Token  的有效性进行一次检查，大大减少了更新有效期的操作，也就避免了频繁读写。当然 Refresh Token  也是有有效期的，但是这个有效期就可以长一点了，比如，以天为单位的时间。</p>
 <h3 id="时序图表示"><a href="#时序图表示" class="headerlink" title="时序图表示"></a>时序图表示</h3><p>使用 Token 和 Refresh Token 的时序图如下：</p>
-<h5 id="1）登录"><a href="#1）登录" class="headerlink" title="1）登录"></a>1）登录</h5><img src="D:\Hexo-Blog\themes\next\source\images\upload.jpg" alt="clipboard.png" style="zoom:67%;" />
+<h5 id="1）登录"><a href="#1）登录" class="headerlink" title="1）登录"></a>1）登录</h5><h5 id=""><a href="#" class="headerlink" title=""></a><img src="\uploads\upload.jpg" alt="clipboard.png" style="zoom:67%;" /></h5><h5 id="2）业务请求"><a href="#2）业务请求" class="headerlink" title="2）业务请求"></a>2）业务请求</h5><img src="\uploads\request.jpg" alt="clipboard.png" style="zoom:80%;" />
 
-<h5 id="2）业务请求"><a href="#2）业务请求" class="headerlink" title="2）业务请求"></a>2）业务请求</h5><img src="D:\Hexo-Blog\themes\next\source\images\request.jpg" alt="clipboard.png" style="zoom:80%;" />
-
-<h5 id="3）Token-过期，刷新-Token"><a href="#3）Token-过期，刷新-Token" class="headerlink" title="3）Token 过期，刷新 Token"></a>3）Token 过期，刷新 Token</h5><img src="D:\Hexo-Blog\themes\next\source\images\newToken.jpg" alt="clipboard.png" style="zoom:80%;" />
+<h5 id="3）Token-过期，刷新-Token"><a href="#3）Token-过期，刷新-Token" class="headerlink" title="3）Token 过期，刷新 Token"></a>3）Token 过期，刷新 Token</h5><img src="D:\uploads\newToken.jpg" alt="clipboard.png" style="zoom:80%;" />
 
 <p>上面的时序图中并未提到 Refresh Token 过期怎么办。不过很显然，Refresh Token 既然已经过期，就该要求用户重新登录了。</p>
 <p>当然还可以把这个机制设计得更复杂一些，比如，Refresh Token 每次使用的时候，都更新它的过期时间，直到与它的创建时间相比，已经超过了非常长的一段时间（比如三个月），这等于是在相当长一段时间内允许 Refresh Token 自动续期。</p>
@@ -335,17 +338,19 @@
 <li>应该考虑使用二次认证来增强敏感操作的安全性</li>
 </ol>
 <p>到此，关于 Token 的话题似乎差不多了——然而并没有，上面说的只是认证服务和业务服务集成在一起的情况，如果是分离的情况呢？</p>
-<h2 id="分离认证服务"><a href="#分离认证服务" class="headerlink" title="分离认证服务"></a>分离认证服务</h2><p>当 Token 无状态之后，单点登录就变得容易了。前端拿到一个有效的 Token，它就可以在任何同一体系的服务上认证通过——只要它们使用同样的密钥和算法来认证 Token 的有效性。就样这样：</p>
-<p><img src="https://sfault-image.b0.upaiyun.com/244/254/2442545916-5a69d3ab205b4" alt="img"></p>
+<h3 id="分离认证服务"><a href="#分离认证服务" class="headerlink" title="分离认证服务"></a>分离认证服务</h3><p>当 Token 无状态之后，单点登录就变得容易了。前端拿到一个有效的 Token，它就可以在任何同一体系的服务上认证通过——只要它们使用同样的密钥和算法来认证 Token 的有效性。就像这样：</p>
+<img src="\uploads\token-p4.jpg" alt="clipboard.png" style="zoom:80%;" />
+
 <p>当然，如果 Token 过期了，前端仍然需要去认证服务更新 Token：</p>
-<p><img src="https://sfault-image.b0.upaiyun.com/236/406/2364067243-5a69d3df322ca" alt="img"></p>
+<img src="\uploads\token-p5.jpg" alt="clipboard.png" style="zoom:80%;" />
+
 <p>可见，虽然认证和业务分离了，实际即并没产生多大的差异。当然，这是建立在<strong>认证服务器信任业务服务器的前提</strong>下，因为认证服务器产生 Token 的密钥和业务服务器认证 Token 的密钥和算法相同。换句话说，业务服务器同样可以创建有效的 Token。</p>
 <p>如果业务服务器不能被信任，该怎么办？</p>
-<h2 id="不受信的业务服务器"><a href="#不受信的业务服务器" class="headerlink" title="不受信的业务服务器"></a>不受信的业务服务器</h2><p>遇到不受信的业务服务器时，很容易想到的办法是使用不同的密钥。认证服务器使用密钥1签发，业务服务器使用密钥2验证——这是典型非对称加密签名的应用场景。认证服务器自己使用私钥对 Token 签名，公开公钥。信任这个认证服务器的业务服务器保存公钥，用于验证签名。幸好，JWT 不仅可以使用 HMAC 签名，也可以使用  RSA（一种非对称加密算法）签名。</p>
+<h3 id="不受信的业务服务器"><a href="#不受信的业务服务器" class="headerlink" title="不受信的业务服务器"></a>不受信的业务服务器</h3><p>遇到不受信的业务服务器时，很容易想到的办法是使用不同的密钥。认证服务器使用密钥1签发，业务服务器使用密钥2验证——这是典型非对称加密签名的应用场景。认证服务器自己使用私钥对 Token 签名，公开公钥。信任这个认证服务器的业务服务器保存公钥，用于验证签名。幸好，JWT 不仅可以使用 HMAC 签名，也可以使用  RSA（一种非对称加密算法）签名。</p>
 <p>不过，当业务服务器已经不受信任的时候，<strong>多个业务服务器之间使用相同的 Token 对用户来说是不安全的</strong>。因为任何一个服务器拿到 Token 都可以仿冒用户去另一个服务器处理业务……悲剧随时可能发生。</p>
 <p>为了防止这种情况发生，就需要在认证服务器产生 Token 的时候，把使用该 Token 的业务服务器的信息记录在 Token 中，这样当另一个业务服务器拿到这个 Token 的时候，发现它并不是自己应该验证的 Token，就可以直接拒绝。</p>
 <p>现在，认证服务器不信任业务服务器，业务服务器相互也不信任，但前端是信任这些服务器的——如果前端不信任，就不会拿 Token 去请求验证。那么为什么会信任？可能是因为这些是同一家公司或者同一个项目中提供的若干服务构成的服务体系。</p>
-<p>但是，前端信任不代表用户信任。如果 Token 不没有携带用户隐私（比如姓名），那么用户不会关心信任问题。但如果 Token  含有用户隐私的时候，用户得关心信任问题了。这时候认证服务就不得不再啰嗦一些，当用户请求 Token  的时候，问上一句，你真的要授权给某某某业务服务吗？而这个“某某某”，用户怎么知道它是不是真的“某某某”呢？用户当然不知道，甚至认证服务也不知道，因为公钥已经公开了，任何一个业务都可以声明自己是“某某某”。</p>
+<p>但是，前端信任不代表用户信任。如果 Token 没有携带用户隐私（比如姓名），那么用户不会关心信任问题。但如果 Token  含有用户隐私的时候，用户得关心信任问题了。这时候认证服务就不得不再啰嗦一些，当用户请求 Token  的时候，问上一句，你真的要授权给某某某业务服务吗？而这个“某某某”，用户怎么知道它是不是真的“某某某”呢？用户当然不知道，甚至认证服务也不知道，因为公钥已经公开了，任何一个业务都可以声明自己是“某某某”。</p>
 <p>为了得到用户的信任，认证服务就不得不帮助用户来甄别业务服务。所以，认证服器决定不公开公钥，而是要求业务服务先申请注册并通过审核。只有通过审核的业务服务器才能得到认证服务为它创建的，仅供它使用的公钥。如果该业务服务泄漏公钥带来风险，由该业务服务自行承担。现在认证服务可以清楚的告诉用户，“某某某”服务是什么了。如果用户还是不够信任，认证服务甚至可以问，某某某业务服务需要请求 A、B、C 三项个人数据，其中 A 是必须的，不然它不工作，是否允许授权？如果你授权，我就把你授权的几项数据加密放在 Token 中……</p>
 <p>废话了这么多，有没有似曾相识……对了，这类似开放式 API 的认证过程。开发式 API 多采用 OAuth 认证，而关于 OAuth 的探讨资源非常丰富，这里就不深究了。</p>
 
