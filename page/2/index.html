@@ -25,7 +25,7 @@
 <meta name="description" content="my的修炼之路">
 <meta property="og:type" content="website">
 <meta property="og:title" content="my鱼">
-<meta property="og:url" content="https://mylym-mm.github.io/index.html">
+<meta property="og:url" content="https://mylym-mm.github.io/page/2/index.html">
 <meta property="og:site_name" content="my鱼">
 <meta property="og:description" content="my的修炼之路">
 <meta property="og:locale" content="en_US">
@@ -33,7 +33,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mylym-mm.github.io/">
+<link rel="canonical" href="https://mylym-mm.github.io/page/2/">
 
 
 <script class="page-configurations">
@@ -244,7 +244,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/09/13/19-52-58/">
+    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/15/18-00-24/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/hylike.jpg">
@@ -257,7 +257,86 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/13/19-52-58/" class="post-title-link" itemprop="url">Vue优化方式</a>
+          <a href="/2021/05/15/18-00-24/" class="post-title-link" itemprop="url">Token 认证的来龙去脉</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-05-15 18:00:24 / Modified: 21:14:22" itemprop="dateCreated datePublished" datetime="2021-05-15T18:00:24+08:00">2021-05-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>概览：</p>
+<p>1.为什么要用 Token？</p>
+<p>2.需要设置有效期吗？</p>
+<p>3.时序图表示    （1）登录    （2）业务请求    （3）Token 过期，刷新 Token</p>
+<p>4.无状态 Token</p>
+<p>5.分离认证服务</p>
+<p>6.不受信的业务服务器</p>
+<p>补充：java生成token方法</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/15/18-00-24/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/14/20-36-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/hylike.jpg">
+      <meta itemprop="name" content="lym">
+      <meta itemprop="description" content="my的修炼之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="my鱼">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/05/14/20-36-11/" class="post-title-link" itemprop="url">MVC && API</a>
         </h2>
 
         <div class="post-meta-container">
@@ -268,14 +347,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-09-13 19:52:58" itemprop="dateCreated datePublished" datetime="2021-09-13T19:52:58+08:00">2021-09-13</time>
+      <time title="Created: 2021-05-14 20:36:11" itemprop="dateCreated datePublished" datetime="2021-05-14T20:36:11+08:00">2021-05-14</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-14 23:58:59" itemprop="dateModified" datetime="2021-09-14T23:58:59+08:00">2021-09-14</time>
+        <time title="Modified: 2021-05-15 19:06:39" itemprop="dateModified" datetime="2021-05-15T19:06:39+08:00">2021-05-15</time>
       </span>
 
   
@@ -288,11 +367,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="编码优化"><a href="#编码优化" class="headerlink" title="编码优化"></a>编码优化</h1><h3 id="避免响应所有数据"><a href="#避免响应所有数据" class="headerlink" title="避免响应所有数据"></a>避免响应所有数据</h3><p>不要把所有数据都放到data中，data中的数据都会增加getter和setter，而且会收集watcher，这样还占内存，不需要响应式的数据我们可以直接定义在实例上。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;view&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        components:&#123;&#125;,</span><br><span class="line">        data:()&#x3D;&gt;(&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;),</span><br><span class="line">        beforeCreate:function()&#123;</span><br><span class="line">            this.timer&#x3D;null</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="函数式组件"><a href="#函数式组件" class="headerlink" title="函数式组件"></a>函数式组件</h3><p>函数式组件是一个不包含状态和实例的组件，简单的说，就是函数不支持响应式，并且不能通过this关键字引用自己。因为函数式组件没有状态，所以它不需要像Vue的响应式系统一样需要经过额外的初始化，这样就可以避免相关操作带来的性能消耗。当然函数式组件仍然会对响应的变化</p>
-<h1 id="打包优化"><a href="#打包优化" class="headerlink" title="打包优化"></a>打包优化</h1>
+          <p>概览：<br>1.API接口TOKEN设计（API的特点、api_token、user_token）        2.MVC        3.前端控制器模式MVC</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/14/20-36-11/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -318,7 +401,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/06/09/15-07-35/">
+    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/11/14-51-21/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/hylike.jpg">
@@ -331,7 +414,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/06/09/15-07-35/" class="post-title-link" itemprop="url">Js小红书第一章阅读</a>
+          <a href="/2021/05/11/14-51-21/" class="post-title-link" itemprop="url">前后端项目之王者荣耀爬虫</a>
         </h2>
 
         <div class="post-meta-container">
@@ -342,77 +425,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-06-09 15:07:35" itemprop="dateCreated datePublished" datetime="2021-06-09T15:07:35+08:00">2021-06-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/20/18-39-59/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/hylike.jpg">
-      <meta itemprop="name" content="lym">
-      <meta itemprop="description" content="my的修炼之路">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="my鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/20/18-39-59/" class="post-title-link" itemprop="url">浏览器安全</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-20 18:39:59" itemprop="dateCreated datePublished" datetime="2021-05-20T18:39:59+08:00">2021-05-20</time>
+      <time title="Created: 2021-05-11 14:51:21" itemprop="dateCreated datePublished" datetime="2021-05-11T14:51:21+08:00">2021-05-11</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-28 01:23:01" itemprop="dateModified" datetime="2021-05-28T01:23:01+08:00">2021-05-28</time>
+        <time title="Modified: 2021-05-16 21:15:34" itemprop="dateModified" datetime="2021-05-16T21:15:34+08:00">2021-05-16</time>
       </span>
 
   
@@ -425,18 +445,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>1.关于浏览器的安全问题（前端有哪些危险）</p>
-<p>2.防御XSS攻击的方法</p>
-<p>3.cookie里面有个字段httponly是干嘛的</p>
-<p>4.CSRF的攻击流程</p>
-<p>5.具体如何防御CSRF攻击</p>
-<p>6.CSRFtoken可以被窃取吗</p>
-<p>7.那CSRFtoken是不是白做了</p>
-<p>8.referer了解这个字段吗</p>
-<p>9.黑客怎么样利用这个cookie的，请求是怎么仿造的</p>
-<p>10.cookie怎么发送到服务端的详细过程</p>
-<p>11.CSRFtoken能放到cookie里面吗</p>
-
+          <p>概览：</p>
+<p>1.flask框架模板        2.WSGI        3.反爬虫机制和破解方法汇总    </p>
+<p>4.raise_for_status()        5.bind()        6.Python f 字符串教程    </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/11/14-51-21/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -462,7 +481,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/20/18-30-37/">
+    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/10/01-30-15/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/hylike.jpg">
@@ -475,7 +494,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/20/18-30-37/" class="post-title-link" itemprop="url">计算机网络</a>
+          <a href="/2021/05/10/01-30-15/" class="post-title-link" itemprop="url">牛客华为-字符串类题-js</a>
         </h2>
 
         <div class="post-meta-container">
@@ -486,14 +505,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-05-20 18:30:37" itemprop="dateCreated datePublished" datetime="2021-05-20T18:30:37+08:00">2021-05-20</time>
+      <time title="Created: 2021-05-10 01:30:15" itemprop="dateCreated datePublished" datetime="2021-05-10T01:30:15+08:00">2021-05-10</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-28 01:22:54" itemprop="dateModified" datetime="2021-05-28T01:22:54+08:00">2021-05-28</time>
+        <time title="Modified: 2021-05-16 02:55:15" itemprop="dateModified" datetime="2021-05-16T02:55:15+08:00">2021-05-16</time>
       </span>
 
   
@@ -506,43 +525,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <ol>
-<li><p>tcp,udp区别</p>
-</li>
-<li><p>tcp三次握手</p>
-</li>
-<li><p>为什么不是两次握手</p>
-</li>
-<li><p>四次挥手</p>
-</li>
-<li><p>为什么等待2msl</p>
-</li>
-<li><p>syn flood攻击</p>
-</li>
-<li><p>http特点</p>
-</li>
-<li><p>常见的响应状态码</p>
-</li>
-<li><p>http报文</p>
-</li>
-<li><p>http相关版本</p>
-</li>
-<li><p>http的请求方法</p>
-</li>
-<li><p>get和post的区别</p>
-</li>
-<li><p>HTTPS和http区别</p>
-</li>
-<li><p>对称加密和非对称加密 区别</p>
-</li>
-<li><p>https验证过程</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43914604/article/details/104557738">计算机网络的分层结构、协议、服务和接口</a></p>
-</li>
-<li><p>OSI参考模型及功能 </p>
-</li>
-</ol>
-
+          <p>概览（共9题-题目）：<br>1.字符串最后一个单词的长度（较难）        2.计算某字母出现次数（较难）        3.字符串分隔（较难）<br>4.进制转换（中等）        5.字符个数统计（中等）        6.数字颠倒（简单）        7.字符串反转（简单）<br>8.句子逆序（较难）        9.字符串排序（中等）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/10/01-30-15/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -568,7 +559,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/16/00-02-22/">
+    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/10/01-30-15/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/hylike.jpg">
@@ -581,7 +572,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/16/00-02-22/" class="post-title-link" itemprop="url">Vue-官方文档</a>
+          <a href="/2021/05/10/01-30-15/" class="post-title-link" itemprop="url">牛客华为-字符串类题-js</a>
         </h2>
 
         <div class="post-meta-container">
@@ -592,8 +583,15 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-05-16 00:02:22" itemprop="dateCreated datePublished" datetime="2021-05-16T00:02:22+08:00">2021-05-16</time>
+      <time title="Created: 2021-05-10 01:30:15" itemprop="dateCreated datePublished" datetime="2021-05-10T01:30:15+08:00">2021-05-10</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-05-16 01:53:22" itemprop="dateModified" datetime="2021-05-16T01:53:22+08:00">2021-05-16</time>
+      </span>
 
   
 </div>
@@ -605,322 +603,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/16/00-01-43/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/hylike.jpg">
-      <meta itemprop="name" content="lym">
-      <meta itemprop="description" content="my的修炼之路">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="my鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/16/00-01-43/" class="post-title-link" itemprop="url">Vue-MDN</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-16 00:01:43" itemprop="dateCreated datePublished" datetime="2021-05-16T00:01:43+08:00">2021-05-16</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/15/21-13-48/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/hylike.jpg">
-      <meta itemprop="name" content="lym">
-      <meta itemprop="description" content="my的修炼之路">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="my鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/15/21-13-48/" class="post-title-link" itemprop="url">什么是Http无状态？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-15 21:13:48" itemprop="dateCreated datePublished" datetime="2021-05-15T21:13:48+08:00">2021-05-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/15/21-13-24/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/hylike.jpg">
-      <meta itemprop="name" content="lym">
-      <meta itemprop="description" content="my的修炼之路">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="my鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/15/21-13-24/" class="post-title-link" itemprop="url">SSL安全证书</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-15 21:13:24" itemprop="dateCreated datePublished" datetime="2021-05-15T21:13:24+08:00">2021-05-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/15/20-34-57/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/hylike.jpg">
-      <meta itemprop="name" content="lym">
-      <meta itemprop="description" content="my的修炼之路">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="my鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/15/20-34-57/" class="post-title-link" itemprop="url">CSRF 攻击</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-15 20:34:57" itemprop="dateCreated datePublished" datetime="2021-05-15T20:34:57+08:00">2021-05-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/15/20-34-29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/hylike.jpg">
-      <meta itemprop="name" content="lym">
-      <meta itemprop="description" content="my的修炼之路">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="my鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/15/20-34-29/" class="post-title-link" itemprop="url">同源策略</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-15 20:34:29" itemprop="dateCreated datePublished" datetime="2021-05-15T20:34:29+08:00">2021-05-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
+          <p>概览（共9题-题目）：<br>1.坐标描述（较难）        2.识别有效的IP地址和掩码并进行分类统计（困难）        3.简单错误记录（困难）<br>4.密码验证合格程序（较难）        5.简单密码破解（中等）        6.删除字符串中出现次数最少的字符（较难）        7.字符串排序（中等）        8.字符串加解密（较难）        9.字符串合并处理（较难）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/10/01-30-15/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -939,7 +630,7 @@
 
 
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 

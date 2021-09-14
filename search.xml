@@ -227,143 +227,6 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>牛客华为-字符串类题-js</title>
-    <url>/2021/05/10/01-30-15/</url>
-    <content><![CDATA[<p>概览（共9题-题目）：<br>1.字符串最后一个单词的长度        2.计算某字母出现次数        3.字符串分隔        4.进制转换<br>5.字符个数统计        6.数字颠倒        7.字符串反转        8.句子逆序        9.字符串排序</p>
-<span id="more"></span>
-
-<h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-字符串最后一个单词的长度"><a href="#T1-字符串最后一个单词的长度" class="headerlink" title="T1.字符串最后一个单词的长度"></a>T1.字符串最后一个单词的长度</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1：简单解法，但不满足具体题意</span></span><br><span class="line"><span class="keyword">let</span> s = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s[s.length-<span class="number">1</span>].length) </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2：满足题目描述具体解法</span></span><br><span class="line"><span class="keyword">let</span> strArr = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span>(strArr.length &amp;&amp; strArr.length &lt; <span class="number">5000</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(strArr[strArr.length-<span class="number">1</span>].length)</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;输入应非空&amp;&amp;字符串长度小于5000&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>收获：</p>
-<ul>
-<li><p>之前好像没有用过readline()函数完全没有映像；split()函数复习（用split(‘ ‘)把字符串按照空格分成数组）；输出函数console.log()好几天没写差点忘了差点写print哈哈哈（这个其实可以）；</p>
-</li>
-<li><p>JavaScript输出：JavaScript，没有任何打印或者输出的函数</p>
-</li>
-<li><p>JavaScript显示数据：JavaScript可以通过不同的方式来输出数据：</p>
-<ul>
-<li>使用window.alert()弹出警告框。</li>
-<li>使用document.write()方法将内容写到HTML文档中</li>
-<li>使用innerHTML写入到HTML元素</li>
-<li>使用console.log()写入到浏览器的控制台</li>
-</ul>
-</li>
-<li><p>（Object一共有两类原生方法，一是本身的方法，二是实例方法）</p>
-<ul>
-<li><p>所谓本身的方法就是直接定义在Object对象的方法。<code>Object.print = function(o)&#123;console.log(o) &#125;;</code>print方法是直接定义在Object对象上的</p>
-</li>
-<li><p>所谓实例方法就是定义在Object原型对象 Object.prototype 上的方法。它可以被Object实例直接使用。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Object.prototype.print &#x3D; function () &#123;</span><br><span class="line">	console.log(this) ;</span><br><span class="line">&#125;;</span><br><span class="line">let obj &#x3D; new Object();</span><br><span class="line">obj.print()</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="T2-计算某字母出现次数"><a href="#T2-计算某字母出现次数" class="headerlink" title="T2.计算某字母出现次数"></a>T2.计算某字母出现次数</h4><p>题目描述：写出一个程序，接受一个由字母、数字和空格组成的字符串，和一个字母，然后输出输入字符串                    中该字母的出现次数。不区分大小写，字符串长度小于500。<br>输入：第一行输入一个由字母和数字以及空格组成的字符串，第二行输入一个字母。<br>输出：输出输入字符串中含有该字符的个数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">let</span> line = readline().toLowerCase()</span><br><span class="line"><span class="keyword">let</span> strget = readline().toLowerCase()</span><br><span class="line"><span class="built_in">console</span>.log(line.split(<span class="string">&#x27;&#x27;</span>).filter(<span class="function"><span class="params">e</span>=&gt;</span>e===strget).length)</span><br><span class="line"><span class="comment">//这里的console.log可以换成print</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> a = readline().toLowerCase()</span><br><span class="line">    <span class="keyword">let</span> strA = line.toLowerCase()</span><br><span class="line">    <span class="keyword">for</span> (chart <span class="keyword">of</span> strA)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a === chart)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(count)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>收获：</p>
-<ul>
-<li><p>不区分大小写：将用来比较的字符串都换成小写/大写；</p>
-</li>
-<li><p>直接对一个字符串进行分割、过滤、求长度；</p>
-</li>
-<li><p>filter函数：<code>**filter()**</code>方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 </p>
-</li>
-<li><p>Node.js的readline()：模块提供了一个接口，用于一次一行地读取可读流例如（ process.stdin）中的数据。</p>
-</li>
-<li><p>可读流：是对数据来源的一种抽象。可读流的例子包括：<br>客户端的HTTP响应、服务器的HTTP请求、fs的读取流、zlib流、crypto流、TCP socket、子进程 stdout 与 stderr、process.stdin</p>
-</li>
-<li><p>由for(…… of…… ) 引出的关于字符串遍历的几种方法的收集：</p>
-<ul>
-<li> for循环：要遍历字符串的所有字符，我们可以使用一个普通的for循环，并使用一个循环计数器（i）来对字符串索引遍历</li>
-</ul>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;Buzz&#x27;</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i++)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(str[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>for…in…：存在一种特殊的循环形式，变量 i 自动接收索引，以便可以使用来访问每个字符<code>str[i]</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> str)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(str[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>for…of…：使用<code>for item of str</code>。变量<code>item</code>直接接收字符，因此不必使用索引。如果代码不需要每个字符的索引值，则此循环格式甚至更简单。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> char <span class="keyword">of</span> str) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(char);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="T3-字符串分隔"><a href="#T3-字符串分隔" class="headerlink" title="T3.字符串分隔"></a>T3.字符串分隔</h4><p>题目描述：连续输入字符串，请按长度为8拆分每个字符串后输出到新的字符串数                组；长度不是8整数倍的字符串请在后面补数字0，空字符串不处理。<br>输入：连续输入字符串(输入多次,每个字符串长度小于100)<br>输出：输出到长度为8的新字符串数组</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1，先加7个0，然后只保留能整除8的部分的字符串，然后每8个print一次</span></span><br><span class="line"><span class="keyword">while</span>(str = readline())&#123;</span><br><span class="line">    str+=<span class="string">&#x27;0000000&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> len = <span class="built_in">Math</span>.floor(str.length/<span class="number">8</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        print(str.substring(i*<span class="number">8</span>,(i+<span class="number">1</span>)*<span class="number">8</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2,直接把传进来的一行处理了，从头到尾遍历字符串line，把它加进str,大于7（8）时就输出，然后str清零，遍历完了之后用if语句看str是不是空，不是的话加0到8个输出。</span></span><br><span class="line"><span class="keyword">while</span>((line=readline()))&#123;</span><br><span class="line">    <span class="keyword">let</span> str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;line.length;i++)&#123;</span><br><span class="line">        str=str+line[i];</span><br><span class="line">        <span class="keyword">if</span>(str.length&gt;<span class="number">7</span>)&#123;</span><br><span class="line">            print(str);</span><br><span class="line">            str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(str.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(str.length&lt;<span class="number">8</span>) str+=<span class="string">&quot;0&quot;</span>;</span><br><span class="line">        print(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>收获：</p>
-<ul>
-<li>题目‘连续输入字符串’，解题时用<code>while(line = readline())&#123; &#125;</code></li>
-<li><code>**Math.floor()**</code>为向下取整。学习<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>，以下为个人觉得需要记住的：<ul>
-<li>Math.abs(x)  绝对值</li>
-<li>Math.random()  0 到 1 之间的伪随机数</li>
-<li>Math.round(x)  返回四舍五入后的整数</li>
-<li>Math.ceil(x)  一个数向上取整后的值</li>
-<li>Math.floor(x)  一个数向下取整后的值</li>
-<li>Math.log(x)  自然对数</li>
-<li>Math.lnx  自然对数</li>
-<li>Math.PI  圆周率，一个圆的周长和直径之比，约等于 <code>3.14159</code></li>
-<li>Math.min([x,[y[,…]]])  返回零到多个数值中最小值</li>
-<li>Math.max([x,[y[,…]]])  返回零到多个数值中最大值</li>
-</ul>
-</li>
-<li>学习<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/substring">substring</a>方法，返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。语法：<code>str.substring(indexStart[, indexEnd])</code></li>
-<li>由于空字符串不处理，所以<code>str+=&#39;0000000&#39;</code>这里是加7个0；加8个的话可能会导致在原字符串长度就可以整除8的情况下加一个空字符串；</li>
-<li>由于是按行输入和按长度分解的，所以不应该直接使用str.split()函数分解成数组。与题意不符</li>
-</ul>
-<h4 id="T4-进制转换"><a href="#T4-进制转换" class="headerlink" title="T4.进制转换"></a>T4.进制转换</h4><p>题目描述：写出一个程序，接受一个十六进制的数，输出该数值的十进制表示。<br>输入：输入一个十六进制的数值字符串。注意：一个用例会同时有多组输入数据，请参考帖子<a href="https://www.nowcoder.com/discuss/276%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82">https://www.nowcoder.com/discuss/276处理多组输入的问题。</a><br>输出：输出该数值的十进制字符串。不同组的测试用例用\n隔开。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    print(<span class="string">&#x27;&#x27;</span>+<span class="built_in">parseInt</span>(line,<span class="number">16</span>))</span><br><span class="line">    <span class="comment">//等于console.log(&#x27;&#x27;+parseInt(line,16))</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>收获：</p>
-<ul>
-<li><code>parseInt(string,radix)</code>函数  : 解析radix进制的string为十进制数；如果string的第一个非空格字符不是数字或者radix不在[2,36]这个范围的话返回NaN;如果string不是一个字符串，则将其转换为字符串(使用  <code>ToString </code>抽象操作)。字符串开头的空白符将会被忽略。radix，从2到36，可以不写，但可能出错。</li>
-<li>NaN属性是代表非数字值的特殊值。该属性用于指示某个值不是数字。可以把 Number 对象设置为该值，来指示其不是数字值。</li>
-<li>这个print()是封装过的console.log()</li>
-<li>console.log()默认是换行的，不用单独处理，如果想输出换行，可以用console.log( ‘\n’ );</li>
-<li>用’’+把结果转换成字符串</li>
-</ul>
-<h4 id="T5-字符个数统计"><a href="#T5-字符个数统计" class="headerlink" title="T5.字符个数统计"></a>T5.字符个数统计</h4><p>题目描述：  编写一个函数，计算字符串中含有的不同字符的个数。字符在ACSII码范围内(0<del>127)，换行表示结束符，不算在字符里。不在范围内的不作统计。多个相同的字符只计算一次<br>例如，对于字符串abaca而言，有a、b、c三种不同的字符，因此输出3。<br>输入：输入一行没有空格的字符串。<br>输出：输出范围在(0</del>127)字符的个数。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> line = readline()</span><br><span class="line"><span class="keyword">let</span> arr=[]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;line.length;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.indexOf(line[i])==-<span class="number">1</span>&amp;&amp;line.charCodeAt(i)&lt;=<span class="number">127</span>&amp;&amp;line.charCodeAt(i)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">        arr.push(line[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr.length)</span><br></pre></td></tr></table></figure>
-
-<p>收获：</p>
-<ul>
-<li><code>**str.charCodeAt(index)**</code> 方法返回 <code>0</code> 到 <code>65535</code> 之间的整数，表示给定索引处的 UTF-16 代码单元。参数index：一个大于等于 <code>0</code>，小于字符串长度的整数。如果不是一个数值，则默认为 <code>0</code>。返回值：指定 <code>index</code> 处字符的 UTF-16 代码单元值的一个数字；如果 <code>index</code> 超出范围，<code>charCodeAt()</code> 返回 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN"><code>NaN</code></a>。</li>
-</ul>
-<h4 id="T6-数字颠倒"><a href="#T6-数字颠倒" class="headerlink" title="T6.数字颠倒"></a>T6.数字颠倒</h4><p>题目描述：  输入一个整数，将这个整数以字符串的形式逆序输出。 程序不考虑负数的情况，若数字含                有0，则逆序形式也含有0，如输入为100，则输出为001<br>输入：输入一个int整数<br>输出：将这个整数以字符串的形式逆序输出</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">let</span> line = <span class="built_in">String</span>(readline())</span><br><span class="line"><span class="built_in">console</span>.log(line.toString().split(<span class="string">&#x27;&#x27;</span>).reverse().join(<span class="string">&#x27;&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"><span class="keyword">let</span> line = <span class="built_in">String</span>(readline())</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=line.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">    str+=line[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(str)</span><br></pre></td></tr></table></figure>
-
-<h4 id="T7-字符串反转"><a href="#T7-字符串反转" class="headerlink" title="T7.字符串反转"></a>T7.字符串反转</h4><p>题目描述：  接受一个只包含小写字母的字符串，然后输出该字符串反转后的字符串。（字符串长度不                    超过1000）<br>输入：输入一行，为一个只包含小写字母的字符串。<br>输出：输出该字符串反转后的字符串。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> input = readline();</span><br><span class="line"><span class="keyword">var</span> length = input.length;</span><br><span class="line"><span class="keyword">if</span>(length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(length &gt; <span class="number">1000</span>)&#123;                <span class="comment">//字符串长度不超过1000</span></span><br><span class="line">        length = <span class="number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">if</span>(<span class="regexp">/^[a-z]+$/</span>.test(input))&#123;       <span class="comment">//只包含小写字母</span></span><br><span class="line">          <span class="built_in">console</span>.log(input.split(<span class="string">&quot;&quot;</span>).reverse().join(<span class="string">&quot;&quot;</span>))</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="T8-句子逆序"><a href="#T8-句子逆序" class="headerlink" title="T8.句子逆序"></a>T8.句子逆序</h4><p>题目描述：  将一个英文语句以单词为单位逆序排放。例如“I am a boy”，逆序排放后为“boy a am I”<br> 所有单词之间用一个空格隔开，语句中除了英文字母外，不再包含其他字符<br>输入：输入一个英文语句，每个单词用空格隔开。保证输入只包含空格和字母。<br>输出：得到逆序的句子</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(line.split(<span class="string">&quot; &quot;</span>).reverse().join(<span class="string">&quot; &quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="T9-字符串排序"><a href="#T9-字符串排序" class="headerlink" title="T9.字符串排序"></a>T9.字符串排序</h4><p>题目描述：  给定n个字符串，请对n个字符串按照字典序排列。<br>输入：输入第一行为一个正整数n(1≤n≤1000),下面n行为n个字符串(字符串长度≤100),字符串中只含有大小写字母。<br>输出：数据输出n行，输出结果为按照字典序排列的字符串</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num=<span class="built_in">Number</span>(readline())</span><br><span class="line"><span class="keyword">let</span> arr=[]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">    arr.push(readline())</span><br><span class="line">&#125;</span><br><span class="line">arr.sort()</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arr[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>收获：</p>
-<ul>
-<li>Number()  把readline接收到的字符串转换成数字</li>
-<li>arr.sort()用<a href="https://en.wikipedia.org/wiki/In-place_algorithm">原地算法</a>对数组的元素进行排序，并返回数组。默认排序顺序是在将元素<strong>转换为字符串</strong>，然后比较它们的UTF-16代码单元值序列时构建的。<ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">arr.sort([compareFunction])</a></li>
-<li>参数compareFunction，可省，用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。 例如 “Banana” 会被排列到 “cherry” 之前。当数字按由小到大排序时，9 出现在 80 之前，但因为（没有指明 <code>compareFunction</code>），比较的数字会先被转换为字符串，所以在Unicode顺序上 “80” 要比 “9” 要靠前。</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>字符串</tag>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>同源策略</title>
     <url>/2021/05/15/20-34-29/</url>
     <content><![CDATA[]]></content>
@@ -442,12 +305,12 @@
 <p>  实际上，在线用户不一定会和其他用户发生并发，例如正在浏览网页的用户，对服务器是没有任何影响的。但是，用户在线数量是统计并发用户数量的主要依据之一。</p>
 <p>​    并发主要是针对服务器而言，是否并发的关键是看用户操作是否对服务器产生了影响。因此，并发用户数量的正确理解为：在同一时段与服务器进行了交互的在线用户数量。这些用户的最大特征是和服务器产生了交互，这种交互既可以是单向的传输数据，也可以是双向的传送数据。</p>
 <h4 id="4-raise-for-status"><a href="#4-raise-for-status" class="headerlink" title="4.raise_for_status()"></a>4.<a href="https://blog.csdn.net/weixin_43360707/article/details/101034944">raise_for_status()</a></h4><p>能够判断返回的Response类型状态是不是200。如果是200，他将表示返回的内容是正确的，如果不是200，他就会产生一个HttpError的异常。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHTMLText</span>(<span class="params">url</span>):</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">r = requests.get(url, timeout = <span class="number">30</span>)</span><br><span class="line">r.raise_for_status()</span><br><span class="line">r.encoding = r.apparent_encoding</span><br><span class="line"><span class="keyword">return</span> r.text</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line"><span class="keyword">return</span> “产生异常”</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHTMLText</span>(<span class="params">url</span>):</span></span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		r = requests.get(url, timeout = <span class="number">30</span>)</span><br><span class="line">		r.raise_for_status()</span><br><span class="line">		r.encoding = r.apparent_encoding</span><br><span class="line">		<span class="keyword">return</span> r.text</span><br><span class="line">	<span class="keyword">except</span>:</span><br><span class="line">		<span class="keyword">return</span> “产生异常”</span><br></pre></td></tr></table></figure>
 
 <p>这个代码中我们用r.raise_for_status()方法，它就可以有效的判断网络连接的状态。如果网连接出现错误，那么它就会用try-except来获取一个异常。而这个异常，在异常部分，我们用了一句 return “产生异常” 来表示，我们捕获到了这个异常，所以这样一个通用代码框架可以有效的处理，我们在访问或爬取网页过程中，它可能出现的一些错误，或者是网络不稳定造成的一些现象</p>
 <h4 id="5-bind"><a href="#5-bind" class="headerlink" title="5.bind()"></a>5.<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">bind()</a></h4><p>Function.prototype.bind()</p>
 <p><code>**bind()**</code> 方法创建一个新的函数，在 <code>bind()</code> 被调用时，这个新函数的 <code>this</code> 被指定为 <code>bind()</code> 的第一个参数，而其余参数将作为新函数的参数，供调用时使用。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const module = &#123;</span><br><span class="line">  x: <span class="number">42</span>,</span><br><span class="line">  getX: function() &#123;</span><br><span class="line">    <span class="keyword">return</span> this.x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const unboundGetX = module.getX;</span><br><span class="line">console.log(unboundGetX()); // The function gets invoked at the <span class="keyword">global</span> scope</span><br><span class="line">// expected output: undefined</span><br><span class="line"></span><br><span class="line">const boundGetX = unboundGetX.bind(module);</span><br><span class="line">console.log(boundGetX());</span><br><span class="line">// expected output: <span class="number">42</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">  x: <span class="number">42</span>,</span><br><span class="line">  getX: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> unboundGetX = <span class="built_in">module</span>.getX;</span><br><span class="line"><span class="built_in">console</span>.log(unboundGetX()); <span class="comment">// The function gets invoked at the global scope</span></span><br><span class="line"><span class="comment">// expected output: undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> boundGetX = unboundGetX.bind(<span class="built_in">module</span>);</span><br><span class="line"><span class="built_in">console</span>.log(boundGetX());</span><br><span class="line"><span class="comment">// expected output: 42</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function.bind(thisArg[, arg1[, arg2[, ...]]])</span><br></pre></td></tr></table></figure>
 
@@ -491,6 +354,316 @@
 ]]></content>
       <tags>
         <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue-MDN</title>
+    <url>/2021/05/16/00-01-43/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Js小红书第一章阅读</title>
+    <url>/2021/06/09/15-07-35/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Vue优化方式</title>
+    <url>/2021/09/13/19-52-58/</url>
+    <content><![CDATA[<h1 id="编码优化"><a href="#编码优化" class="headerlink" title="编码优化"></a>编码优化</h1><h3 id="避免响应所有数据"><a href="#避免响应所有数据" class="headerlink" title="避免响应所有数据"></a>避免响应所有数据</h3><p>不要把所有数据都放到data中，data中的数据都会增加getter和setter，而且会收集watcher，这样还占内存，不需要响应式的数据我们可以直接定义在实例上。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;view&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        components:&#123;&#125;,</span><br><span class="line">        data:()&#x3D;&gt;(&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;),</span><br><span class="line">        beforeCreate:function()&#123;</span><br><span class="line">            this.timer&#x3D;null</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数式组件"><a href="#函数式组件" class="headerlink" title="函数式组件"></a>函数式组件</h3><p>函数式组件是一个不包含状态和实例的组件，简单的说，就是函数不支持响应式，并且不能通过this关键字引用自己。因为函数式组件没有状态，所以它不需要像Vue的响应式系统一样需要经过额外的初始化，这样就可以避免相关操作带来的性能消耗。当然函数式组件仍然会对响应的变化</p>
+<h1 id="打包优化"><a href="#打包优化" class="headerlink" title="打包优化"></a>打包优化</h1>]]></content>
+  </entry>
+  <entry>
+    <title>Vue-官方文档</title>
+    <url>/2021/05/16/00-02-22/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>浏览器安全</title>
+    <url>/2021/05/20/18-39-59/</url>
+    <content><![CDATA[<p>1.关于浏览器的安全问题（前端有哪些危险）</p>
+<p>2.防御XSS攻击的方法</p>
+<p>3.cookie里面有个字段httponly是干嘛的</p>
+<p>4.CSRF的攻击流程</p>
+<p>5.具体如何防御CSRF攻击</p>
+<p>6.CSRFtoken可以被窃取吗</p>
+<p>7.那CSRFtoken是不是白做了</p>
+<p>8.referer了解这个字段吗</p>
+<p>9.黑客怎么样利用这个cookie的，请求是怎么仿造的</p>
+<p>10.cookie怎么发送到服务端的详细过程</p>
+<p>11.CSRFtoken能放到cookie里面吗</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>牛客华为-字符串类题-js</title>
+    <url>/2021/05/10/01-30-15/</url>
+    <content><![CDATA[<p>概览（共9题-题目）：<br>1.字符串最后一个单词的长度（较难）        2.计算某字母出现次数（较难）        3.字符串分隔（较难）<br>4.进制转换（中等）        5.字符个数统计（中等）        6.数字颠倒（简单）        7.字符串反转（简单）<br>8.句子逆序（较难）        9.字符串排序（中等）</p>
+<span id="more"></span>
+
+<h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-字符串最后一个单词的长度（较难）"><a href="#T1-字符串最后一个单词的长度（较难）" class="headerlink" title="T1.字符串最后一个单词的长度（较难）"></a>T1.字符串最后一个单词的长度（较难）</h4><p>题目描述：计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。<br>输入：输入一行，代表要计算的字符串，非空，长度小于5000。<br>输出：输出一个整数，表示输入字符串最后一个单词的长度。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1：简单解法，但不满足具体题意</span></span><br><span class="line"><span class="keyword">let</span> s = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(s[s.length-<span class="number">1</span>].length) </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2：满足题目描述具体解法</span></span><br><span class="line"><span class="keyword">let</span> strArr = readline().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"><span class="keyword">if</span>(strArr.length &amp;&amp; strArr.length &lt; <span class="number">5000</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(strArr[strArr.length-<span class="number">1</span>].length)</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;输入应非空&amp;&amp;字符串长度小于5000&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><p>之前好像没有用过readline()函数完全没有映像（牛客自己的）；split()函数复习（用split(‘ ‘)把字符串按照空格分成数组）；输出函数console.log()好几天没写差点忘了差点写print哈哈哈（这个在牛客其实可以）；</p>
+</li>
+<li><p>JavaScript输出：JavaScript，没有任何打印或者输出的函数</p>
+</li>
+<li><p>JavaScript显示数据：JavaScript可以通过不同的方式来输出数据：</p>
+<ul>
+<li>使用window.alert()弹出警告框。</li>
+<li>使用document.write()方法将内容写到HTML文档中</li>
+<li>使用innerHTML写入到HTML元素</li>
+<li>使用console.log()写入到浏览器的控制台</li>
+</ul>
+</li>
+<li><p>（Object一共有两类原生方法，一是本身的方法，二是实例方法）</p>
+<ul>
+<li><p>所谓本身的方法就是直接定义在Object对象的方法。<code>Object.print = function(o)&#123;console.log(o) &#125;;</code>print方法是直接定义在Object对象上的</p>
+</li>
+<li><p>所谓实例方法就是定义在Object原型对象 Object.prototype 上的方法。它可以被Object实例直接使用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Object.prototype.print &#x3D; function () &#123;</span><br><span class="line">	console.log(this) ;</span><br><span class="line">&#125;;</span><br><span class="line">let obj &#x3D; new Object();</span><br><span class="line">obj.print()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="T2-计算某字母出现次数（较难）"><a href="#T2-计算某字母出现次数（较难）" class="headerlink" title="T2.计算某字母出现次数（较难）"></a>T2.计算某字母出现次数（较难）</h4><p>题目描述：写出一个程序，接受一个由字母、数字和空格组成的字符串，和一个字母，然后输出输入字符串                    中该字母的出现次数。不区分大小写，字符串长度小于500。<br>输入：第一行输入一个由字母和数字以及空格组成的字符串，第二行输入一个字母。<br>输出：输出输入字符串中含有该字符的个数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">let</span> line = readline().toLowerCase()</span><br><span class="line"><span class="keyword">let</span> strget = readline().toLowerCase()</span><br><span class="line"><span class="built_in">console</span>.log(line.split(<span class="string">&#x27;&#x27;</span>).filter(<span class="function"><span class="params">e</span>=&gt;</span>e===strget).length)</span><br><span class="line"><span class="comment">//这里的console.log可以换成print</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> a = readline().toLowerCase()</span><br><span class="line">    <span class="keyword">let</span> strA = line.toLowerCase()</span><br><span class="line">    <span class="keyword">for</span> (chart <span class="keyword">of</span> strA)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a === chart)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(count)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><p>不区分大小写：将用来比较的字符串都换成小写/大写；</p>
+</li>
+<li><p>直接对一个字符串进行分割、过滤、求长度；</p>
+</li>
+<li><p>filter函数：<code>**filter()**</code>方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 </p>
+</li>
+<li><p>Node.js的readline()：模块提供了一个接口，用于一次一行地读取可读流例如（ process.stdin）中的数据。</p>
+</li>
+<li><p>可读流：是对数据来源的一种抽象。可读流的例子包括：<br>客户端的HTTP响应、服务器的HTTP请求、fs的读取流、zlib流、crypto流、TCP socket、子进程 stdout 与 stderr、process.stdin</p>
+</li>
+<li><p>由for(…… of…… ) 引出的关于字符串遍历的几种方法的收集：</p>
+<ul>
+<li> for循环：要遍历字符串的所有字符，我们可以使用一个普通的for循环，并使用一个循环计数器（i）来对字符串索引遍历</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;Buzz&#x27;</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i++)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(str[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>for…in…：存在一种特殊的循环形式，变量 i 自动接收索引，以便可以使用来访问每个字符<code>str[i]</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> str)&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(str[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>for…of…：使用<code>for item of str</code>。变量<code>item</code>直接接收字符，因此不必使用索引。如果代码不需要每个字符的索引值，则此循环格式甚至更简单。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> char <span class="keyword">of</span> str) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(char);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="T3-字符串分隔（较难）"><a href="#T3-字符串分隔（较难）" class="headerlink" title="T3.字符串分隔（较难）"></a>T3.字符串分隔（较难）</h4><p>题目描述：连续输入字符串，请按长度为8拆分每个字符串后输出到新的字符串数组；长度不是8整数倍的字符串请在后面补数字0，空字符串不处理。<br>输入：连续输入字符串(输入多次,每个字符串长度小于100)<br>输出：输出到长度为8的新字符串数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1，先加7个0，然后只保留能整除8的部分的字符串，然后每8个print一次</span></span><br><span class="line"><span class="keyword">while</span>(str = readline())&#123;</span><br><span class="line">    str+=<span class="string">&#x27;0000000&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> len = <span class="built_in">Math</span>.floor(str.length/<span class="number">8</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        print(str.substring(i*<span class="number">8</span>,(i+<span class="number">1</span>)*<span class="number">8</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2,直接把传进来的一行处理了，从头到尾遍历字符串line，把它加进str,大于7（8）时就输出，然后str清零，遍历完了之后用if语句看str是不是空，不是的话加0到8个输出。</span></span><br><span class="line"><span class="keyword">while</span>((line=readline()))&#123;</span><br><span class="line">    <span class="keyword">let</span> str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;line.length;i++)&#123;</span><br><span class="line">        str=str+line[i];</span><br><span class="line">        <span class="keyword">if</span>(str.length&gt;<span class="number">7</span>)&#123;</span><br><span class="line">            print(str);</span><br><span class="line">            str=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(str.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(str.length&lt;<span class="number">8</span>) str+=<span class="string">&quot;0&quot;</span>;</span><br><span class="line">        print(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li>题目‘连续输入字符串’，解题时用<code>while(line = readline())&#123; &#125;</code></li>
+<li><code>**Math.floor()**</code>为向下取整。学习<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>，以下为个人觉得需要记住的：<ul>
+<li>Math.abs(x)  绝对值</li>
+<li>Math.random()  0 到 1 之间的伪随机数</li>
+<li>Math.round(x)  返回四舍五入后的整数</li>
+<li>Math.ceil(x)  一个数向上取整后的值</li>
+<li>Math.floor(x)  一个数向下取整后的值</li>
+<li>Math.log(x)  自然对数</li>
+<li>Math.lnx  自然对数</li>
+<li>Math.PI  圆周率，一个圆的周长和直径之比，约等于 <code>3.14159</code></li>
+<li>Math.min([x,[y[,…]]])  返回零到多个数值中最小值</li>
+<li>Math.max([x,[y[,…]]])  返回零到多个数值中最大值</li>
+</ul>
+</li>
+<li>学习<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/substring">substring</a>方法，返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。语法：<code>str.substring(indexStart[, indexEnd])</code></li>
+<li>由于空字符串不处理，所以<code>str+=&#39;0000000&#39;</code>这里是加7个0；加8个的话可能会导致在原字符串长度就可以整除8的情况下加一个空字符串；</li>
+<li>由于是按行输入和按长度分解的，所以不应该直接使用str.split()函数分解成数组。与题意不符</li>
+</ul>
+<h4 id="T4-进制转换（中等）"><a href="#T4-进制转换（中等）" class="headerlink" title="T4.进制转换（中等）"></a>T4.进制转换（中等）</h4><p>题目描述：写出一个程序，接受一个十六进制的数，输出该数值的十进制表示。<br>输入：输入一个十六进制的数值字符串。注意：一个用例会同时有多组输入数据，请处理多组输入的问题。<br>输出：输出该数值的十进制字符串。不同组的测试用例用\n隔开。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    print(<span class="string">&#x27;&#x27;</span>+<span class="built_in">parseInt</span>(line,<span class="number">16</span>))</span><br><span class="line">    <span class="comment">//等于console.log(&#x27;&#x27;+parseInt(line,16))</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><code>parseInt(string,radix)</code>函数  : 解析radix进制的string为十进制数；如果string的第一个非空格字符不是数字或者radix不在[2,36]这个范围的话返回NaN;如果string不是一个字符串，则将其转换为字符串(使用  <code>ToString </code>抽象操作)。字符串开头的空白符将会被忽略。radix，从2到36，可以不写，但可能出错。</li>
+<li>NaN属性是代表非数字值的特殊值。该属性用于指示某个值不是数字。可以把 Number 对象设置为该值，来指示其不是数字值。</li>
+<li>这个print()是封装过的console.log()</li>
+<li>console.log()默认是换行的，不用单独处理，如果想输出换行，可以用console.log( ‘\n’ );</li>
+<li>用’’+把结果转换成字符串</li>
+</ul>
+<h4 id="T5-字符个数统计（中等）"><a href="#T5-字符个数统计（中等）" class="headerlink" title="T5.字符个数统计（中等）"></a>T5.字符个数统计（中等）</h4><p>题目描述：  编写一个函数，计算字符串中含有的不同字符的个数。字符在ACSII码范围内(0<del>127)，换行表示结束符，不算在字符里。不在范围内的不作统计。多个相同的字符只计算一次<br>例如，对于字符串abaca而言，有a、b、c三种不同的字符，因此输出3。<br>输入：输入一行没有空格的字符串。<br>输出：输出范围在(0</del>127)字符的个数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> line = readline()</span><br><span class="line"><span class="keyword">let</span> arr=[]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;line.length;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.indexOf(line[i])==-<span class="number">1</span>&amp;&amp;line.charCodeAt(i)&lt;=<span class="number">127</span>&amp;&amp;line.charCodeAt(i)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">        arr.push(line[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr.length)</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li><code>**str.charCodeAt(index)**</code> 方法返回 <code>0</code> 到 <code>65535</code> 之间的整数，表示给定索引处的 UTF-16 代码单元。参数index：一个大于等于 <code>0</code>，小于字符串长度的整数。如果不是一个数值，则默认为 <code>0</code>。返回值：指定 <code>index</code> 处字符的 UTF-16 代码单元值的一个数字；如果 <code>index</code> 超出范围，<code>charCodeAt()</code> 返回 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN"><code>NaN</code></a>。</li>
+</ul>
+<h4 id="T6-数字颠倒（简单）"><a href="#T6-数字颠倒（简单）" class="headerlink" title="T6.数字颠倒（简单）"></a>T6.数字颠倒（简单）</h4><p>题目描述：  输入一个整数，将这个整数以字符串的形式逆序输出。 程序不考虑负数的情况，若数字含有0，则逆序形式也含有0，如输入为100，则输出为001<br>输入：输入一个int整数<br>输出：将这个整数以字符串的形式逆序输出</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"><span class="keyword">let</span> line = readline()</span><br><span class="line"><span class="built_in">console</span>.log(line.toString().split(<span class="string">&#x27;&#x27;</span>).reverse().join(<span class="string">&#x27;&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"><span class="keyword">let</span> line = <span class="built_in">String</span>(readline())</span><br><span class="line"><span class="keyword">let</span> str=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=line.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">    str+=line[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(str)</span><br></pre></td></tr></table></figure>
+
+<h4 id="T7-字符串反转（简单）"><a href="#T7-字符串反转（简单）" class="headerlink" title="T7.字符串反转（简单）"></a>T7.字符串反转（简单）</h4><p>题目描述：  接受一个只包含小写字母的字符串，然后输出该字符串反转后的字符串。（字符串长度不                    超过1000）<br>输入：输入一行，为一个只包含小写字母的字符串。<br>输出：输出该字符串反转后的字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> input = readline();</span><br><span class="line"><span class="keyword">var</span> length = input.length;</span><br><span class="line"><span class="keyword">if</span>(length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(length &gt; <span class="number">1000</span>)&#123;                <span class="comment">//字符串长度不超过1000</span></span><br><span class="line">        length = <span class="number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">if</span>(<span class="regexp">/^[a-z]+$/</span>.test(input))&#123;       <span class="comment">//只包含小写字母</span></span><br><span class="line">          <span class="built_in">console</span>.log(input.split(<span class="string">&quot;&quot;</span>).reverse().join(<span class="string">&quot;&quot;</span>))</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="T8-句子逆序（数组类题）（较难）"><a href="#T8-句子逆序（数组类题）（较难）" class="headerlink" title="T8.句子逆序（数组类题）（较难）"></a>T8.句子逆序（数组类题）（较难）</h4><p>题目描述：  将一个英文语句以单词为单位逆序排放。例如“I am a boy”，逆序排放后为“boy a am I”<br> 所有单词之间用一个空格隔开，语句中除了英文字母外，不再包含其他字符<br>输入：输入一个英文语句，每个单词用空格隔开。保证输入只包含空格和字母。<br>输出：得到逆序的句子</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(line = readline())&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(line.split(<span class="string">&quot; &quot;</span>).reverse().join(<span class="string">&quot; &quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="T9-字符串排序（中等）"><a href="#T9-字符串排序（中等）" class="headerlink" title="T9.字符串排序（中等）"></a>T9.字符串排序（中等）</h4><p>题目描述：  给定n个字符串，请对n个字符串按照字典序排列。<br>输入：输入第一行为一个正整数n(1≤n≤1000),下面n行为n个字符串(字符串长度≤100),字符串中只含有大小写字母。<br>输出：数据输出n行，输出结果为按照字典序排列的字符串</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> num=<span class="built_in">Number</span>(readline())</span><br><span class="line"><span class="keyword">let</span> arr=[]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">    arr.push(readline())</span><br><span class="line">&#125;</span><br><span class="line">arr.sort()</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arr[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li>Number()  把readline接收到的字符串转换成数字</li>
+<li>arr.sort()用<a href="https://en.wikipedia.org/wiki/In-place_algorithm">原地算法</a>对数组的元素进行排序，并返回数组。默认排序顺序是在将元素<strong>转换为字符串</strong>，然后比较它们的UTF-16代码单元值序列时构建的。<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">arr.sort([compareFunction])</a></li>
+<li>参数compareFunction，可省，用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的各个字符的Unicode位点进行排序。 例如 “Banana” 会被排列到 “cherry” 之前。当数字按由小到大排序时，9 出现在 80 之前，但因为（没有指明 <code>compareFunction</code>），比较的数字会先被转换为字符串，所以在Unicode顺序上 “80” 要比 “9” 要靠前。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>字符串</tag>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机网络</title>
+    <url>/2021/05/20/18-30-37/</url>
+    <content><![CDATA[<ol>
+<li><p>tcp,udp区别</p>
+</li>
+<li><p>tcp三次握手</p>
+</li>
+<li><p>为什么不是两次握手</p>
+</li>
+<li><p>四次挥手</p>
+</li>
+<li><p>为什么等待2msl</p>
+</li>
+<li><p>syn flood攻击</p>
+</li>
+<li><p>http特点</p>
+</li>
+<li><p>常见的响应状态码</p>
+</li>
+<li><p>http报文</p>
+</li>
+<li><p>http相关版本</p>
+</li>
+<li><p>http的请求方法</p>
+</li>
+<li><p>get和post的区别</p>
+</li>
+<li><p>HTTPS和http区别</p>
+</li>
+<li><p>对称加密和非对称加密 区别</p>
+</li>
+<li><p>https验证过程</p>
+</li>
+<li><p><a href="https://blog.csdn.net/weixin_43914604/article/details/104557738">计算机网络的分层结构、协议、服务和接口</a></p>
+</li>
+<li><p>OSI参考模型及功能 </p>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>牛客华为-字符串类题-js</title>
+    <url>/2021/05/10/01-30-15/</url>
+    <content><![CDATA[<p>概览（共9题-题目）：<br>1.坐标描述（较难）        2.识别有效的IP地址和掩码并进行分类统计（困难）        3.简单错误记录（困难）<br>4.密码验证合格程序（较难）        5.简单密码破解（中等）        6.删除字符串中出现次数最少的字符（较难）        7.字符串排序（中等）        8.字符串加解密（较难）        9.字符串合并处理（较难）</p>
+<span id="more"></span>
+
+<h2 id="字符串类型题-js"><a href="#字符串类型题-js" class="headerlink" title="字符串类型题  js"></a>字符串类型题  js</h2><h4 id="T1-坐标描述（较难）"><a href="#T1-坐标描述（较难）" class="headerlink" title="T1.坐标描述（较难）"></a>T1.坐标描述（较难）</h4><p>题目描述：开发一个坐标计算工具， A表示向左移动，D表示向右移动，W表示向上移动，S表示向下移动。从（0,0）点开始移动，从输入字符串里面读取一些坐标，并将最终输入结果输出到输出文件里面。<br>输入：  一行字符串   —— 合法坐标为A(或者D或者W或者S) + 数字（两位以内） ，坐标之间以;分隔。 非法坐标点需要进行丢弃。如AA10; A1A; $%$; YAD; 等。 输出：输出一个整数，表示输入字符串最后一个单词的长度。<br>输出：最终坐标，以逗号分隔</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1：</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2：</span></span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li></li>
+</ul>
+<h4 id="T2-识别有效的IP地址和掩码并进行分类统计（困难）"><a href="#T2-识别有效的IP地址和掩码并进行分类统计（困难）" class="headerlink" title="T2.识别有效的IP地址和掩码并进行分类统计（困难）"></a>T2.识别有效的IP地址和掩码并进行分类统计（困难）</h4><p>题目描述：  请解析IP地址和对应的掩码，进行分类识别。要求按照A/B/C/D/E类地址归类，不合法的地址和掩码单独归类。<br>  所有的IP地址划分为 A,B,C,D,E五类<br>  A类地址1.0.0.0<del>126.255.255.255;<br>  B类地址128.0.0.0</del>191.255.255.255;<br>  C类地址192.0.0.0<del>223.255.255.255;<br>  D类地址224.0.0.0</del>239.255.255.255；<br>  E类地址240.0.0.0~255.255.255.255 </p>
+<p> 私网IP范围是：<br>  10.0.0.0～10.255.255.255<br>  172.16.0.0～172.31.255.255<br>  192.168.0.0～192.168.255.255<br>  子网掩码为二进制下前面是连续的1，然后全是0。（例如：255.255.255.32就是一个非法的掩码）<br>  注意二进制下全是1或者全是0均为非法 </p>
+<p>  注意：<br> \1. 类似于【0.<em>.</em>.<em>】和【127.</em>.*.*】的IP地址不属于上述输入的任意一类，也不属于不合法ip地址，计数时可以忽略        \2. 私有IP地址和A,B,C,D,E类地址是不冲突的<br>输入：多行字符串。每行一个IP地址和掩码，用~隔开。<br>输出：统计A、B、C、D、E、错误IP地址或错误掩码、私有IP的个数，之间以空格隔开。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li></li>
+</ul>
+<h4 id="T3-简单错误记录（困难）"><a href="#T3-简单错误记录（困难）" class="headerlink" title="T3.简单错误记录（困难）"></a>T3.简单错误记录（困难）</h4><p>题目描述：  开发一个简单错误记录功能小模块，能够记录出错的代码所在的文件名称和行号。<br>  处理：<br>  1、 记录最多8条错误记录，循环记录，最后只用输出最后出现的八条错误记录。对相同的错误记录只记录一条，但是**错误计数增加。最后一个斜杠后面的带后缀名的部分（保留最后16位）和行号完全匹配的记录才做算是”相同“的错误记录。<br>  2、 超过16个字符的文件名称，只记录文件的最后有效16个字符；<br>  3、 输入的文件可能带路径，记录文件名称不能带路径。<br>  4、循环记录时，只以第一次出现的顺序为准，后面重复的不会更新它的出现时间，仍以第一次为准</p>
+<p>输入：每组只包含一个测试用例。一个测试用例包含一行或多行字符串。每行包括带路径文件名称，行号，以空格隔开。<br>输出：将所有的记录统计并将结果输出，格式：文件名 代码行数 数目，一个空格隔开，如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li></li>
+</ul>
+<h4 id="T4-密码验证合格程序（较难）"><a href="#T4-密码验证合格程序（较难）" class="headerlink" title="T4.密码验证合格程序（较难）"></a>T4.密码验证合格程序（较难）</h4><p>题目描述：<br>    密码要求:   1.长度超过8位<br>                       2.包括大小写字母.数字.其它符号,以上四种至少三种<br>                       3.不能有相同长度大于2的子串重复<br>输入：一组或多组长度超过2的字符串。每组占一行<br>输出：如果符合要求输出：OK，否则输出NG</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li></li>
+</ul>
+<h4 id="T5-简单密码破解（中等）"><a href="#T5-简单密码破解（中等）" class="headerlink" title="T5.简单密码破解（中等）"></a>T5.简单密码破解（中等）</h4><p>题目描述：<br>    密码是我们生活中非常重要的东东，我们的那么一点不能说的秘密就全靠它了。哇哈哈. 接下来渊子要在密码之上再加一套密码，虽然简单但也安全。<br>     假设渊子原来一个BBS上的密码为zvbo9441987,为了方便记忆，他通过一种算法把这个密码变换成YUANzhi1987，这个密码是他的名字和出生年份，怎么忘都忘不了，而且可以明目张胆地放在显眼的地方而不被别人知道真正的密码。<br>     他是这么变换的，大家都知道手机上的字母： 1–1， abc–2, def–3, ghi–4, jkl–5, mno–6, pqrs–7, tuv–8 wxyz–9, 0–0,就这么简单，渊子把密码中出现的小写字母都变成对应的数字，数字和其他的符号都不做变换，<br>      声明：密码中没有空格，而密码中出现的大写字母则变成小写之后往后移一位，如：X，先变成小写，再往后移一位，不就是y了嘛，简单吧。记住，z往后移是a哦。<br>输入：输入包括多个测试数据。输入是一个明文，密码长度不超过100个字符，输入直到文件结尾<br>输出：输出渊子真正的密文</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>收获：</p>
+<ul>
+<li></li>
+</ul>
+<h4 id="T6-删除字符串中出现次数最少的字符（较难）"><a href="#T6-删除字符串中出现次数最少的字符（较难）" class="headerlink" title="T6.删除字符串中出现次数最少的字符（较难）"></a>T6.删除字符串中出现次数最少的字符（较难）</h4><p>题目描述：    实现删除字符串中出现次数最少的字符，若多个字符出现次数一样，则都删除。输出删除这些单词后的字符串，字符串中其它字符保持原来的顺序。   注意每个输入文件有多组输入，即多个字符串用回车隔开<br>输入：字符串只包含小写英文字母, 不考虑非法输入，输入的字符串长度小于等于20个字节。<br>输出：删除字符串中出现次数最少的字符后的字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//解2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="T7-字符串排序（中等）"><a href="#T7-字符串排序（中等）" class="headerlink" title="T7.字符串排序（中等）"></a>T7.字符串排序（中等）</h4><p>题目描述：    编写一个程序，将输入字符串中的字符按如下规则排序。</p>
+<p> 规则 1 ：英文字母从 A 到 Z 排列，不区分大小写。</p>
+<p> 如，输入： Type 输出： epTy</p>
+<p> 规则 2 ：同一个英文字母的大小写同时存在时，按照输入顺序排列。</p>
+<p> 如，输入： BabA 输出： aABb</p>
+<p> 规则 3 ：非英文字母的其它字符保持原来的位置。</p>
+<p> 如，输入： By?e 输出： Be?y<br>注意有多组测试数据，即输入有多行，每一行单独处理（换行符隔开的表示不同行）</p>
+<p>输入：输入字符串<br>输出：输出字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="T8-字符串加解密（较难）"><a href="#T8-字符串加解密（较难）" class="headerlink" title="T8.字符串加解密（较难）"></a>T8.字符串加解密（较难）</h4><p>题目描述：    1、对输入的字符串进行加解密，并输出。 </p>
+<p>  2、加密方法为： </p>
+<p>  当内容是英文字母时则用该英文字母的后一个字母替换，同时字母变换大小写,如字母a时则替换为B；字母Z时则替换为a； </p>
+<p>  当内容是数字时则把该数字加1，如0替换1，1替换2，9替换0； </p>
+<p>  其他字符不做变化。 </p>
+<p>  3、解密方法为加密的逆过程。 </p>
+<p>本题含有多组样例输入。</p>
+<p>输入：<br>输入一串要加密的密码<br>输入一串加过密的密码</p>
+<p>输出：<br>输出加密后的字符<br>输出解密后的字符</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="T9-字符串合并处理（较难）"><a href="#T9-字符串合并处理（较难）" class="headerlink" title="T9.字符串合并处理（较难）"></a>T9.字符串合并处理（较难）</h4><p>题目描述：    按照指定规则对输入的字符串进行处理。 </p>
+<p>  详细描述： </p>
+<p>  将输入的两个字符串合并。 </p>
+<p>  对合并后的字符串进行排序，要求为：下标为奇数的字符和下标为偶数的字符分别从小到大排序。这里的下标意思是字符在字符串中的位置。 </p>
+<p>   对排序后的字符串进行操作，如果字符为‘0’——‘9’或者‘A’——‘F’或者‘a’——‘f’，则对他们所代表的16进制的数进行BIT倒序的操作，并转换为相应的大写字符。如字符为‘4’，为0100b，则翻转后为0010b，也就是2。转换后的字符为‘2’； 如字符为‘7’，为0111b，则翻转后为1110b，也就是e。转换后的字符为大写‘E’。 </p>
+<p>  举例：输入str1为”dec”，str2为”fab”，合并为“decfab”，分别对“dca”和“efb”进行排序，排序后为“abcedf”，转换后为“5D37BF” </p>
+<p>  注意本题含有多组样例输入</p>
+<p>输入：本题含有多组样例输入。每组样例输入两个字符串，用空格隔开。<br>输出：输出转化后的结果。每组样例输出一行。</p>
+<p>收获：</p>
+<p>- </p>
+]]></content>
+      <tags>
+        <tag>字符串</tag>
+        <tag>js</tag>
       </tags>
   </entry>
 </search>
