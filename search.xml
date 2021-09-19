@@ -713,7 +713,153 @@
   <entry>
     <title>9.19-数据结构与算法1</title>
     <url>/2021/09/19/17-16-15/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>1.什么是数据结构？</p>
+<ul>
+<li>数组、链表、队列、栈、堆、二叉树、图</li>
+<li>如果一定要给出一个官方的解释，那么它就是：<br><strong>计算机存储、组织数据的方式。相互之间存在一种或多种特定关系的数据元素的集合。</strong>通常情况下，精心选择的数据结构可以带来更高的运行或者存储效率。往往同高效的检索算法和索引技术有关。</li>
+</ul>
+<p>2.数据结构和算法的关系</p>
+<ul>
+<li>数据结构主要讲解数据的组织形式，比如链表，堆，栈，队列。</li>
+<li>而算法，则注重的是思想，比如链表的元素怎么插入、删除、查找？堆的元素怎么弹出来？栈为什么是先进后出的？队列又为什么是先进先出？</li>
+<li>讲的直白一点，数据结构是有实体的，算法是虚拟的；数据结构是物质上的，算法是精神上的。当然，精神与物质是缺一不可的。</li>
+</ul>
+<p>3.数据结构概览</p>
+<p><img src="C:\Users\mylym\AppData\Roaming\Typora\typora-user-images\image-20210920005857021.png" alt="image-20210920005857021"></p>
+<p>4.算法入门</p>
+<p><img src="C:\Users\mylym\AppData\Roaming\Typora\typora-user-images\image-20210920005903869.png" alt="image-20210920005903869"></p>
+<p><img src="C:\Users\mylym\AppData\Roaming\Typora\typora-user-images\image-20210920010119893.png" alt="image-20210920010119893"></p>
+<h1 id="算法入门《前缀和》简单01-——-LeetCode-724-寻找数组的中心索引"><a href="#算法入门《前缀和》简单01-——-LeetCode-724-寻找数组的中心索引" class="headerlink" title="算法入门《前缀和》简单01 —— LeetCode 724 寻找数组的中心索引"></a><strong>算法入门</strong>《前缀和》简单01 —— LeetCode 724 寻找数组的中心索引</h1><h3 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h3><ul>
+<li><p>一、题目</p>
+</li>
+<li><ul>
+<li>1、题目描述</li>
+<li>2、基础框架</li>
+<li>3、原题链接</li>
+</ul>
+</li>
+<li><p>二、解题报告</p>
+</li>
+<li><ul>
+<li>1、思路分析</li>
+<li>2、时间复杂度</li>
+<li>3、代码详解</li>
+</ul>
+</li>
+<li><p>三、本题小知识</p>
+</li>
+</ul>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><h4 id="1、题目描述"><a href="#1、题目描述" class="headerlink" title="1、题目描述"></a>1、题目描述</h4><pre><code>  给定一个整数数组nums，请计算数组的中心下标 。数组中心下标是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。如果中心下标位于数组最左端，那么左侧数之和视为 0 ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。如果数组有多个中心下标，应该返回 最靠近左边 的那一个。如果数组不存在中心下标，返回 -1。
+  样例输入： nums = [1, 7, 3, 6, 5, 6]
+  样例输出： 3
+</code></pre>
+<h4 id="2、基础框架"><a href="#2、基础框架" class="headerlink" title="2、基础框架"></a>2、基础框架</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> pivotIndex = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、原题链接"><a href="#3、原题链接" class="headerlink" title="3、原题链接"></a>3、原题链接</h4><blockquote>
+<p><a href="https://leetcode-cn.com/problems/find-pivot-index/">LeetCode 724. 寻找数组的中心下标</a><br> <a href="https://leetcode-cn.com/problems/tvdfij/">LeetCode 剑指 Offer II 012. 左右两边子数组的和相等</a></p>
+</blockquote>
+<h3 id="二、解题报告"><a href="#二、解题报告" class="headerlink" title="二、解题报告"></a>二、解题报告</h3><h4 id="1、思路分析"><a href="#1、思路分析" class="headerlink" title="1、思路分析"></a>1、思路分析</h4><p>记数组的全部元素之和为 sum，当遍历到第 i 个元素时，设其左侧元素之和为 curSum，则2×curSum+nums[i]=total.</p>
+<p>当中心索引左侧或右侧没有元素时，即为零个项相加，这在数学上称作「空和」（empty sum）。在程序设计中我们约定「空和是零」。</p>
+<h4 id="2、时间复杂度"><a href="#2、时间复杂度" class="headerlink" title="2、时间复杂度"></a>2、时间复杂度</h4><pre><code>总共两次遍历，一次计算前缀和，一次枚举判定，所以总的时间复杂度为 O(n)。
+</code></pre>
+<h4 id="3、代码详解"><a href="#3、代码详解" class="headerlink" title="3、代码详解"></a>3、代码详解</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> pivotIndex = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> sum = nums.reduce(<span class="function">(<span class="params">pre,cur</span>)=&gt;</span>pre + cur,<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">let</span> curSum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>,len = nums.length;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(curSum*<span class="number">2</span> + nums[i] == sum)&#123;</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            curSum += nums[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三、本题小知识"><a href="#三、本题小知识" class="headerlink" title="三、本题小知识"></a>三、本题小知识</h3><p>前缀和 可以在  O(n) 的时间内进行预处理， O(1) 的时间进行求和。</p>
+<h1 id="算法入门《前缀和》简单02-——-LeetCode-974-和可被K整除的子数组"><a href="#算法入门《前缀和》简单02-——-LeetCode-974-和可被K整除的子数组" class="headerlink" title="算法入门《前缀和》简单02 —— LeetCode 974 和可被K整除的子数组"></a><strong>算法入门</strong>《前缀和》简单02 —— LeetCode 974 和可被K整除的子数组</h1><ul>
+<li>作者：xiao_ben_zhu<br>链接：<a href="https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/solution/you-jian-qian-zhui-he-na-jiu-zai-ci-dai-ni-da-tong/">https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/solution/you-jian-qian-zhui-he-na-jiu-zai-ci-dai-ni-da-tong/</a><br>来源：力扣（LeetCode）</li>
+</ul>
+<h3 id="一、题目-1"><a href="#一、题目-1" class="headerlink" title="一、题目"></a>一、题目</h3><h4 id="1、题目描述-1"><a href="#1、题目描述-1" class="headerlink" title="1、题目描述"></a>1、题目描述</h4><pre><code>  给定一个整数数组 A，返回其中元素之和可被 K 整除的（连续、非空）子数组的数目。
+  样例输入： A = [4,5,0,-2,-3,1], K = 5
+  样例输出： 7
+</code></pre>
+<h4 id="2、基础框架-1"><a href="#2、基础框架-1" class="headerlink" title="2、基础框架"></a>2、基础框架</h4><pre><code>/**
+ * @param &#123;number[]&#125; nums
+ * @param &#123;number&#125; k
+ * @return &#123;number&#125;
+ */
+var subarraysDivByK = function(nums, k) &#123;
+
+&#125;;
+</code></pre>
+<h4 id="3、原题链接-1"><a href="#3、原题链接-1" class="headerlink" title="3、原题链接"></a>3、原题链接</h4><blockquote>
+<p><a href="https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/">LeetCode 974. 和可被 K 整除的子数组</a></p>
+</blockquote>
+<h3 id="二、解题报告-1"><a href="#二、解题报告-1" class="headerlink" title="二、解题报告"></a>二、解题报告</h3><h4 id="1、思路分析-1"><a href="#1、思路分析-1" class="headerlink" title="1、思路分析"></a>1、思路分析</h4><p><strong>什么是前缀和</strong></p>
+<pre><code>前缀和：数组 第 0 项 到 当前项 的和。用一个数组 preSum 表示：
+preSum[i]=A[0]+A[1]+…+A[i]
+
+数组第 i 项可以表示为相邻前缀和之差：
+A[i]=preSum[i]−preSum[i−1]
+
+多项叠加，有：
+A[i]+…+A[j]=preSum[j]−preSum[i−1]
+
+i 可以为 0，此时 i - 1 为 - 1，我们故意让 preSum[−1] 为 0，此时有：
+A[0]+A[1]+…+A[j]=preSum[j]
+设置这种不存在的情况，只是为了让边界情况也能套用通式。
+</code></pre>
+<p><strong>题目等价转化</strong></p>
+<pre><code>子数组的元素之和 =&gt; A[i] 到 A[j]的和
+元素和能被 K 整除的子数组数目 =&gt; 有几种i、j组合，使得A[i]到A[j]之和 mod K == 0
+↓ ↓ ↓ 转化为 ↓ ↓ ↓
+有几种 i、j 组合，满足 (preSum[j]−preSum[i−1])mod K==0
+有几种 i、j 组合，满足 preSum[j] mod K == preSum[i−1]mod K。
+    前提：preSum[j] 、preSum[i−1] 为正整数。负数的情况要处理。
+</code></pre>
+<p><strong>前缀和怎么求</strong></p>
+<pre><code>数组当前项的前缀和 = 上一项的前缀和 + 数组当前项
+我们可以求出数组 A 每一项的前缀和，让它 mod K，mod 完再看哪两项相等，去计数。
+但前面通式有i、j两个变量，找出所有相等的两项，需要两层循环，能否优化呢？
+</code></pre>
+<p>我们只关心：<strong>数值和出现次数</strong></p>
+<pre><code>数组A的元素都有自己的前缀和，但我们不关心前缀和对应了哪一项。我们只关心出现过哪些「前缀和 mod K」的值，以及出现这个值的次数。
+用一个变量 preSumModK，将每次求出的「前缀和 mod K」，存入哈希表：
+    key：前缀和 mod K
+    value：这个值出现的次数
+「前缀和 mod K」值恰好是 0,1,2...,K-1，正好和索引对应，所以也可以用数组去存。
+</code></pre>
+<p>找到 preSumModK 的递推关系，用于迭代计算</p>
+<pre><code>模的分配率： (a + b) mod c = (a mod c + b mod c) mod c
+当前的 preSumModK
+= ( 当前的前缀和 ) mod K
+= ( 上一项的前缀和 + A[i]) mod K
+= ( 上一项的前缀和) mod K + A[i]mod K) mod K
+= ( 上一个 preSumModK + A[i] mod K ) mod K
+= ( 上一个 preSumModK + A[i] ) mod K
+前后的 preSumModK 有了递推关系，可以在迭代中计算。
+</code></pre>
+<p>整个流程</p>
+<pre><code>预置 preSum[-1] = 0
+    遍历数组 A 之前，map 提前放入 0:1 键值对，代表求第 0 项前缀和之前，前缀和 mod K 等于 0 这种情况出现了 1 次。
+遍历数组 A，求当前项的 preSumModK ，存入 map 中：
+    之前没有存过，则作为 key 存入，value 为 1。
+    之前存过了，则 value 加 1。
+边存边查看，如果 map 中已经存在 key 等于当前的 preSumModK：
+    说明存在之前求过的 preSumModK 等于 当前 preSumModK，把 key 对应的出现次数，累加给 count。
+    过去的这个前缀，与当前的前缀，差分出一个子数组，过去的这个前缀和出现过几次 ，就是有几个过去的前缀，与当前前缀，差分出几个满足条件的子数组。
+</code></pre>
+<p>尝试一句话概括</p>
+<pre><code>根据当前前缀和 mod K，在哈希表中找到与之相等的 key。满足条件的 历史preSumModK 出现过 n 次，就是当前前缀和 能找到 n 个历史前缀和，与之形成 n 个不同的子数组，满足元素和能被 K 整除。
+遍历数组 A 每一项，做以上步骤，n 不断累加给 count，最后返回 count
+</code></pre>
+<p>补充：前缀和 为负数 的情况</p>
+<pre><code>拿K = 4为例，求出某个前缀和为 -1，-1 % K 应该为 3，但有的编程语言 -1 % K = -1
+这个 -1，要加上 K，转成正数的 3。
+为什么？为什么 preSum 值为 -1 和 3 需要归为同一类？因为：
+-1 和 3 分别模 4 的结果看似不相等，但前缀和之差：3-(-1) 等于 4。4 % K = 0，即所形成的子数组满足元素和被 4 整除。所以前缀和 -1 和 3 其实是等价的。
+</code></pre>
+<h4 id="2、复杂度"><a href="#2、复杂度" class="headerlink" title="2、复杂度"></a>2、复杂度</h4><p>Time：O(n)<br> Space：O(K)。 mod 的结果最多 K 种，哈希表最多存放 K 个键值对</p>
+<h4 id="3、代码详解-1"><a href="#3、代码详解-1" class="headerlink" title="3、代码详解"></a>3、代码详解</h4><h5 id="解法1："><a href="#解法1：" class="headerlink" title="解法1："></a>解法1：</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> subarraysDivByK = <span class="function">(<span class="params">A, K</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> preSumModK = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> map = &#123; <span class="number">0</span>: <span class="number">1</span> &#125;;<span class="comment">// 初始化哈希表，并且插入第一个元素sum[-1]</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; A.length; i++) &#123;</span><br><span class="line">    preSumModK = (preSumModK + A[i]) % K; <span class="comment">// 递推式子 计算前缀和模 k</span></span><br><span class="line">    <span class="keyword">if</span> (preSumModK &lt; <span class="number">0</span>) &#123;  <span class="comment">//确保每个sum[i]都是大于等于0的；</span></span><br><span class="line">      preSumModK += K;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (map[preSumModK]) &#123;      <span class="comment">// 已经存在于map</span></span><br><span class="line">      count += map[preSumModK]; <span class="comment">// 把对应的次数累加给count</span></span><br><span class="line">      map[preSumModK]++;        <span class="comment">// 并且更新出现次数，次数+1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      map[preSumModK] = <span class="number">1</span>;      <span class="comment">// 之前没出现过，初始化值为1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> count;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">作者：xiao_ben_zhu</span><br></pre></td></tr></table></figure>
+
+<h5 id="解法2：用数组代替哈希表存mod"><a href="#解法2：用数组代替哈希表存mod" class="headerlink" title="解法2：用数组代替哈希表存mod"></a>解法2：用数组代替哈希表存mod</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> subarraysDivByK = <span class="function">(<span class="params">A, K</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> preSumModK = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Array</span>(K).fill(<span class="number">0</span>);</span><br><span class="line">  map[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; A.length; i++) &#123;     </span><br><span class="line">    preSumModK = (preSumModK + A[i]) % K;</span><br><span class="line">    <span class="keyword">if</span> (preSumModK &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      preSumModK += K;</span><br><span class="line">    &#125;</span><br><span class="line">    count += map[preSumModK]; <span class="comment">// 索引对应模的结果，值对应出现次数</span></span><br><span class="line">    map[preSumModK]++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> count;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">作者：xiao_ben_zhu</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三、本题小知识-1"><a href="#三、本题小知识-1" class="headerlink" title="三、本题小知识"></a>三、本题小知识</h3><pre><code>前缀和的问题，一般是先初始化前缀和，然后再进行一次线性枚举，通过 O(1) 的时间取前缀和的结果。
+</code></pre>
+]]></content>
   </entry>
   <entry>
     <title>web Socket</title>
