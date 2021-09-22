@@ -338,7 +338,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-20 04:17:22" itemprop="dateModified" datetime="2021-09-20T04:17:22+08:00">2021-09-20</time>
+        <time title="Modified: 2021-09-21 04:52:23" itemprop="dateModified" datetime="2021-09-21T04:52:23+08:00">2021-09-21</time>
       </span>
 
   
@@ -405,10 +405,7 @@
 
 
 <h3 id="三、本题小知识"><a href="#三、本题小知识" class="headerlink" title="三、本题小知识"></a>三、本题小知识</h3><p>前缀和 可以在  O(n) 的时间内进行预处理， O(1) 的时间进行求和。</p>
-<h1 id="算法入门《前缀和》简单02-——-LeetCode-974-和可被K整除的子数组"><a href="#算法入门《前缀和》简单02-——-LeetCode-974-和可被K整除的子数组" class="headerlink" title="算法入门《前缀和》简单02 —— LeetCode 974 和可被K整除的子数组"></a><strong>算法入门</strong>《前缀和》简单02 —— LeetCode 974 和可被K整除的子数组</h1><ul>
-<li>作者：xiao_ben_zhu<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/solution/you-jian-qian-zhui-he-na-jiu-zai-ci-dai-ni-da-tong/">https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/solution/you-jian-qian-zhui-he-na-jiu-zai-ci-dai-ni-da-tong/</a><br>来源：力扣（LeetCode）</li>
-</ul>
-<h3 id="一、题目-1"><a href="#一、题目-1" class="headerlink" title="一、题目"></a>一、题目</h3><h4 id="1、题目描述-1"><a href="#1、题目描述-1" class="headerlink" title="1、题目描述"></a>1、题目描述</h4><pre><code>  给定一个整数数组 A，返回其中元素之和可被 K 整除的（连续、非空）子数组的数目。
+<h1 id="算法入门《前缀和》中等02-——-LeetCode-974-和可被K整除的子数组"><a href="#算法入门《前缀和》中等02-——-LeetCode-974-和可被K整除的子数组" class="headerlink" title="算法入门《前缀和》中等02 —— LeetCode 974 和可被K整除的子数组"></a><strong>算法入门</strong>《前缀和》中等02 —— LeetCode 974 和可被K整除的子数组</h1><h3 id="一、题目-1"><a href="#一、题目-1" class="headerlink" title="一、题目"></a>一、题目</h3><h4 id="1、题目描述-1"><a href="#1、题目描述-1" class="headerlink" title="1、题目描述"></a>1、题目描述</h4><pre><code>  给定一个整数数组 A，返回其中元素之和可被 K 整除的（连续、非空）子数组的数目。
   样例输入： A = [4,5,0,-2,-3,1], K = 5
   样例输出： 7
 </code></pre>
@@ -424,7 +421,8 @@ var subarraysDivByK = function(nums, k) &#123;
 <h4 id="3、原题链接-1"><a href="#3、原题链接-1" class="headerlink" title="3、原题链接"></a>3、原题链接</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/">LeetCode 974. 和可被 K 整除的子数组</a></p>
 </blockquote>
-<h3 id="二、解题报告-1"><a href="#二、解题报告-1" class="headerlink" title="二、解题报告"></a>二、解题报告</h3><h4 id="1、思路分析-1"><a href="#1、思路分析-1" class="headerlink" title="1、思路分析"></a>1、思路分析</h4><p><strong>什么是前缀和</strong></p>
+<h3 id="二、解题报告-1"><a href="#二、解题报告-1" class="headerlink" title="二、解题报告"></a>二、解题报告</h3><h4 id="1、思路分析-1"><a href="#1、思路分析-1" class="headerlink" title="1、思路分析"></a>1、思路分析</h4><p>作者：xiao_ben_zhu<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/solution/you-jian-qian-zhui-he-na-jiu-zai-ci-dai-ni-da-tong/">https://leetcode-cn.com/problems/subarray-sums-divisible-by-k/solution/you-jian-qian-zhui-he-na-jiu-zai-ci-dai-ni-da-tong/</a><br>来源：力扣（LeetCode）</p>
+<p><strong>什么是前缀和</strong></p>
 <pre><code>前缀和：数组 第 0 项 到 当前项 的和。用一个数组 preSum 表示：
 preSum[i]=A[0]+A[1]+…+A[i]
 
@@ -497,7 +495,23 @@ A[0]+A[1]+…+A[j]=preSum[j]
 
 <h3 id="三、本题小知识-1"><a href="#三、本题小知识-1" class="headerlink" title="三、本题小知识"></a>三、本题小知识</h3><pre><code>前缀和的问题，一般是先初始化前缀和，然后再进行一次线性枚举，通过 O(1) 的时间取前缀和的结果。
 </code></pre>
+<h1 id="算法入门《前缀和》中等03-——-LeetCode-1248-统计-优美子数组"><a href="#算法入门《前缀和》中等03-——-LeetCode-1248-统计-优美子数组" class="headerlink" title="算法入门《前缀和》中等03 —— LeetCode 1248 统计[优美子数组]"></a><strong>算法入门</strong>《前缀和》中等03 —— LeetCode 1248 统计[优美子数组]</h1><h3 id="一、题目-2"><a href="#一、题目-2" class="headerlink" title="一、题目"></a>一、题目</h3><h4 id="1、题目描述-2"><a href="#1、题目描述-2" class="headerlink" title="1、题目描述"></a>1、题目描述</h4><pre><code>  给你一个整数数组 nums 和一个整数 k 。如果某个连续子数组中恰好有 k 个奇数数字，我们就认为这个子数组是「优美子数组」。请返回这个数组中「优美子数组」的数目。
+  样例输入： nums = [1,1,2,1,1], k = 3
+  样例输出： 2
+</code></pre>
+<h4 id="2、基础框架-2"><a href="#2、基础框架-2" class="headerlink" title="2、基础框架"></a>2、基础框架</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">k</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numberOfSubarrays = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<h4 id="3、原题链接-2"><a href="#3、原题链接-2" class="headerlink" title="3、原题链接"></a>3、原题链接</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-number-of-nice-subarrays/">LeetCode 1248. 统计「优美子数组」</a></p>
+</blockquote>
+<h3 id="二、解题报告-2"><a href="#二、解题报告-2" class="headerlink" title="二、解题报告"></a>二、解题报告</h3><h4 id="1、思路分析-2"><a href="#1、思路分析-2" class="headerlink" title="1、思路分析"></a>1、思路分析</h4><p>用一个数组变量 count[ ] 来记录奇数个数有a个的连续子数组有count[a]个，用一个整数变量result来记录满足条件的子数组的个数，result的值是当前奇数个数与k值的比较，如果大于等于，则在result上添加count[odd-k]</p>
+<h4 id="2、复杂度-1"><a href="#2、复杂度-1" class="headerlink" title="2、复杂度"></a>2、复杂度</h4><p>Time：O(n)</p>
+<h4 id="3、代码详解-2"><a href="#3、代码详解-2" class="headerlink" title="3、代码详解"></a>3、代码详解</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">k</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numberOfSubarrays = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    len = nums.length</span><br><span class="line">    <span class="keyword">let</span> count = <span class="keyword">new</span> <span class="built_in">Array</span>(len+<span class="number">1</span>).fill(<span class="number">0</span>)</span><br><span class="line">    count[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">let</span> odd = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> result =<span class="number">0</span></span><br><span class="line">    nums.forEach(<span class="function">(<span class="params">value,index</span>)=&gt;</span>&#123;</span><br><span class="line">        odd+=value&amp;<span class="number">1</span></span><br><span class="line">        result += odd&gt;=k?count[odd-k]:<span class="number">0</span> <span class="comment">// 给前面留出odd-k个奇数，后面就有k个了</span></span><br><span class="line">        count[odd]++</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、本题小知识-2"><a href="#三、本题小知识-2" class="headerlink" title="三、本题小知识"></a>三、本题小知识</h3><pre><code>(1) x &amp; 1为 1 代表是奇数，否则是偶数；
+(2) 计算前缀有多少个奇数；
+</code></pre>
+<h2 id="算法入门《线性枚举》简单01-——-LeetCode-344-反转字符串"><a href="#算法入门《线性枚举》简单01-——-LeetCode-344-反转字符串" class="headerlink" title="算法入门《线性枚举》简单01 —— LeetCode 344 反转字符串"></a><strong>算法入门</strong>《线性枚举》简单01 —— LeetCode 344 反转字符串</h2>
       
     </div>
 
@@ -699,10 +713,16 @@ A[0]+A[1]+…+A[j]=preSum[j]
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-09-18 15:05:34 / Modified: 16:22:45" itemprop="dateCreated datePublished" datetime="2021-09-18T15:05:34+08:00">2021-09-18</time>
+      <time title="Created: 2021-09-18 15:05:34" itemprop="dateCreated datePublished" datetime="2021-09-18T15:05:34+08:00">2021-09-18</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-09-20 19:11:41" itemprop="dateModified" datetime="2021-09-20T19:11:41+08:00">2021-09-20</time>
+      </span>
 
   
 </div>
@@ -1043,6 +1063,28 @@ A[0]+A[1]+…+A[j]=preSum[j]
 <h4 id="5-5-Squash-多个commit"><a href="#5-5-Squash-多个commit" class="headerlink" title="5.5 Squash 多个commit"></a>5.5 Squash 多个commit</h4><p>为了便于他人阅读你的提交，也便于<code>cherry-pick</code>或撤销代码变化，在发起Pull Request之前，应该把多个commit合并成一个。（前提是，该分支只有你一个人开发，且没有跟<code>master</code>合并过。）</p>
 <p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015122309.png" alt="img"></p>
 <p>这可以采用<code>rebase</code>命令附带的<code>squash</code>操作，具体方法请参考我写的<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/08/git-use-process.html">《Git 使用规范流程》</a>。</p>
+<h2 id="git如果出现冲突怎么办"><a href="#git如果出现冲突怎么办" class="headerlink" title="git如果出现冲突怎么办 ?"></a>git如果出现冲突怎么办 ?</h2><h3 id="git冲突解决"><a href="#git冲突解决" class="headerlink" title="git冲突解决"></a>git冲突解决</h3><h4 id="1-简单分支管理的冲突解决："><a href="#1-简单分支管理的冲突解决：" class="headerlink" title="1.简单分支管理的冲突解决："></a>1.简单分支管理的冲突解决：</h4><p>当我们在master和feature1两个分支上都对同一个文件进行了修改提交后，现在我们要合并分支，这时git无法进行快速合并，可能会有冲突，我们可以使用git status 查看也可以直接查看文件（git 会自动标识 ） </p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2494440-ff788275fd8b47c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/455" alt="img"></p>
+<p>​                                                                    冲突示意图</p>
+<p>解决办法：</p>
+<p>A.在文件中选择一个版本保留，删除有冲突不需要保存的部分内容后，保存文件</p>
+<p>B.再次提交</p>
+<p>C.删除feature1分支</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2494440-5b4d691285746444.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/561" alt="img"></p>
+<p>​                                                            解决冲突后的分支图</p>
+<p>注：可用git log–graph命令可以看到分支合并图。</p>
+<h4 id="2-多人协作时的冲突解决"><a href="#2-多人协作时的冲突解决" class="headerlink" title="2.多人协作时的冲突解决"></a>2.多人协作时的冲突解决</h4><p>当你的小伙伴将本地dev上的一个文件push到origin/dev上后，而碰巧你也修改了同一个文件打算push到远程，但此时会和你的小伙伴的提交有冲突。</p>
+<p>解决办法：</p>
+<p>A.用git pull 把最新的提交从origin/dev上拉取下来（第一次pull可能会失败，git可能会提示你没有指定本地的dev和origin/dev 的链接，一般根据提示采用 $git branch –set-upstream dev origin/dev建立链接，再次使用git pull）</p>
+<p>B.现在你已经成功的拉取了远程最新的提交，但是合并有冲突，需要像上一例中手动解决，解决后再次提交。</p>
+<p>C.提交成功后就可以push到远程了</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。</p>
+<p>解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。</p>
+<p>用<code>git log --graph</code>命令可以看到分支合并图。</p>
+<h1 id="git同样的先后提交的东西，怎么覆盖"><a href="#git同样的先后提交的东西，怎么覆盖" class="headerlink" title="git同样的先后提交的东西，怎么覆盖"></a>git同样的先后提交的东西，怎么覆盖</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 使用一次新的commit，替代上一次提交</span><br><span class="line"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span><br><span class="line">$ git commit --amend -m [message]</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
