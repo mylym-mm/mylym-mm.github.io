@@ -198,7 +198,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -235,6 +235,265 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/09/15/16-22-08/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/hylike.jpg">
+      <meta itemprop="name" content="lym">
+      <meta itemprop="description" content="my的修炼之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="my鱼">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/15/16-22-08/" class="post-title-link" itemprop="url">9.17 一个人也要像一支队伍</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-15 16:22:08" itemprop="dateCreated datePublished" datetime="2021-09-15T16:22:08+08:00">2021-09-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-09-18 11:08:23" itemprop="dateModified" datetime="2021-09-18T11:08:23+08:00">2021-09-18</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>写日记的第一天 - 9.17 16:22</p>
+<h3 id="看一篇面经，学习，回答问题，录一个视频。"><a href="#看一篇面经，学习，回答问题，录一个视频。" class="headerlink" title="看一篇面经，学习，回答问题，录一个视频。"></a>看一篇面经，学习，回答问题，录一个视频。</h3><p>作者：小土豆不会掉头发<br>链接：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/745089">https://www.nowcoder.com/discuss/745089</a><br>来源：牛客网</p>
+<p>1.git工作流 </p>
+<p>  2.git如果出现冲突怎么办 </p>
+<p>  3.git同样的先后提交的东西，怎么覆盖 </p>
+<p>  4.git撤回操作 </p>
+<p>  答得特别不好，git工作流脑子里都不知该怎么组织语言，不是面试官想要的回答 </p>
+<h4 id="git"><a href="#git" class="headerlink" title="git"></a>git</h4><h5 id="git主要优点"><a href="#git主要优点" class="headerlink" title="git主要优点"></a>git主要优点</h5><ul>
+<li>分布式存储，本地仓库包含了远程仓库的所有内容</li>
+<li>安全性高，远程仓库文件丢失了也不怕</li>
+<li>优秀的分支模型，创建/合并分支都非常快捷便捷</li>
+</ul>
+<h5 id="git分支管理"><a href="#git分支管理" class="headerlink" title="git分支管理"></a>git分支管理</h5><p>我们在实际工作中会创建很多分支以便于不同场景下的开发，但是如果没有分支规范就会造成分支杂乱，大家往往也搞不清楚一个分支是做什么，下面我们就介绍一下我们常用的并且推荐大家使用的分支类型。</p>
+<h6 id="git分支类型"><a href="#git分支类型" class="headerlink" title="git分支类型"></a>git分支类型</h6><p>[master分支]</p>
+<p>-master 为产品主分支，该分支为只读唯一分支，也是用于部署生产环境的分支，需确保master分支的稳定性。<br>-master 分支一般由 release 分支或 hotfix 分支合并，任何情况下都不应该直接修改master分支代码<br>-产品的功能全部实现后，最终在master分支对外发布，另外所有在 master 分支的推送应该打标签（tag）做记录，方便追溯。<br>-master 分支不可删除</p>
+<p>develop 分支<br>-develop 为主开发分支，基于 master 分支创建，始终保持最新完成功能的代码以及bug修复后的代码<br>-develop 分支为只读唯一分支，只能从其他分支合并，不可以直接在该分支合并做功能开发或bug修复<br>-一般开发新功能时，feature 分支都是基于develop 分支下创建的。<br>-develop 分支包含所有要发布到下一个 release 的代码<br>-feature 功能分支完成后，开发人员需合并到develop分支（不推送远程），需先将develop分支合并到release分支，进行提测。<br>-当所有新功能开发完成后，开发人员需合并到develop分支（不推送远程），需要将develop 分支合并到 feature,解决完冲突后再合并到develop分支。<br>-当所有新功能开发完成后，开发人员并自测完成后，此时从develop拉取release分支，进行提测<br>-release或hotfix分支上线完成后 ，开发人员需合并到develop分支并推送远程<br>-develop分支不可删</p>
+<p>feature分支<br>-feature 分支通常为新功能或新特性开发分支，以develop分支为基础创建feature分支<br>-分支命名： feature /开头的为新特性或新功能分支，建议的命名规则： feature/use_createtime_feature,例如：feature/ftd_20201018_alipay, 含义为：开发人员ftd在20201018创建了一个支付宝支付的功能分支。<br>-新特性或新功能开发完成后，开发人员需合并到develop分支<br>-feature 分支可同时存在多个，用于团队中多个功能同时开发<br>-feature分支属于临时分支，功能完成后可选删除</p>
+<p>release 分支<br>-release 分支为预上线分支，基于本次上线所有的feature分支合并到develop分支之后，从develop分支创建<br>-分支命名： release/开头的为预上线分支，建议的命名规则：release/version_publishtime,例如：release/v2.1.1_20201018。<br>-release 分支主要用于提交给测试人员进行功能测试。发布提测阶段，会以release 分支代码为基准进行提测。测试过程中发现的bug在本分支进行修复，上线完成后需合并到develop/master分支并推送远程<br>-release 分支属于临时分支，产品上线后可选删除</p>
+<p>“当有一组feature开发完成后，首先开发人员会各自将最新功能代码合并到develop分支。进入提测阶段时，开发组长在develop 分支上创建 release 分支。如果在测试过程中发现bug需要修复，则直接由开发者在release分支修复并提交。当测试完成后，开发组长将release分支合并到master和develop分支，此时master为最新可发布代码，用作产品发布上线”</p>
+<p>hotfix 分支<br>-hotfix 分支为线上bug 修复分支或补丁分支，主要用于对线上的版本进行bug修复<br>-分支命名：hotfix/ 开发的为修复分支，他的命名规则与feature分支类似，建议的命名规则：hotfix/user_createtime_hotfix，例如：hotfix/ftd_20201018_alipaybugfix，含义为：开发人员ftd在20201018创建了一个支付宝支付bug修复的分支<br>-hotfix 分支用于线上出现紧急问题时，需要及时修复，以master分支为基线，创建hotfix分支。当问题修复完成后，需要合并到master分支和develop分支并推送远程。<br>-所有hotfix分支的修改会进入到下一个release。<br>-hotfix 分支属于临时分支，bug修复上线后可选删除。</p>
+<h5 id="git日志规范"><a href="#git日志规范" class="headerlink" title="git日志规范"></a>git日志规范</h5><p>“在一个团队协作的项目中，开发人员需要经常提交一些代码去修复bug或者实现新的feature。而项目中的文件和实现什么功能、解决什么问题都会渐渐淡忘，最后需要浪费时间去阅读代码。但是好的日志规范commit message编写有帮助到我们，它也反映了一个开发人员是否是良好的协作者”</p>
+<p>编写良好的Commit messages可以达到3个重要的目的：</p>
+<ul>
+<li>加快代码view的流程</li>
+<li>帮助开发人员编写良好的版本发布日志</li>
+<li>让之后的维护者了解代码里出现特定变化和feature被添加的原因</li>
+</ul>
+<p>「目前，社区有多种 Commit message 的写法规范。来自Angular 规范是目前使用最广的写法，比较合理和系统化。建议使用如下：」</p>
+<p><strong>Commit messages的基本语法</strong></p>
+<p>具体格式为:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># EN</span><br><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line">&lt;BLANK LINE&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;BLANK LINE&gt;</span><br><span class="line">&lt;footer&gt;</span><br><span class="line"># CN</span><br><span class="line">&lt;类型&gt;[可选的作用域]: &lt;描述&gt;</span><br><span class="line">[可选的正文]</span><br><span class="line">[可选的脚注]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>type: 本次 commit 的类型，诸如 bugfix、docs、style 等，类型说明参见下方。</p>
+</li>
+<li><p>scope: 本次 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
+</li>
+<li><p>subject: 简明扼要的阐述下本次 commit 的主旨，是 commit 目的的简短描述，建议不超过50个字符。</p>
+</li>
+<li><p>body: 在主体内容中我们需要把本次 commit 详细的描述一下，比如此次变更的动机，详细的修改方法或其他需要额外重点说明的内容。</p>
+</li>
+<li><p>footer: 描述下与之关联的 issue 或 break change，详见案例。</p>
+<h5 id="Type的类别说明："><a href="#Type的类别说明：" class="headerlink" title="Type的类别说明："></a><strong>Type的类别说明：</strong></h5></li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 主要type</span><br><span class="line">feat: 增加新功能</span><br><span class="line">fix: 修复bug</span><br><span class="line"> </span><br><span class="line"># 特殊type</span><br><span class="line">docs: 只改动了文档相关的内容</span><br><span class="line">style: 不影响代码含义的改动，例如去掉空格、改变缩进、增删分号</span><br><span class="line">build: 构造工具的或者外部依赖的改动，例如webpack，npm</span><br><span class="line">refactor: 代码重构时使用</span><br><span class="line">revert: 执行git revert打印的message</span><br><span class="line"> </span><br><span class="line"># 暂不使用type</span><br><span class="line">test: 添加测试或者修改现有测试</span><br><span class="line">perf: 提高性能的改动</span><br><span class="line">ci: 与CI（持续集成服务）有关的改动</span><br><span class="line">chore: 不修改src或者test的其余修改，例如构建过程或辅助工具的变动</span><br></pre></td></tr></table></figure>
+
+<h5 id="Commit-messages格式要求"><a href="#Commit-messages格式要求" class="headerlink" title="Commit messages格式要求"></a><strong>Commit messages格式要求</strong></h5><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 标题行：50个字符以内，描述主要变更内容</span><br><span class="line">#</span><br><span class="line"># 主体内容：更详细的说明文本，建议72个字符以内。 需要描述的信息包括:</span><br><span class="line">#</span><br><span class="line"># * 为什么这个变更是必须的? 它可能是用来修复一个bug，增加一个feature，提升性能、可靠性、稳定性等等</span><br><span class="line"># * 如何解决这个问题? 具体描述解决问题的步骤</span><br><span class="line"># * 是否存在副作用、风险? </span><br><span class="line">#</span><br><span class="line"># 如果需要的话可以添加一个链接到issue地址或者其它文档</span><br></pre></td></tr></table></figure>
+
+<p> <strong>示例：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># fix：修复支付宝支付bug</span><br><span class="line">#</span><br><span class="line"># 1，修复支付完成后未查询支付状态问题</span><br><span class="line"># 2，增加定时任务保证支付状态完整</span><br><span class="line">#</span><br><span class="line"># link：http://github.com/ftd/shopmall/issue001</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>❝ 注：如果一次改动内容较多，包含多个提交类型时，建议拆分成多个提交，分次提交，这样会更清晰。<br> ❞</p>
+</blockquote>
+<h5 id="Git-Flow工作流"><a href="#Git-Flow工作流" class="headerlink" title="Git Flow工作流"></a><strong>Git Flow工作流</strong></h5><p>我们现在已经了解了Git的分支，包括分支有哪些类型，什么情况下使用什么类型的分支，以及提交的格式规范等。不过往往在一个团队人数较多，创建的分支也比较多的时候，还是会带来很多分支操作上的困扰。那有没有一个什么好的流程来规范大家呢，针对这些问题，建议大家使用Git Flow的工作流模式。</p>
+<h5 id="Git-Flow-流程图"><a href="#Git-Flow-流程图" class="headerlink" title="Git Flow 流程图"></a><strong>Git Flow 流程图</strong></h5><h6 id="「1，主分支流程」"><a href="#「1，主分支流程」" class="headerlink" title="「1，主分支流程」"></a><strong>「1，主分支流程」</strong></h6><ul>
+<li>master分支记录了每次版本发布历史和tag标记。</li>
+<li>develop分支记录了所有开发的版本历史。</li>
+<li>develop分支仅第一次创建时从master分支拉取。 </li>
+</ul>
+<p><img src="https://pic2.zhimg.com/v2-7d04bd950aa8e174f5bc0927d0dddf65_r.jpg"></p>
+<h6 id="「2，开发流程」"><a href="#「2，开发流程」" class="headerlink" title="「2，开发流程」"></a><strong>「2，开发流程」</strong></h6><ul>
+<li>feature分支是从develop分支拉取的分支。</li>
+<li>每个feature完成后需合并到develop分支。 </li>
+</ul>
+<p><img src="https://pic2.zhimg.com/80/v2-4370d55e601c789c028041406034c635_720w.jpg"></p>
+<h6 id="「3，提测发布流程」"><a href="#「3，提测发布流程」" class="headerlink" title="「3，提测发布流程」"></a><strong>「3，提测发布流程」</strong></h6><ul>
+<li>release分支是在所有功能开发自测完成后，从develop分支拉取的分支。</li>
+<li>release分支一旦创建后，通常不再从develop分支拉取，该分支只做bug修复，文档生成和其他面向发布的任务。</li>
+<li>release分支测试完成，达到上线标准后，需合并回master分支和develop分支。 </li>
+</ul>
+<p><img src="https://pic2.zhimg.com/80/v2-34e42ecbcb3ed91086926bdf3857e4ad_720w.jpg"></p>
+<h6 id="「4，bug修复流程」"><a href="#「4，bug修复流程」" class="headerlink" title="「4，bug修复流程」"></a><strong>「4，bug修复流程」</strong></h6><ul>
+<li>hotfix分支是在线上出现bug之后，从master分支拉取的分支。</li>
+<li>hotfix分支测试完成后，需合并回master分支和develop分支。 </li>
+</ul>
+<p><img src="https://pic1.zhimg.com/80/v2-70e259e69263b64222ee332a8678e498_720w.jpg"></p>
+<h5 id="Git-Flow实战"><a href="#Git-Flow实战" class="headerlink" title="Git Flow实战"></a><strong>Git Flow实战</strong></h5><p>Git Flow的流程搞清楚后，我们下面开始实际的项目实战，假设我们现在有一个商城的项目，并且我们已经建好了Git仓库。</p>
+<p>我们通过命令行和图形界面的方式分别向大家展示如何使用Git Flow工作流。</p>
+<h5 id="Git-Flow-命令示例"><a href="#Git-Flow-命令示例" class="headerlink" title="Git Flow 命令示例"></a><strong>Git Flow 命令示例</strong></h5><h5 id="开始-Feature"><a href="#开始-Feature" class="headerlink" title="开始 Feature"></a><strong>开始 Feature</strong></h5><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 创建feature分支</span><br><span class="line">git flow feature start ftd_20201018_wechatpay</span><br><span class="line"></span><br><span class="line"># 指定当前分支pull的源为develop</span><br><span class="line">git branch --set-upstream-to=origin/develop feature/ftd_20201018_wechatpay</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 发布feature</span><br><span class="line">git flow feature publish ftd_20201018_wechatpay</span><br><span class="line"></span><br><span class="line"># 完成feature</span><br><span class="line">git flow feature finish ftd_20201018_wechatpay</span><br><span class="line"></span><br><span class="line">开始 Release</span><br><span class="line">git flow release start v1.0_20201031</span><br><span class="line"></span><br><span class="line">完成 Release</span><br><span class="line">git flow release finish v1.0_20201031</span><br><span class="line"></span><br><span class="line">开始 Hotfix</span><br><span class="line">git flow hotfix start ftd_20201031_bugfix</span><br><span class="line"></span><br><span class="line">完成 Hotfix</span><br><span class="line">git flow hotfix finish ftd_20201031_bugfix</span><br></pre></td></tr></table></figure>
+
+<p>大家可以看到，简简单单几行命令就可以完成比较复杂的流程管理，如果对于命令行不太擅长的小伙伴还可以使用图形工具，这里推荐使用sourcetree，sourcetree也是著名的Git管理工具，可以大大方便我们对Git的操作和使用，下面就来介绍一下sourcetree中如何使用Git Flow。（以下内容为Windows版本的sourcetree为例，Mac类似）</p>
+<h3 id="初始化GitFlow"><a href="#初始化GitFlow" class="headerlink" title="初始化GitFlow"></a><strong>初始化GitFlow</strong></h3><p>打开sourcetree，选择想使用Git Flow工作流的项目，在右上角点击Git工作流按钮，如下图所示： </p>
+<p><img src="https://pic3.zhimg.com/80/v2-8905db964ffa612296317a9572348dca_720w.jpg"></p>
+<p>随后会弹出对话框，可以选择产品分支，开发分支以及功能分支等，如下图所示： </p>
+<p>点击确定后完成仓库的Git Flow初始化。</p>
+<h5 id="开始-Feature-1"><a href="#开始-Feature-1" class="headerlink" title="开始 Feature"></a><strong>开始 Feature</strong></h5><p>点击右上角Git工作流，显示如图界面： </p>
+<p><img src="https://pic2.zhimg.com/80/v2-b6bf6c5cf942bddd9946868f0e7ec79d_720w.jpg"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-7daf41b5234c9efd19aef1addbc8d31d_720w.jpg"></p>
+<p>输入本次功能的名称，点击确定创建feature分支 </p>
+<p><img src="https://pic3.zhimg.com/80/v2-830ba50a587884e2ef94a9c954f37226_720w.jpg"></p>
+<p>可以看到本地已经有了新建的feature分支，如图所示：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-432bf105f9c80df5c841ad423b9e1c6f_720w.jpg"></p>
+<p>然后就可以在该分支进行功能开发了。</p>
+<h5 id="完成-Feature"><a href="#完成-Feature" class="headerlink" title="完成 Feature"></a><strong>完成 Feature</strong></h5><p>功能开发完成之后，还是点击右上角Git工作流，显示如图界面： </p>
+<p><img src="https://pic4.zhimg.com/80/v2-13ca7c5c6d1fe3619657f0e924ac6697_720w.jpg"></p>
+<p>点击完成功能，如下图所示： </p>
+<p><img src="https://pic4.zhimg.com/80/v2-2fa75372ae37b06f2da85fdcd2f929cf_720w.jpg"></p>
+<p>这里可以选择将该feature分支删除或保留，可以根据团队的规定来处理即可。</p>
+<p>点击确定后，完成feature功能的开发。</p>
+<p>至此该流程处理完毕。</p>
+<h5 id="开始-Release"><a href="#开始-Release" class="headerlink" title="开始 Release"></a><strong>开始 Release</strong></h5><p>同样的，点击右上角Git工作流，选择建立新的发布版本，显示如下： </p>
+<p><img src="https://pic2.zhimg.com/80/v2-ed17790cb44fcac6caca7df237f4c955_720w.jpg"></p>
+<p>输入发布版本名称，点击确定，完成release分支的创建。</p>
+<p>此时可以看到已经创建的release分支，如下图所示： </p>
+<p><img src="https://pic4.zhimg.com/80/v2-68c8331fe778adae2968f797787a43e7_720w.jpg"></p>
+<h5 id="完成-Release"><a href="#完成-Release" class="headerlink" title="完成 Release"></a><strong>完成 Release</strong></h5><p>测试通过后，可以进行release版本的发布，如下图所示： </p>
+<p><img src="https://pic1.zhimg.com/80/v2-27e3134ee9c2a53b5b82c800793cdfc4_720w.jpg"></p>
+<p>输入该发布的标签信息，点击确定进行发布。</p>
+<p>至此，我们已经完成了release的发布流程。</p>
+<h5 id="Hotfix"><a href="#Hotfix" class="headerlink" title="Hotfix"></a><strong>Hotfix</strong></h5><p>hotfix流程与上述流程操作方法类似，再次不再赘述，大家可以通过软件进行操作练习。</p>
+<h3 id="常用-Git-命令清单"><a href="#常用-Git-命令清单" class="headerlink" title="常用 Git 命令清单"></a>常用 Git 命令清单</h3><p>作者： <a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/">阮一峰</a></p>
+<p>我每天使用 Git ，但是很多命令记不住。</p>
+<p>一般来说，日常使用只要记住下图6个命令，就可以了。但是熟练使用，恐怕要记住60～100个命令。</p>
+<p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png"></p>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>下面是我整理的常用 Git 命令清单。几个专用名词的译名如下。</p>
+<blockquote>
+<ul>
+<li>Workspace：工作区</li>
+<li>Index / Stage：暂存区</li>
+<li>Repository：仓库区（或本地仓库）</li>
+<li>Remote：远程仓库</li>
+</ul>
+</blockquote>
+<h5 id="一、新建代码库"><a href="#一、新建代码库" class="headerlink" title="一、新建代码库"></a>一、新建代码库</h5><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录新建一个Git代码库</span></span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个目录，将其初始化为Git代码库</span></span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载一个项目和它的整个代码历史</span></span><br><span class="line">$ git <span class="built_in">clone</span> [url]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h5><p>Git的设置文件为<code>.gitconfig</code>，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前的Git配置</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Git配置文件</span></span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置提交代码时的用户信息</span></span><br><span class="line">$ git config [--global] user.name <span class="string">&quot;[name]&quot;</span></span><br><span class="line">$ git config [--global] user.email <span class="string">&quot;[email address]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加/删除文件"></a>三、增加/删除文件</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加指定文件到暂存区</span></span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加指定目录到暂存区，包括子目录</span></span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前目录的所有文件到暂存区</span></span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加每个变化前，都会要求确认</span></span><br><span class="line"><span class="comment"># 对于同一个文件的多处变化，可以实现分次提交</span></span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除工作区文件，并且将这次删除放入暂存区</span></span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止追踪指定文件，但该文件会保留在工作区</span></span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 改名文件，并且将这个改名放入暂存区</span></span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
+
+<h5 id="四、代码提交"><a href="#四、代码提交" class="headerlink" title="四、代码提交"></a>四、代码提交</h5><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交暂存区到仓库区</span></span><br><span class="line">$ git commit -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交暂存区的指定文件到仓库区</span></span><br><span class="line">$ git commit [file1] [file2] ... -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交工作区自上次commit之后的变化，直接到仓库区</span></span><br><span class="line">$ git commit -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交时显示所有diff信息</span></span><br><span class="line">$ git commit -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用一次新的commit，替代上一次提交</span></span><br><span class="line"><span class="comment"># 如果代码没有任何新变化，则用来改写上一次commit的提交信息</span></span><br><span class="line">$ git commit --amend -m [message]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重做上一次commit，并包括指定文件的新变化</span></span><br><span class="line">$ git commit --amend [file1] [file2] ...</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="五、分支"><a href="#五、分支" class="headerlink" title="五、分支"></a>五、分支</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有本地分支</span></span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有远程分支</span></span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有本地分支和远程分支</span></span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，但依然停留在当前分支</span></span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，并切换到该分支</span></span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向指定commit</span></span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，与指定的远程分支建立追踪关系</span></span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到指定分支，并更新工作区</span></span><br><span class="line">$ git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到上一个分支</span></span><br><span class="line">$ git checkout -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立追踪关系，在现有分支与指定的远程分支之间</span></span><br><span class="line">$ git branch --set-upstream [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择一个commit，合并进当前分支</span></span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支</span></span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程分支</span></span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote/branch]</span><br></pre></td></tr></table></figure>
+
+<h5 id="六、标签"><a href="#六、标签" class="headerlink" title="六、标签"></a>六、标签</h5><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有tag</span></span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在当前commit</span></span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个tag在指定commit</span></span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地tag</span></span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程tag</span></span><br><span class="line">$ git push origin :refs/tags/[tagName]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag信息</span></span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交指定tag</span></span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交所有tag</span></span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个分支，指向某个tag</span></span><br><span class="line">$ git checkout -b [branch] [tag]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="七、查看信息"><a href="#七、查看信息" class="headerlink" title="七、查看信息"></a>七、查看信息</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示有变更的文件</span></span><br><span class="line">$ git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的版本历史</span></span><br><span class="line">$ git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示commit历史，以及每次commit发生变更的文件</span></span><br><span class="line">$ git <span class="built_in">log</span> --<span class="built_in">stat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索提交历史，根据关键词</span></span><br><span class="line">$ git <span class="built_in">log</span> -S [keyword]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，每个commit占据一行</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --pretty=format:%s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个commit之后的所有变动，其&quot;提交说明&quot;必须符合搜索条件</span></span><br><span class="line">$ git <span class="built_in">log</span> [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个文件的版本历史，包括文件改名</span></span><br><span class="line">$ git <span class="built_in">log</span> --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件相关的每一次diff</span></span><br><span class="line">$ git <span class="built_in">log</span> -p [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示过去5次提交</span></span><br><span class="line">$ git <span class="built_in">log</span> -5 --pretty --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有提交过的用户，按提交次数排序</span></span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件是什么人在什么时间修改过</span></span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和工作区的差异</span></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示暂存区和上一个commit的差异</span></span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示工作区与当前分支最新commit之间的差异</span></span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示两次提交之间的差异</span></span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示今天你写了多少行代码</span></span><br><span class="line">$ git diff --shortstat <span class="string">&quot;@&#123;0 day ago&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交的元数据和内容变化</span></span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交发生变化的文件</span></span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某次提交时，某个文件的内容</span></span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示当前分支的最近几次提交</span></span><br><span class="line">$ git reflog</span><br></pre></td></tr></table></figure>
+
+<h5 id="八、远程同步"><a href="#八、远程同步" class="headerlink" title="八、远程同步"></a>八、远程同步</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载远程仓库的所有变动</span></span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有远程仓库</span></span><br><span class="line">$ git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示某个远程仓库的信息</span></span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加一个新的远程仓库，并命名</span></span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取回远程仓库的变化，并与本地分支合并</span></span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传本地指定分支到远程仓库</span></span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强行推送当前分支到远程仓库，即使有冲突</span></span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送所有分支到远程仓库</span></span><br><span class="line">$ git push [remote] --all</span><br></pre></td></tr></table></figure>
+
+<h5 id="九、撤销"><a href="#九、撤销" class="headerlink" title="九、撤销"></a>九、撤销</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 恢复暂存区的指定文件到工作区</span></span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复某个commit的指定文件到暂存区和工作区</span></span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复暂存区的所有文件到工作区</span></span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</span></span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置暂存区与工作区，与上一次commit保持一致</span></span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</span></span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span></span><br><span class="line">$ git reset --hard [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重置当前HEAD为指定commit，但保持暂存区和工作区不变</span></span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个commit，用来撤销指定commit</span></span><br><span class="line"><span class="comment"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span></span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 暂时将未提交的变化移除，稍后再移入</span></span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>
+
+<h5 id="十、其他"><a href="#十、其他" class="headerlink" title="十、其他"></a>十、其他</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个可供发布的压缩包</span></span><br><span class="line">$ git archive</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>5.给了一个网页图片排列，如何实现下面：（不要想着用css以及js） </p>
+<ul>
+<li> 1.搜索，顺序不能变 </li>
+<li> \2. 已知原始宽高 </li>
+<li> \3. 只能等比形变，不能裁减 </li>
+<li> 说了3种方法，实现是没听懂他的意思，面试官后来说关键的点在每一行图片的高度不一样，得自己一排排就设定 </li>
+<li> 崩溃了我 </li>
+</ul>
+<p>​    6.写一个深拷贝   </p>
+<p>​    7.深拷贝的方法用json有什么缺点   </p>
+<p>​    7.jit即时编译   </p>
+<p>​    8.基本数据存在哪里，有什么特点   </p>
+<p>​    9.怎么把字符串变成数组   </p>
+<p>​    9.为什么基本数据类型有方法   </p>
+<p>​    10.跨页面通信的方法以及api   </p>
+<p>​    11.跨页面通信中我说了localstorage，哪些场景不能用？   </p>
+<p>​    12.同源策略中的websocket了解嘛   </p>
+<p>​    13.vue中data没有初始化，为什么不能直接赋值？   </p>
+<h3 id="JavaScript-split-方法"><a href="#JavaScript-split-方法" class="headerlink" title="JavaScript split() 方法"></a>JavaScript split() 方法</h3><h4 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h4><p>split() 方法用于把一个字符串分割成字符串数组。</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>stringObject.split(separator,howmany)</p>
+<ul>
+<li>separator: 必需。字符串或者正则表达式，从该参数指定的地方分割stringObject。</li>
+<li>howmany: 可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。</li>
+</ul>
+<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>一个字符串数组。该数组是通过在separator指定的边界处将字符串 stringObject 分割成子串创建的。返回的数组中的字串不包括 separator 自身。</p>
+<p>但是，如果 separator 是包含子表达式的正则表达式，那么返回的数组中包括与这些子表达式匹配的字串（但不包括与整个正则表达式匹配的文本）</p>
+<h4 id="提示和注释"><a href="#提示和注释" class="headerlink" title="提示和注释"></a>提示和注释</h4><p>注释：如果把空字符串（””）用作 separator，那么 stringObject 中的每个字符之间都会被分割</p>
+<p>注释：String.split() 执行的操作与 Array.join 执行的操作是相反的</p>
+<h3 id="JavaScript-slice-方法"><a href="#JavaScript-slice-方法" class="headerlink" title="JavaScript slice() 方法"></a>JavaScript slice() 方法</h3><h5 id="定义和用法-1"><a href="#定义和用法-1" class="headerlink" title="定义和用法"></a>定义和用法</h5><p>slice() 方法可从已有的数组中返回选定的元素</p>
+<h5 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h5><p>arrayObject.slice(start,end)</p>
+<p>start: 必需。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1指最后一个元素，-2指倒数第二个元素，以此类推。</p>
+<p>end: 可选。规定从何处结束选取。该参数是数组片断结束处的数组下标。如果没有指定该参数，那么切分的数组包含从start到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素</p>
+<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><p>请注意，该方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -884,69 +1143,6 @@
       <span class="post-meta-item-text">Posted on</span>
 
       <time title="Created: 2021-05-15 20:34:57" itemprop="dateCreated datePublished" datetime="2021-05-15T20:34:57+08:00">2021-05-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://mylym-mm.github.io/2021/05/15/20-34-29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/hylike.jpg">
-      <meta itemprop="name" content="lym">
-      <meta itemprop="description" content="my的修炼之路">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="my鱼">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/15/20-34-29/" class="post-title-link" itemprop="url">同源策略</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-15 20:34:29" itemprop="dateCreated datePublished" datetime="2021-05-15T20:34:29+08:00">2021-05-15</time>
     </span>
 
   
